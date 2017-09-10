@@ -9,7 +9,6 @@
 #  Supports a single directory of JPEGs.
 
 class GetResources
-	
 	require 'csv'
 
 	attr_accessor :photos_home,
@@ -25,8 +24,6 @@ class GetResources
 	              :playlists_list
 	
 	def initialize()
-
-		puts "Creating GetResources object. "
 
 		#Load resources, populating attributes.
 		@photos_home = '/app/snowbot/config/data/photos' #On Heroku at least.
@@ -56,29 +53,24 @@ class GetResources
 		end
 		@playlists_list = []
 		@playlists_list = get_playlists
-
 	end
 
 	#Take resource file with '#' comment lines and filter them out.
+	#Filter out '#' comment lines.
 	def filter_list(lines)
-
 		list = []
-
-		#Filter out '#' comment lines.
+		
 		lines.each do |line|
 			if line[0][0] != '#'
 				#drop dynamically from array
 				list << line
 			end
 		end
-
 		list
-
 	end
 
 	#photo_list = [] #Load array of photo metadata.
 	def get_photos
-		
 		list = []
 		
 		begin
@@ -92,7 +84,6 @@ class GetResources
 
 	#list = [] #Load array of curated links.
 	def get_links
-		
 		list = []
 		
 		begin
@@ -106,7 +97,6 @@ class GetResources
 
 	#list = [] #Load array of curated locations.
 	def get_locations
-		
 		list = []
 		
 		begin
@@ -120,7 +110,6 @@ class GetResources
 
 	#list = [] #Load array of curated locations.
 	def get_playlists
-		
 		list = []
 		
 		begin
@@ -137,12 +126,11 @@ class GetResources
 		retriever = GetResources.new
 		
 		#Example code for loading location file --------
-		retriever.locations_home = '/Users/jmoffitt/work/snowbot/snowbot/config/data/locations'
+		retriever.locations_home = '/Users/jmoffitt/work/snowbotdev/data/locations'
 		locations = retriever.get_locations
 		
 		locations.each do |resorts|  #explore that list
 			puts resorts
 		end
-	
 	end
 end
