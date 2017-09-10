@@ -5,9 +5,15 @@ Current home of the @SnowBotDev bot, a demo illustrating the Twitter Account Act
 #### Tags: DMAPI, AAAPI, Ruby, WebApp, Sinatra
 
 # Introduction
-The purpose of this tutorial is to help developers get started with the Twitter Account Activity and Direct Message APIs. The material below is split into several pieces. Much of the narrative is language-agnostic, yet includes many code examples written in Ruby. Since these code examples are very short and have comments, we can consider them as pseudo-code. Pseudo-code that hopefully illustrates fundamental concepts that are readily implemented in non-Ruby languages.
+The purpose of this tutorial is to help developers get started with the Twitter Account Activity and Direct Message APIs. (describe what we want to build: a snowbot with some fun features. )
 
-We'll start off with a how to get started with these APIs. The steps here include getting access keys to the APIs, and deploying a web app that integrates both APIs. By integrating with the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. By integrating the Direct Message (DM) API, you are building the private communication channel to your bot users. The AA API prodives the ability to listen for Twitter account activities, and the DM API enables you to send messages back to your users. 
+The material below is split into several pieces. Much of the narrative is language-agnostic, yet includes many code examples written in Ruby. Since these code examples are very short and have comments, we can consider them as pseudo-code. Pseudo-code that hopefully illustrates fundamental concepts that are readily implemented in non-Ruby languages.
+
+We'll start off with a how to get started with these APIs. The steps here include :
+* Getting access keys to use when authenticating Twitter API requests.
+* Deploying a web app that integrates both APIs. 
+  * By integrating with the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
+  * By integrating the Direct Message (DM) API, you are building the private communication channel to your bot users. The AA API prodives the ability to listen for Twitter account activities, and the DM API enables you to send messages back to your users. 
 
 # Getting Started
 As outlined [HERE](https://dev.twitter.com/webhooks/getting-started), here are the steps to take to set up access to, and the 'plumbing' of, the Account Activity API.
