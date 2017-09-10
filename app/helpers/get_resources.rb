@@ -4,9 +4,12 @@
 #Sets up all object variables needed by Bot. One Stop Shop.
 
 #Key feature design details: 
-#  Supports a single list of locations 
-#  Supports the look-up for a single list of links
-#  Supports a single directory of JPEGs.
+#  Supports 
+#     * single list of locations 
+#     * Look-up for a single list of links
+#     * Serves photos hosted in single directory of JPEGs on webhook listener server.
+#     * Single list of playlist URLs.
+#  
 
 class GetResources
 	require 'csv'
