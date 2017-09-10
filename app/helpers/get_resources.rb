@@ -4,12 +4,17 @@
 #Sets up all object variables needed by Bot. One Stop Shop.
 
 #Key feature design details: 
-#  Supports 
-#     * single list of locations 
-#     * Look-up for a single list of links
-#     * Serves photos hosted in single directory of JPEGs on webhook listener server.
-#     * Single list of playlist URLs.
-#  
+
+# This bot builds Twitter Quick Reply (menu) lists from a set of local data files. These files are served from the webhook listener server... 
+# Bot supports: 
+#     * Single list of locations (up to 20) 
+#           * Snowbot uses snow resort locations, @FloodSocial uses Texas cities. 
+#     * Look-up for a single list of curated links.
+#           * Snowbot presents a short of list of suggested 'learn more' URLs.
+#     * Serves photos hosted in single directory of JPEGs.
+#           * Snowbot displays random snow photos.
+#     * Single list of playlist URLs. Geo-tagged music, why not?
+
 
 class GetResources
 	require 'csv'
