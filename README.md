@@ -34,3 +34,11 @@ As outlined [HERE](https://dev.twitter.com/webhooks/getting-started), here are t
 + Create a default Welcome Message.
 
 + Handle CRC event.
+
+## Setting up Account subscriptions
+
+## Setting up Welcome Messages
+
+### Setting Default Welcome Message
+
+### Designing your Quick Replies
