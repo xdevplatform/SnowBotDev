@@ -1,5 +1,12 @@
 # Script for managing Account Activity API configuration
 
+## Getting started
+
++ Setting client-side URL for webhook events. Where should we send the event JSON?
++ Looking up what webhook IDs are set up? Confirming what webhook 'bridges' have been set up.
+
+
+
 ## Setting up webhooks
 
 The setup_webooks.rb script helps automate Account Activity configuration management. https://dev.twitter.com/webhooks/managing
@@ -16,8 +23,22 @@ Usage: setup_webhooks [options]
 
 Here are some example commands:
 
+   + setup_webhooks.rb -t "list"
+
+    '''
+    Retrieving webhook configurations...
+    No existing configurations... 
+    '''
+
+
+   
+
 
   + setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbot"
+
+
+
+
   
 ```
 Setting a webhook configuration...
@@ -91,4 +112,28 @@ Webhook URL does not meet the requirements. Please consult: https://dev.twitter.
 ```
 
 If you receive this message you'll need to wait to retry. The default rate limit is one request every 15 minutes. 
+
+
+### Updating Webhook URL
+
+Sometimes you need to have the Twitter AA API point to a new client-side webhook URL. When building a bot, you may have Twitter initially send webhook events to a development site, then later point to a production system. 
+
+When this is the case, you need to first delete the current webhook maping, then create a new one. 
+
+setup_webhooks.rb -t "list"
+```
+Retrieving webhook configurations...
+Webhook ID 890716673514258432 --> https://snowbotdev_test.herokuapp.com/snowbot
+```
+
+setup_webhooks.rb -t "delete" -i 890716673514258432 
+```
+Attempting to delete configuration for webhook id: 890716673514258432.
+Webhook configuration for 890716673514258432 was successfully deleted.
+```
+Running a 'list' task should confirm there are no longer any webhook ids set up for this Twitter app.
+
+Now, we are ready to update to our production 
+
+  + setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbot"
 
