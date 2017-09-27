@@ -137,3 +137,26 @@ Now, we are ready to update to our production
 
   + setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbotdev"
 
+
+### Error responses
+
+Only set the consumer key and secret.
+
+```
+Setting a webhook configuration...
+POST ERROR occurred with /1.1/account_activity/webhooks.json?url=https%3A%2F%2Fsnowbotdev.herokuapp.com%2Fsnowbotdev, request:  
+Error code: 403 #<Net::HTTPForbidden:0x007f93fad1f048>
+Error Message: {"errors":[{"code":261,"message":"Application cannot perform write actions. Contact Twitter Platform Operations through https://support.twitter.com/forms/platform."}]}
+{"code"=>261, "message"=>"Application cannot perform write actions. Contact Twitter Platform Operations through https://support.twitter.com/forms/platform."}
+```
+
+Failing CRC check.
+```
+Setting a webhook configuration...
+POST ERROR occurred with /1.1/account_activity/webhooks.json?url=https%3A%2F%2Fsnowbotdev.herokuapp.com%2Fsnowbotdev, request:  
+Error code: 400 #<Net::HTTPBadRequest:0x007fe23a197840>
+Error Message: {"errors":[{"code":214,"message":"Webhook URL does not meet the requirements. Please consult: https://dev.twitter.com/webhooks/securing"}]}
+{"code"=>214, "message"=>"Webhook URL does not meet the requirements. Please consult: https://dev.twitter.com/webhooks/securing"}
+```
+
+
