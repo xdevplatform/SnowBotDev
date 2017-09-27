@@ -120,13 +120,13 @@ Sometimes you need to have the Twitter AA API point to a new client-side webhook
 
 When this is the case, you need to first delete the current webhook maping, then create a new one. 
 
-setup_webhooks.rb -t "list"
++  setup_webhooks.rb -t "list"
 ```
 Retrieving webhook configurations...
 Webhook ID 890716673514258432 --> https://snowbotdev_test.herokuapp.com/snowbot
 ```
 
-setup_webhooks.rb -t "delete" -i 890716673514258432 
+  + setup_webhooks.rb -t "delete" -i 890716673514258432 
 ```
 Attempting to delete configuration for webhook id: 890716673514258432.
 Webhook configuration for 890716673514258432 was successfully deleted.
@@ -135,5 +135,5 @@ Running a 'list' task should confirm there are no longer any webhook ids set up 
 
 Now, we are ready to update to our production 
 
-  + setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbot"
+  + setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbotdev"
 
