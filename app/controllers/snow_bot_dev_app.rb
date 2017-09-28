@@ -4,7 +4,7 @@ require 'json'
 
 require_relative "../../app/helpers/event_manager"
 
-class SnowBotApp < Sinatra::Base
+class SnowBotDevApp < Sinatra::Base
 
 	def initialize
 		puts "Starting up web app."
@@ -23,7 +23,7 @@ class SnowBotApp < Sinatra::Base
 	end
 
 	get '/' do
-		'<p><b>Welcome to snow bot dev...</b></p>
+		'<p><b>Welcome to snowbotdev, home of the @SnowBotDev system...</b></p>
      <p>I am a sinatra-based web app...</p>
      <p>I consume Twitter Account Activity webhook events and manage DM bot dialogs...</p>
      <p>I serve a local hive of snow photos, weather conditions, snow reports, snow research links... </p>

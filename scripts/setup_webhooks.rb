@@ -13,15 +13,21 @@ class TaskManager
 	attr_accessor :twitter_api,
 	              :webhook_configs  #An array of Webhook IDs. Currently numeric(e.g. 88888888888888), subject to change?
 	
-	def initialize(config_file=nil, url=nil)
+	def initialize(url=nil)
 		
-		if config_file.nil?
-			config = '../../config/config_private.yaml'
-		else
-			config = config_file
-		end
+		#if config_file.nil?
+		#	config = '../../config/config_private.yaml'
+		#else
+		#	config = config_file
+		#end
 
-		@twitter_api = ApiOauthRequest.new(config)
+		#These are loaded from ENV by ApiOAuthRequest object.
+		#@keys['consumer_key'] = ENV['CONSUMER_KEY']
+		#@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
+		#@keys['access_token'] = ENV['ACCESS_TOKEN']
+		#@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
+
+		@twitter_api = ApiOauthRequest.new()
 		@twitter_api.uri_path = '/1.1/account_activity'
 		@twitter_api.get_api_access
 		
@@ -165,7 +171,7 @@ if __FILE__ == $0 #This script code is executed when running this file.
 	OptionParser.new do |o|
 
 		#Passing in a config file.... Or you can set a bunch of parameters.
-		o.on('-c CONFIG', '--config', 'Configuration file (including path) that provides account OAuth details. ') { |config| $config = config}
+		#o.on('-c CONFIG', '--config', 'Configuration file (including path) that provides account OAuth details. ') { |config| $config = config}
 		o.on('-t TASK','--task', "Securing Webhooks Task to perform: trigger CRC ('crc'), set config ('set'), list configs ('list'), delete config ('delete'), subscribe app ('subscribe'), unsubscribe app ('unsubscribe'),get subscription ('subscription').") {|task| $task = task}
 		o.on('-u URL','--url', "Webhooks 'consumer' URL, e.g. https://mydomain.com/webhooks/twitter.") {|url| $url = url}
 		o.on('-i ID','--id', 'Webhook ID') {|id| $id = id}
@@ -184,9 +190,11 @@ if __FILE__ == $0 #This script code is executed when running this file.
 		$task = 'list'
 	end
 	
-	if $config.nil? #Passed in config file needs to use a relative path...
-		$config = '../config/config_private.yaml' #This is referenced by APIOAuthRequest class, so relative to its location.
-	end
+	
+	
+	#if $config.nil? #Passed in config file needs to use a relative path...
+	#	$config = '../config/config_private.yaml' #This is referenced by APIOAuthRequest class, so relative to its location.
+	#end
 	
 	if $url.nil?
 		$url = 'https://floodsocial.herokuapp.com/webhooks/twitter'
