@@ -1,19 +1,38 @@
 
-# Tutorial: Building the snowbot
+# Tutorial: Building a Twitter DM system with Ruby and Sinatra
+### *Building the snowbot*
 #### Tags: DMAPI, AAAPI, Ruby, WebApp, Sinatra
 
 # Introduction
-The purpose of this tutorial is to help developers get started with the Twitter Account Activity and Direct Message APIs. (describe what we want to build: a snowbot with some fun features. )
+The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Direct Message *bots*, automated systems that respond to incoming Direct Messages. These systems receive webhook events from Twitter, process the received messages, and respond to the requester. 
 
-The material below is split into several pieces. Much of the narrative is language-agnostic, yet includes many code examples written in Ruby. Since these code examples are very short and have comments, we can consider them as pseudo-code. Pseudo-code that hopefully illustrates fundamental concepts that are readily implemented in non-Ruby languages.
++ By integrating with the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
++ By integrating the Direct Message (DM) API, you are building the private communication channel for your bot users. 
 
-We'll start off with a how to get started with these APIs. The steps here include :
+For this tutorial, we are going to build a *snow bot*, a Twitter-based gateway for all kinds of snow-related information. It would be fun to have a Twitter account supply current weather and snow data, send Direct Messages with snow photos, and provide a curated list of web sites for learning more about snow science. 
+
+So, this tutorial will walk us through the steps of designing, building and deploying a bot. The material below is split into several pieces including tips on getting started, utilities for managing API configurations, and various code examples to illustrate working with the API. 
+
+Much of the narrative is language-agnostic, yet includes many code examples written in Ruby. Since these code examples are very short and have comments, we can consider them as pseudo-code. Pseudo-code that hopefully illustrates fundamental concepts that are readily implemented in non-Ruby languages.
+
+We'll start off with a how to get started with these APIs.
+
+# Getting Started
+
+First off, if you haven't checked-out the DM and AA API documentation, that's the place to start. 
+
++ https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
++ https://developer.twitter.com/en/docs/direct-messages/beta-features
+
+If you are new to building bots with these APIs, please check out our [](). As described there, here are the steps for getting started: 
 * Getting access keys to use when authenticating Twitter API requests.
+
+
 * Deploying a web app that integrates both APIs. 
   * By integrating with the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
   * By integrating the Direct Message (DM) API, you are building the private communication channel to your bot users. The AA API prodives the ability to listen for Twitter account activities, and the DM API enables you to send messages back to your users. 
 
-# Getting Started
+
 As outlined [HERE](https://dev.twitter.com/webhooks/getting-started), here are the steps to take to set up access to, and the 'plumbing' of, the Account Activity API.
 
 ## Getting API access
