@@ -38,9 +38,9 @@ class SnowBotDevApp < Sinatra::Base
 
 		if not crc_token.nil?
 
-			puts "CRC event with #{crc_token}"
-			puts "headers: #{headers}"
-			puts headers['X-Twitter-Webhooks-Signature']
+			#puts "CRC event with #{crc_token}"
+			#puts "headers: #{headers}"
+			#puts headers['X-Twitter-Webhooks-Signature']
 
 			response = {}
 			response['response_token'] = "sha256=#{generate_crc_response(settings.dm_api_consumer_secret, crc_token)}"
