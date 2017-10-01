@@ -1,9 +1,8 @@
 # Script for managing Welcome Messages
 
-## Setting up Welcome Messages
+## Managing Welcome Messages
 
-* *set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
-* Takes one or two command-line parameters. 
+As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line paramters and manage API calls that create, delete, set, and list Welcome Messages. 
 
 ```
 Usage: setup_welcome_message [options]
@@ -12,6 +11,10 @@ Usage: setup_welcome_message [options]
     -i, --id ID                      Message or rule ID
     -h, --help                       Display this screen.
 ```
+
+*set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
+
+One of the first steps of deploying a bot is designing your Welcome Message. 
 
 -w "create"
 
