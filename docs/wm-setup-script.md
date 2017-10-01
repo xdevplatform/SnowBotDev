@@ -1,5 +1,27 @@
 # Script for managing Welcome Messages
 
+## Getting started
+
++ *set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
++ Written with Ruby 2.0 and ran from command-line with up to two parameters.
+
++ This script comes along with a clone of @SnowBotDev. See /snowbotdev/scripts
++ Code requires two standard gems:
+
+```
+require 'json'
+require 'optparse'
+```
+
++ Code requires two other project objects:
+
+```
+require_relative '../app/helpers/api_oauth_request'
+require_relative '../app/helpers/generate_direct_message_content'
+```
+
+See the project's Gemfile for more details about what gems are needed for the Sinatra web app. 
+
 ## Managing Welcome Messages
 
 As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line paramters and manage API calls that create, delete, set, and list Welcome Messages. 
@@ -14,6 +36,12 @@ Usage: setup_welcome_message [options]
 
 *set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
 
+## 
+
+
+
+## Welcome Method actions
+
 ### Creating a Welcome Message
 
 One of the first steps of deploying a bot is designing your Welcome Message. 
@@ -26,7 +54,7 @@ Creating GenerateDirectMessageContent object.
 Creating Welcome Message...
 ```
 
-
+### Listing Welcome Messages
 
 ```
 Creating Welcome Message...
@@ -44,7 +72,7 @@ Message IDs:
 Message ID 913875901732941829 with message: ❄ Welcome to snowbot (ver. 0.05) ❄ 
 ```
 
-
+### Setting a default Welcome Message
 
 -w "set" -i 913875901732941829
 
@@ -88,11 +116,6 @@ Deleting Welcome Message with id: 890789035756503044.
 Deleted message id: 890789035756503044
 ```
 -w "delete" -i 893578135685406724
-
-```
-Deleting Welcome Message with id: 893578135685406724.
-Deleted message id: 893578135685406724
-```
 
 If you try to delete an unexisting Welcome Message ID: 
 
