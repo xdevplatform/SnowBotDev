@@ -31,7 +31,8 @@ See the project's Gemfile for more details about what gems are needed for the Si
 ### Running script
 
 To run this script you have several options. You may want to just grab these already-written scripts to manage your Welcome Messages
- []$ruby ./scripts/setup_welcome_messages.rb -h
+ 
+ >> []$ruby ./scripts/setup_welcome_messages.rb -h
 
 ```
 Usage: setup_welcome_message [options]
