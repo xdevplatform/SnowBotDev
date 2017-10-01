@@ -14,6 +14,8 @@ Usage: setup_welcome_message [options]
 
 *set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
 
+### Creating a Welcome Message
+
 One of the first steps of deploying a bot is designing your Welcome Message. 
 
 -w "create"
