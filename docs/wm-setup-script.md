@@ -16,15 +16,39 @@ Usage: setup_welcome_message [options]
 -w "create"
 
 ```
+
+Creating GenerateDirectMessageContent object.
+Creating Welcome Message...
+```
+
+
+
+```
 Creating Welcome Message...
 error code: 403 #<Net::HTTPForbidden:0x007ff29903f230>
 Errors occurred.
 {"code"=>151, "message"=>"There was an error sending your message: Field description is not present in all options."}
 ```
 
+-w "get"
+
+```
+Creating GenerateDirectMessageContent object.
+Getting welcome message list.
+Message IDs: 
+Message ID 913875901732941829 with message: ❄ Welcome to snowbot (ver. 0.05) ❄ 
+```
 
 
-setup_welcome_message --w "set" -i 883450462757765123
+
+-w "set" -i 913875901732941829
+
+```
+Creating GenerateDirectMessageContent object.
+Setting default Welcome Message to message with id 913875901732941829...
+
+```
+
 
 
 <What the story here? when one option did not have a description, this error is triggered:>
