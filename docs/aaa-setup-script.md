@@ -1,13 +1,10 @@
-# Script for managing Account Activity API configuration
+# Account Activity API script
+### Script for managing webbook setup and subscriptions.
 
 ## Getting started
 
 + Setting client-side URL for webhook events. Where should we send the event JSON?
 + Looking up what webhook IDs are set up? Confirming what webhook 'bridges' have been set up.
-
-
-
-## Setting up webhooks
 
 This script helps automate the fundamental plumbing of the webhook-based Account Activity API. These steps include:
 
@@ -17,7 +14,7 @@ This script helps automate the fundamental plumbing of the webhook-based Account
 
 <note about sibling script>
 
-The setup_webooks.rb script helps automate Account Activity configuration management. https://dev.twitter.com/webhooks/managing
+The **setup_webooks.rb** script helps automate Account Activity account details. https://dev.twitter.com/webhooks/managing
 
 ```
 Usage: setup_webhooks [options]
@@ -28,6 +25,7 @@ Usage: setup_webhooks [options]
     -h, --help                       Display this screen.  
 ```
 
+## Setting up webhooks
 
 Here are some example commands:
 
