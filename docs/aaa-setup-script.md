@@ -9,6 +9,14 @@
 
 ## Setting up webhooks
 
+This script helps automate the fundamental plumbing of the webhook-based Account Activity API. These steps include:
+
++ Telling Twitter where to send webhook events. 
++ Setting up AA API subscriptions.
++ Managing CRC events from Twitter, and manually triggering those events.
+
+<note about sibling script>
+
 The setup_webooks.rb script helps automate Account Activity configuration management. https://dev.twitter.com/webhooks/managing
 
 ```
