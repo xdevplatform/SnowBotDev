@@ -166,3 +166,12 @@ Error Message: {"errors":[{"code":214,"message":"Webhook URL does not meet the r
 ```
 
 
+```
+Setting subscription for 'host' account for webhook id: 915795063925387264
+POST ERROR occurred with /1.1/account_activity/webhooks/915795063925387264/subscriptions.json, request:  
+Error code: 401 #<Net::HTTPUnauthorized:0x007f971b6c06d8>
+Error Message: {"errors":[{"code":348,"message":"Client application is not permitted to access this user's webhook subscriptions."}]}
+{"errors":[{"code":348,"message":"Client application is not permitted to access this user's webhook subscriptions."}]}
+```
+
+
