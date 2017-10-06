@@ -9,8 +9,8 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-  VERSION = 0.05
-	BOT_NAME = 'snowbot'
+  VERSION = 0.06
+	BOT_NAME = 'snowbotdev'
 	BOT_CHAR = '❄'
 
 	attr_accessor :TwitterAPI, 

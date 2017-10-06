@@ -129,6 +129,24 @@ class WelcomeMessageManager
 			results
 		end
 	end
+	
+	def create_message_rule(id)
+
+		puts "Setting message rule for id #{id}..."
+
+		set_rule = {}
+		set_rule['welcome_message_rule'] = {}
+		set_rule['welcome_message_rule']['welcome_message_id'] = id
+
+		uri_path = "#{@twitter_api.uri_path}/welcome_messages/rules/new.json"
+
+		response = @twitter_api.make_post_request(uri_path, set_rule.to_json)
+		results = JSON.parse(response)
+
+		rule_id = results['id']
+		puts rule_id
+		
+	end
 
 
 	def delete_message_rule(id)
@@ -212,7 +230,7 @@ if __FILE__ == $0 #This script code is executed when running this file.
 		message_manager.delete_all_welcome_messages(messages)
 
 	elsif $rule == 'create'
-		message_manager
+		message_manager.create_message_rule($id)
 	elsif $rule == 'get'
 		rules = message_manager.get_message_rules
 

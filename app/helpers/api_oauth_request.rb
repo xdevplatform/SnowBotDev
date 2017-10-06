@@ -64,7 +64,7 @@ class ApiOauthRequest
 		response = @twitter_api.get(uri_path, HEADERS)
 		
 		if response.code.to_i >= 300
-			puts "GET ERROR occurred with #{uri_path}, request: #{request} "
+			puts "GET ERROR occurred with #{uri_path}: "
 			puts "Error: #{response}"
 		end
 
@@ -81,7 +81,7 @@ class ApiOauthRequest
 		response = @twitter_api.delete(uri_path, HEADERS)
 
 		if response.code.to_i >= 300
-			puts "DELETE ERROR occurred with #{uri_path}, request: #{request} "
+			puts "DELETE ERROR occurred with #{uri_path}: "
 			puts "Error: #{response}"
 		end
 
