@@ -36,28 +36,28 @@ class GetResources
 		#Load resources, populating attributes.
 		@photos_home = '/app/config/data/photos' #On Heroku at least.
 		if not File.directory?(@photos_home)
-			@photos_home = '../../config/data/photos'
+			@photos_home = '../config/data/photos'
 		end
 		@photos_list = []
 		@photos_list = get_photos
 
 		@links_home = '/app/config/data/links' #On Heroku at least.
 		if not File.directory?(@links_home)
-			@links_home = '../../config/data/links'
+			@links_home = '../config/data/links'
 		end
 		@links_list = []
 		@links_list = get_links
 
 		@locations_home = '/app/config/data/locations' #On Heroku at least.
 		if not File.directory?(@locations_home)
-			@locations_home = '../../config/data/locations'
+			@locations_home = '../config/data/locations'
 		end
 		@locations_list = []
 		@locations_list = get_locations
 		
 		@playlists_home = '/app/config/data/music' #On Heroku at least.
 		if not File.directory?(@playlists_home)
-			@playlists_home = '../../config/data/music'
+			@playlists_home = '../config/data/music'
 		end
 		@playlists_list = []
 		@playlists_list = get_playlists
