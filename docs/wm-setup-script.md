@@ -1,9 +1,38 @@
 # Script for managing Welcome Messages
 
-## Setting up Welcome Messages
+As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line paramters and manage API calls that create, delete, set, and list Welcome Messages. 
 
-* *set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
-* Takes one or two command-line parameters. 
+
+## Getting started
+
++ *set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
++ Written with Ruby 2.0 and ran from command-line with up to two parameters.
+
++ This script comes along with a clone of @SnowBotDev. See /snowbotdev/scripts
++ Code requires two standard gems:
+
+```
+require 'json'
+require 'optparse'
+```
+
++ Code requires two other project objects:
+
+```
+require_relative '../app/helpers/api_oauth_request'
+require_relative '../app/helpers/generate_direct_message_content'
+```
+
+Since this script depends on the snowbot's DM content, which will differ from bot to bot, you'll want this script's functionality in the same language as the rest of your bot. If you are developing with Node.js, then check out this [Node-based Welcome Message sccript].
+
+See the project's Gemfile for more details about what gems are needed for the Sinatra web app. 
+
+
+### Running script
+
+To run this script you have several options. You may want to just grab these already-written scripts to manage your Welcome Messages
+ 
+ >> []$ruby ./scripts/setup_welcome_messages.rb -h
 
 ```
 Usage: setup_welcome_message [options]
@@ -13,7 +42,25 @@ Usage: setup_welcome_message [options]
     -h, --help                       Display this screen.
 ```
 
+## Managing Welcome Messages
+
+
+
+## Welcome Method actions
+
+### Creating a Welcome Message
+
+One of the first steps of deploying a bot is designing your Welcome Message. 
+
 -w "create"
+
+```
+
+Creating GenerateDirectMessageContent object.
+Creating Welcome Message...
+```
+
+### Listing Welcome Messages
 
 ```
 Creating Welcome Message...
@@ -22,9 +69,25 @@ Errors occurred.
 {"code"=>151, "message"=>"There was an error sending your message: Field description is not present in all options."}
 ```
 
+-w "get"
 
+```
+Creating GenerateDirectMessageContent object.
+Getting welcome message list.
+Message IDs: 
+Message ID 913875901732941829 with message: ❄ Welcome to snowbot (ver. 0.05) ❄ 
+```
 
-setup_welcome_message --w "set" -i 883450462757765123
+### Setting a default Welcome Message
+
+-w "set" -i 913875901732941829
+
+```
+Creating GenerateDirectMessageContent object.
+Setting default Welcome Message to message with id 913875901732941829...
+
+```
+
 
 
 <What the story here? when one option did not have a description, this error is triggered:>
@@ -60,11 +123,6 @@ Deleted message id: 890789035756503044
 ```
 -w "delete" -i 893578135685406724
 
-```
-Deleting Welcome Message with id: 893578135685406724.
-Deleted message id: 893578135685406724
-```
-
 If you try to delete an unexisting Welcome Message ID: 
 
 -w "get"
@@ -93,3 +151,19 @@ Setting default Welcome Message to message with id 893579774534209539...
 -r "delete" -i 870397618781691904
 
 ## Validate setup
+
+
+## Troubleshooting errors
+
+### Bot account must accept DM from any user. If not, the following error will be thrown:
+
+```
+Creating GenerateDirectMessageContent object.
+Creating Welcome Message...
+POST ERROR occurred with /1.1/direct_messages/welcome_messages/new.json, request: {"welcome_message":{"message_data":{"text":"❄ Welcome to snowbot (ver. 0.05) ❄","quick_reply":{"type":"options","options":[{"label":"❄ See snow picture 📷","description":"Come on, take a look...","metadata":"see_photo"},{"label":"❄ Weather data from anywhere","description":"Select an exact location or Twitter Place...","metadata":"weather_info"},{"label":"❄ Learn something new about snow","description":"Other than it melts around 32°F and is fun to slide on...","metadata":"learn_snow"},{"label":"❄ Get geo, weather themed playlist","description":"Carefully curated Spotify playlists...'","metadata":"snow_music"},{"label":"❄ Request snow report","description":"Select areas mainly in CO, with some in CA, MN and NZ.","metadata":"snow_report"},{"label":"❓ Learn more about this system","description":"At least a link to underlying code...","metadata":"learn_more"},{"label":"☔ Help","description":"Help with system commands","metadata":"help"},{"label":"⌂ Home","description":"Go back home","metadata":"return_home"}]}}}} 
+Error code: 400 #<Net::HTTPBadRequest:0x007fa752544b78>
+Error Message: {"errors":[{"code":214,"message":"owner must allow dms from anyone"}]}
+Errors occurred.
+{"code"=>214, "message"=>"owner must allow dms from anyone"}
+```
+

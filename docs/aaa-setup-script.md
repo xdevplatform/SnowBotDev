@@ -1,15 +1,20 @@
-# Script for managing Account Activity API configuration
+# Account Activity API script
+### Script for managing webbook setup and subscriptions.
 
 ## Getting started
 
 + Setting client-side URL for webhook events. Where should we send the event JSON?
 + Looking up what webhook IDs are set up? Confirming what webhook 'bridges' have been set up.
 
+This script helps automate the fundamental plumbing of the webhook-based Account Activity API. These steps include:
 
++ Telling Twitter where to send webhook events. 
++ Setting up AA API subscriptions.
++ Managing CRC events from Twitter, and manually triggering those events.
 
-## Setting up webhooks
+<note about sibling script>
 
-The setup_webooks.rb script helps automate Account Activity configuration management. https://dev.twitter.com/webhooks/managing
+The **setup_webooks.rb** script helps automate Account Activity account details. https://dev.twitter.com/webhooks/managing
 
 ```
 Usage: setup_webhooks [options]
@@ -20,6 +25,7 @@ Usage: setup_webhooks [options]
     -h, --help                       Display this screen.  
 ```
 
+## Setting up webhooks
 
 Here are some example commands:
 
@@ -157,6 +163,15 @@ POST ERROR occurred with /1.1/account_activity/webhooks.json?url=https%3A%2F%2Fs
 Error code: 400 #<Net::HTTPBadRequest:0x007fe23a197840>
 Error Message: {"errors":[{"code":214,"message":"Webhook URL does not meet the requirements. Please consult: https://dev.twitter.com/webhooks/securing"}]}
 {"code"=>214, "message"=>"Webhook URL does not meet the requirements. Please consult: https://dev.twitter.com/webhooks/securing"}
+```
+
+
+```
+Setting subscription for 'host' account for webhook id: 915795063925387264
+POST ERROR occurred with /1.1/account_activity/webhooks/915795063925387264/subscriptions.json, request:  
+Error code: 401 #<Net::HTTPUnauthorized:0x007f971b6c06d8>
+Error Message: {"errors":[{"code":348,"message":"Client application is not permitted to access this user's webhook subscriptions."}]}
+{"errors":[{"code":348,"message":"Client application is not permitted to access this user's webhook subscriptions."}]}
 ```
 
 
