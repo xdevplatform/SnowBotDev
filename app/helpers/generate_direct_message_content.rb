@@ -9,7 +9,7 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-  VERSION = 0.06
+  VERSION = 0.08
 	BOT_NAME = 'snowbotdev'
 	BOT_CHAR = '❄'
 
@@ -391,7 +391,7 @@ class GenerateDirectMessageContent
  
   def generate_system_info(recipient_id)
 
-	  message_text = "#{BOT_CHAR} This is a snow bot... It's kinda simple, kinda not... see link https://github.com/jimmoffitt/snowbot"
+	  message_text = "#{BOT_CHAR} This is a snow bot... It's kinda simple, kinda not... see link https://github.com/jimmoffitt/snowbotdev"
 
 	  #Build DM content.
 	  event = {}
