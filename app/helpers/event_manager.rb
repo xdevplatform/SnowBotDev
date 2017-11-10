@@ -143,7 +143,7 @@ class EventManager
 
 	def handle_event(events)
 
-		#puts "Event handler processing: #{events}"
+		puts "Event handler processing: #{events}"
 
 		events = JSON.parse(events)
 
