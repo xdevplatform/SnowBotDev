@@ -1,18 +1,18 @@
 # Account Activity API script
 ### Script for managing webbook setup and subscriptions.
 
-## Getting started
+There are several 'plumbing' details that need attention before you can start receiving webhook events in your event consumer application. This script helps automate the fundamental plumbing of the webhook-based Account Activity (AA) API. These include:
 
-+ Setting client-side URL for webhook events. Where should we send the event JSON?
-+ Looking up what webhook IDs are set up? Confirming what webhook 'bridges' have been set up.
++ Telling Twitter where to send webhook events. This can be a one-time action, but at some point you will likely need to update the client-side web URL for receiving webhook events. This script manages calls to the API ['set URL' method](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/new-webhook-config).
 
-This script helps automate the fundamental plumbing of the webhook-based Account Activity API. These steps include:
++ Setting up Account Activity API subscriptions. This API is designed to enable receiving events from multiple Twitter accounts. This script manages calls to the API ['add account' method](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/new-subscription).
 
-+ Telling Twitter where to send webhook events. 
-+ Setting up AA API subscriptions.
 + Managing CRC events from Twitter, and manually triggering those events.
+In order to start working with the Account Activity API, your event consumer needs to correctly respond to CRC challenges from Twitter. In fact, you will not be able to set up your web hook consumer URL until this step is made. This script manages calls to the API ['test CRC' method](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/validate-webhook-config).
 
 <note about sibling script>
+
+## Getting started
 
 The **setup_webooks.rb** script helps automate Account Activity account details. https://dev.twitter.com/webhooks/managing
 
@@ -24,6 +24,10 @@ Usage: setup_webhooks [options]
     -i, --id ID                      Webhook ID
     -h, --help                       Display this screen.  
 ```
+Here are some common uses for this script:
+
++ Setting client-side URL for webhook events. Where should we send the event JSON?
++ Looking up what webhook IDs are set up? Confirming what webhook 'bridges' have been set up.
 
 ## Setting up webhooks
 
@@ -36,20 +40,12 @@ Here are some example commands:
     No existing configurations... 
     '''
 
-
-   
-
-
   + setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbot"
-
-
-
-
-  
-```
-Setting a webhook configuration...
-Created webhook instance with webhook_id: 890716673514258432 | pointing to https://snowbotdev.herokuapp.com/snowbot
-```
+ 
+    ```
+    Setting a webhook configuration...
+    Created webhook instance with webhook_id: 890716673514258432 | pointing to https://snowbotdev.herokuapp.com/snowbot
+    ```
   
 If your web app is not running, or your CRC code is not quite ready, you will receive the following response:  
   
