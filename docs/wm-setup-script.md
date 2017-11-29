@@ -87,7 +87,7 @@ Message IDs:
 Message ID 913875901732941829 with message: ❄ Welcome to snowbot (ver. 0.05) ❄ 
 ```
 
-### Setting a default Welcome Message
+### Setting default Welcome Message
 
 -w "set" -i 913875901732941829
 
@@ -136,28 +136,13 @@ Getting welcome message list.
 Message IDs: 
 Message ID 893579774534209539 with message: ❄ Welcome to snowbot (ver. 0.02) ❄ 
 ```
+## Updating default Welcome Mesafe
 
-### Setting the default Welcome Message
-
--r "get"
-
-```
-Getting welcome message rules list.
-No rules exist.
-```
-Setting the default Welcome Message
--w "set" -i 893579774534209539
-
-```
-Setting default Welcome Message to message with id 893579774534209539...
-```
-
--r "delete" -i 870397618781691904
 
 ## Validate setup
 
 
-## Troubleshooting errors
+## Other details
 
 ### Bot account must accept DM from any user. If not, the following error will be thrown:
 
