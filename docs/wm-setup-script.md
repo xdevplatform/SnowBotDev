@@ -51,11 +51,14 @@ See the project's Gemfile for more details about what gems are needed for the Si
 
 ## Managing Welcome Messages
 
-* [Creating Welcome Message]()
-* [Listing Welcome Messages]()
-* [Assigning a default Welcome Message]()
+* [Creating Welcome Message](#creating)
+* [Listing Welcome Messages](#listing)
+* [Assigning default Welcome Message](#setting)
+* [Updating default Welcome Message](#updating)
+* [Testing default Welcome Message](#testing)
+* [Other details](#details)
 
-### Creating Welcome Message
+### Creating Welcome Message <a id="creating" class="tall">&nbsp;</a>
 
 One of the first steps of deploying a bot is designing your Welcome Message. 
 
@@ -69,7 +72,7 @@ Creating GenerateDirectMessageContent object.
 Creating Welcome Message...
 ```
 
-### Listing Welcome Messages
+### Listing Welcome Messages <a id="listing" class="tall">&nbsp;</a>
 
 ```
 Creating Welcome Message...
@@ -87,7 +90,7 @@ Message IDs:
 Message ID 913875901732941829 with message: ❄ Welcome to snowbot (ver. 0.05) ❄ 
 ```
 
-### Setting default Welcome Message
+### Setting default Welcome Message <a id="creating" class="tall">&nbsp;</a>
 
 -w "set" -i 913875901732941829
 
@@ -136,13 +139,13 @@ Getting welcome message list.
 Message IDs: 
 Message ID 893579774534209539 with message: ❄ Welcome to snowbot (ver. 0.02) ❄ 
 ```
-## Updating default Welcome Mesafe
+## Updating default Welcome Mesasage <a id="updating" class="tall">&nbsp;</a> 
 
 
-## Validate setup
+## Test default Welcome Message <a id="testing" class="tall">&nbsp;</a> 
 
 
-## Other details
+## Other details <a id="details" class="tall">&nbsp;</a> 
 
 ### Bot account must accept DM from any user. If not, the following error will be thrown:
 
