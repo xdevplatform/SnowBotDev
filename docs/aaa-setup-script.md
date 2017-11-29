@@ -14,17 +14,20 @@ In order to start working with the Account Activity API, your event consumer nee
 
 ## Getting started
 
-The **setup_webooks.rb** script helps automate Account Activity account details. See [HERE}(https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/managing-webhooks-and-subscriptions).
+The **setup_webooks.rb** script helps automate Account Activity account details. See [HERE](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/managing-webhooks-and-subscriptions).
+
+To run this script you have several options. 
+ 
+ >> []$ruby ./scripts/setup_webhooks.rb -h
 
 ```
 Usage: setup_webhooks [options]
     -c, --config CONFIG              Configuration file (including path) that provides account OAuth details. 
-    -t, --task TASK                  Securing Webhooks Task to perform: trigger CRC ('crc'), set config ('set'), list configs ('list'), delete config ('delete'), subscribe app ('subscribe'), unsubscribe app ('unsubscribe'),get subscription ('subscription').
+    -t, --task TASK                  Securing Webhooks Task to perform: trigger CRC ('crc'), set config ('set'), list configs ('list'),                                        delete config ('delete'), subscribe app ('subscribe'), unsubscribe app ('unsubscribe'),get                                                subscription ('subscription').
     -u, --url URL                    Webhooks 'consumer' URL, e.g. https://mydomain.com/webhooks/twitter.
     -i, --id ID                      Webhook ID
     -h, --help                       Display this screen.  
 ```
-[] HOW IS THE SCRIPT INSTALLED/Ran?
 
 -------------------
 Here are some common uses for this script:
@@ -37,7 +40,7 @@ Here are some common uses for this script:
     
 + [Triggering a CRC challenge](#crc)
 
-+ [Adding Twitter accounts to Account Activity API](#subscriptions)
++ [Adding or deleting Twitter accounts to Account Activity API](#subscriptions)
 
 + [Updating event consumer URL](#updating)
 
