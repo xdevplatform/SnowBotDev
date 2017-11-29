@@ -50,14 +50,14 @@ Here are some common uses for this script:
 
 Here are some example commands:
 
-+ setup_webhooks.rb -t "list"
++ setup_webhooks.rb -t **"list"**
 
     ```
     Retrieving webhook configurations...
     No existing configurations... 
     ```
 
-+ setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbot"
++ setup_webhooks.rb -t **"set"** -u "https://snowbotdev.herokuapp.com/snowbot"
  
     ```
     Setting a webhook configuration...
@@ -79,7 +79,7 @@ If your web app is not running, or your CRC code is not quite ready, you will re
     Webhook ID 890716673514258432 --> https://snowbotdev.herokuapp.com/snowbot
     ```
 
-+ setup_webhooks.rb -t "delete" -i 883437804897931264 
++ setup_webhooks.rb -t **"delete"** -i 883437804897931264 
   
     ```
     Attempting to delete configuration for webhook id: 883437804897931264.
@@ -90,7 +90,7 @@ If your web app is not running, or your CRC code is not quite ready, you will re
 
 Check out our 'Securing webhooks' documentation [HERE](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/securing-webhooks).
 
-+ setup_webhooks.rb -t "crc"
++ setup_webhooks.rb -t **"crc"**
 
     ```
     Retrieving webhook configurations...
@@ -112,14 +112,14 @@ If you receive this message you'll need to wait to retry. The default rate limit
 
 ### Adding Subscriptions to a Webhook ID <a id="subscriptions" class="tall">&nbsp;</a>
 
-+ setup_webhooks.rb -t "subscribe" -i webhook_id
++ setup_webhooks.rb -t **"subscribe"** -i webhook_id
   
     ```
     Setting subscription for 'host' account for webhook id: 890716673514258432
     Webhook subscription for 890716673514258432 was successfully added.
     ```
 
-+ setup_webhooks.rb -t "unsubscribe" -i webhook_id
++ setup_webhooks.rb -t **"unsubscribe"** -i webhook_id
   
     ```
     Attempting to delete subscription for webhook: 890716673514258432.
