@@ -1,38 +1,18 @@
-# Script for managing Welcome Messages
+# Managing Welcome Message script
+### Script for managing chatbot Welcome Messages
 
-As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line paramters and manage API calls that create, delete, set, and list Welcome Messages. 
+As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line parameters and manage API calls that create, delete, set, and list Welcome Messages. 
+
+This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory. There is also a script for [managing chatbot Welcome Messages]().
 
 
 ## Getting started
 
-+ *set_welcome_messages.rb* script that makes requests to the Twitter Direct Message API. 
-+ Written with Ruby 2.0 and ran from command-line with up to two parameters.
+The **set_welcome_messages.rb** helps manage requests to the Twitter [Direct Message API](https://developer.twitter.com/en/docs/direct-messages/beta-features). 
 
-+ This script comes along with a clone of @SnowBotDev. See /snowbotdev/scripts
-+ Code requires two standard gems:
-
-```
-require 'json'
-require 'optparse'
-```
-
-+ Code requires two other project objects:
-
-```
-require_relative '../app/helpers/api_oauth_request'
-require_relative '../app/helpers/generate_direct_message_content'
-```
-
-Since this script depends on the snowbot's DM content, which will differ from bot to bot, you'll want this script's functionality in the same language as the rest of your bot. If you are developing with Node.js, then check out this [Node-based Welcome Message sccript].
-
-See the project's Gemfile for more details about what gems are needed for the Sinatra web app. 
-
-
-### Running script
-
-To run this script you have several options. You may want to just grab these already-written scripts to manage your Welcome Messages
+To run this script you have several options. 
  
- >> []$ruby ./scripts/setup_welcome_messages.rb -h
+```$ruby ./scripts/setup_welcome_messages.rb -h```
 
 ```
 Usage: setup_welcome_message [options]
@@ -41,6 +21,37 @@ Usage: setup_welcome_message [options]
     -i, --id ID                      Message or rule ID
     -h, --help                       Display this screen.
 ```
+
++ Code requires two standard gems:
+
+```
+require 'json'
+require 'optparse'
+```
+
++ Code requires two other SnowBotDev project objects:
+
+
+This Ruby class manages and abstracts away the OAuth authentication details:
+
+```
+require_relative '../app/helpers/api_oauth_request'
+```
+
+This Ruby class contains the bot-specific Welcome Messages and Quick Reply content: 
+
+```
+require_relative '../app/helpers/generate_direct_message_content'
+```
+
+Since this script depends on the @SnowBotDev's DM content, content that differs from bot to bot, you'll want this script's functionality in the same language as the rest of your bot. If you are developing with Node.js, then check out this [Node-based Welcome Message sccript].
+
+See the project's Gemfile for more details about what gems are needed for the Sinatra web app. 
+
+
+### Running script
+
+
 
 ## Managing Welcome Messages
 
