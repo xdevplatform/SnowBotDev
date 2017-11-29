@@ -14,7 +14,7 @@ In order to start working with the Account Activity API, your event consumer nee
 
 ## Getting started
 
-The **setup_webooks.rb** script helps automate Account Activity account details. https://dev.twitter.com/webhooks/managing
+The **setup_webooks.rb** script helps automate Account Activity account details. See [HERE}(https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/managing-webhooks-and-subscriptions).
 
 ```
 Usage: setup_webhooks [options]
@@ -24,12 +24,26 @@ Usage: setup_webhooks [options]
     -i, --id ID                      Webhook ID
     -h, --help                       Display this screen.  
 ```
+[] HOW IS THE SCRIPT INSTALLED/Ran?
+
+-------------------
 Here are some common uses for this script:
 
-+ Setting client-side URL for webhook events. Where should we send the event JSON?
-+ Looking up what webhook IDs are set up? Confirming what webhook 'bridges' have been set up.
++ [Setting client-side URL for webhook events.](#setting-up) 
+    + Where should we send the event JSON?
+    + Looking up what webhook IDs are set up. 
+    + Confirming what webhook 'bridges' have been set up.
+    + Note: this will trigger a CRC challenge from Twitter, so be sure you are correctly handling that. 
+    
++ [Triggering a CRC challenge](#crc)
 
-## Setting up webhooks
++ [Adding Twitter accounts to Account Activity API](#subscriptions)
+
++ [Updating event consumer URL](#updating)
+
+-------------------
+
+## Setting up webhooks <a id="setting-up" class="tall">&nbsp;</a>
 
 Here are some example commands:
 
@@ -52,7 +66,7 @@ If your web app is not running, or your CRC code is not quite ready, you will re
     ```
     Setting a webhook configuration...
     error code: 400 #<Net::HTTPBadRequest:0x007ffe0f710f10>
-    {"code"=>214, "message"=>"Webhook URL does not meet the requirements. Please consult: https://dev.twitter.com/webhooks/securing"}
+    {"code"=>214, "message"=>"Webhook URL does not meet the requirements. Please consult: https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/securing-webhooks"}
     ```  
 
 + setup_webhooks.rb -t "list"
@@ -69,7 +83,31 @@ If your web app is not running, or your CRC code is not quite ready, you will re
     Webhook configuration for 883437804897931264 was successfully deleted.
     ```
 
-### Adding Subscriptions to a Webhook ID
+### Triggering CRC check <a id="crc" class="tall">&nbsp;</a>
+
+Check out our 'Securing webhooks' documentation [HERE](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/securing-webhooks).
+
++ setup_webhooks.rb -t "crc"
+
+    ```
+    Retrieving webhook configurations...
+    204
+    CRC request successful and webhook status set to valid.
+    ```
+
+If you receive a response saying the 'Webhook URL does not meet the requirements', make sure your web app is up and running. If you are using a cloud platform, make sure your app is not hibernating. 
+
+    ```
+    Retrieving webhook configurations...
+    Too Many Requests  - Rate limited...
+    error: #<Net::HTTPTooManyRequests:0x007fc4239c1190>
+    {"errors":[{"code":88,"message":"Rate limit exceeded."}]}
+    Webhook URL does not meet the requirements. Please consult: https://dev.twitter.com/webhook/security
+    ```
+
+If you receive this message you'll need to wait to retry. The default rate limit is one request every 15 minutes. 
+
+### Adding Subscriptions to a Webhook ID <a id="subscriptions" class="tall">&nbsp;</a>
 
 + setup_webhooks.rb -t "subscribe" -i webhook_id
   
@@ -92,30 +130,7 @@ If your web app is not running, or your CRC code is not quite ready, you will re
     Webhook subscription exists for 890716673514258432.
     ```
 
-### Triggering CRC check 
-
-+ setup_webhooks.rb -t "crc"
-
-    ```
-    Retrieving webhook configurations...
-    204
-    CRC request successful and webhook status set to valid.
-    ```
-
-If you receive a response saying the 'Webhook URL does not meet the requirements', make sure your web app is up and running. If you are using a cloud platform, make sure your app is not hibernating. 
-
-    ```
-    Retrieving webhook configurations...
-    Too Many Requests  - Rate limited...
-    error: #<Net::HTTPTooManyRequests:0x007fc4239c1190>
-    {"errors":[{"code":88,"message":"Rate limit exceeded."}]}
-    Webhook URL does not meet the requirements. Please consult: https://dev.twitter.com/webhook/security
-    ```
-
-If you receive this message you'll need to wait to retry. The default rate limit is one request every 15 minutes. 
-
-
-### Updating Webhook URL
+### Updating Webhook URL <a id="updating-url" class="tall">&nbsp;</a>
 
 Sometimes you need to have the Twitter AA API point to a new client-side webhook URL. When building a bot, you may have Twitter initially send webhook events to a development site, then later point to a production system. 
 
@@ -144,7 +159,8 @@ Now, we are ready to update to our production
 
 ### Error responses
 
-Only set the consumer key and secret.
+
++ Only set the consumer key and secret.
 
 ```
 Setting a webhook configuration...
@@ -154,7 +170,8 @@ Error Message: {"errors":[{"code":261,"message":"Application cannot perform writ
 {"code"=>261, "message"=>"Application cannot perform write actions. Contact Twitter Platform Operations through https://support.twitter.com/forms/platform."}
 ```
 
-Failing CRC check.
++ Failing CRC check.
+
 ```
 Setting a webhook configuration...
 POST ERROR occurred with /1.1/account_activity/webhooks.json?url=https%3A%2F%2Fsnowbotdev.herokuapp.com%2Fsnowbotdev, request:  
