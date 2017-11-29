@@ -18,7 +18,7 @@ The **setup_webooks.rb** script helps automate Account Activity account details.
 
 To run this script you have several options. 
  
- >> []$ruby ./scripts/setup_webhooks.rb -h
+ ```$ruby ./scripts/setup_webhooks.rb -h```
 
 ```
 Usage: setup_webhooks [options]
