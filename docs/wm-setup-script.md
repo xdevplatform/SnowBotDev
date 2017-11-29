@@ -32,13 +32,13 @@ require 'optparse'
 + Code requires two other SnowBotDev project objects:
 
 
-This Ruby class manages and abstracts away the OAuth authentication details:
+This Ruby ```ApiOauthRequest``` class manages and abstracts away the OAuth authentication details:
 
 ```
 require_relative '../app/helpers/api_oauth_request'
 ```
 
-This Ruby class contains the bot-specific Welcome Messages and Quick Reply content: 
+This Ruby ```GenerateDirectMessageContent``` class contains the bot-specific Welcome Messages and Quick Reply content: 
 
 ```
 require_relative '../app/helpers/generate_direct_message_content'
@@ -49,21 +49,19 @@ Since this script depends on the @SnowBotDev's DM content, content that differs 
 See the project's Gemfile for more details about what gems are needed for the Sinatra web app. 
 
 
-### Running script
-
-
-
 ## Managing Welcome Messages
 
+* [Creating Welcome Message]()
+* [Listing Welcome Messages]()
+* [Assigning a default Welcome Message]()
 
-
-## Welcome Method actions
-
-### Creating a Welcome Message
+### Creating Welcome Message
 
 One of the first steps of deploying a bot is designing your Welcome Message. 
 
 -w "create"
+
+This command will call the ```generate_welcome_message_default``` method of the ```GenerateDirectMessageContent``` object
 
 ```
 
@@ -99,12 +97,7 @@ Setting default Welcome Message to message with id 913875901732941829...
 
 ```
 
-
-
-<What the story here? when one option did not have a description, this error is triggered:>
-
-
-
+<What's the story here? when one option did not have a description, this error is triggered:>
 
 
 setup_welcome_message -w "delete" -i 883450462757765123
