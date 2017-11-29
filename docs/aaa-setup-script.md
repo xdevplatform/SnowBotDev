@@ -10,7 +10,8 @@ There are several 'plumbing' details that need attention before you can start re
 + Managing CRC events from Twitter, and manually triggering those events.
 In order to start working with the Account Activity API, your event consumer needs to correctly respond to CRC challenges from Twitter. In fact, you will not be able to set up your web hook consumer URL until this step is made. This script manages calls to the API ['test CRC' method](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/validate-webhook-config).
 
-<note about sibling script>
+This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory.
+There is also a script for [setting up and security Account Activity webhooks]().
 
 ## Getting started
 
@@ -28,6 +29,23 @@ Usage: setup_webhooks [options]
     -i, --id ID                      Webhook ID
     -h, --help                       Display this screen.  
 ```
+
++ Code requires three gems:
+
+```
+require 'json'
+require 'cgi'
+require 'optparse'
+```
+
++ Code requires one other SnowBotDev project objects:
+
+This Ruby class manages and abstracts away the OAuth authentication details:
+
+```
+require_relative '../app/helpers/api_oauth_request'
+```
+
 
 -------------------
 Here are some common uses for this script:
