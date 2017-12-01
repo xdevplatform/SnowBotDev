@@ -66,7 +66,6 @@ As outlined [HERE](https://dev.twitter.com/webhooks/getting-started), here are t
   * By integrating with the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
   * By integrating the Direct Message (DM) API, you are building the private communication channel to your bot users. The AA API prodives the ability to listen for Twitter account activities, and the DM API enables you to send messages back to your users. 
 
-
 [Intro to why these scripts are needed and an overview of how/when used. "As a AA API client, I need to a tool to update my default Welcome Message. I need to set one up to get started, and also will update it as my bot evolves and add new features.] 
 
 + Deploy web app with an endpoint to handle incoming webhook events.
@@ -80,10 +79,18 @@ As outlined [HERE](https://dev.twitter.com/webhooks/getting-started), here are t
 
 + Handle CRC event.
 
-## Setting up Account subscriptions
+### Event manager
 
-## Setting up Welcome Messages
+### Building bot functionality
 
-### Setting Default Welcome Message
+#### Basic menu navigation
+
+#### Serving media
+
+#### Serving lists
+
+#### Asking users for location
+
+#### Integrating third-party APIs
 
 ### Designing your Quick Replies
