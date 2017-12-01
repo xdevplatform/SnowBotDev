@@ -236,9 +236,11 @@ class GenerateDirectMessageContent
 	  message_data['quick_reply']['type'] = 'options'
 	  
 	  options = []
-	  options = build_home_option
+	  
+	  options += build_home_option
 
 	  message_data['quick_reply']['options'] = options
+	  
 	  event['event']['message_create']['message_data'] = message_data
 	  event.to_json
 
@@ -301,7 +303,6 @@ class GenerateDirectMessageContent
 	  message_data['quick_reply'] = {}
 	  message_data['quick_reply']['type'] = 'options'
 
-	  options = []
 		options = build_back_option 'locations'
 	  options = options + build_home_option  #('with_description')
 
@@ -456,6 +457,12 @@ class GenerateDirectMessageContent
 		option['description'] = 'Come on, take a look...'
 		option['metadata'] = 'see_photo'
 		options << option
+
+		option = {}
+		option['label'] = "#{BOT_CHAR} Request snow report"
+		option['description'] = 'Select areas mainly in CO, with some in CA, MN and NZ.'
+		option['metadata'] = 'snow_report'
+		options << option
 		
 		option = {}
 		option['label'] = "#{BOT_CHAR} Weather data from anywhere"
@@ -473,12 +480,6 @@ class GenerateDirectMessageContent
 		option['label'] = "#{BOT_CHAR} Get geo, weather themed playlist"
 		option['description'] = "Carefully curated Spotify playlists...'"
 		option['metadata'] = 'snow_music'
-		options << option
-
-		option = {}
-		option['label'] = "#{BOT_CHAR} Request snow report"
-		option['description'] = 'Select areas mainly in CO, with some in CA, MN and NZ.'
-		option['metadata'] = 'snow_report'
 		options << option
 
 		#option = {}
