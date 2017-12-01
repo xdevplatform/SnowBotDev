@@ -232,10 +232,10 @@ class GenerateDirectMessageContent
 	  message_data = {}
 	  message_data['text'] = weather_info
 
-
 	  message_data['quick_reply'] = {}
 	  message_data['quick_reply']['type'] = 'options'
-
+	  
+	  options = []
 	  options = build_home_option
 
 	  message_data['quick_reply']['options'] = options
@@ -301,7 +301,8 @@ class GenerateDirectMessageContent
 	  message_data['quick_reply'] = {}
 	  message_data['quick_reply']['type'] = 'options'
 
-	  options = build_back_option 'locations'
+	  options = []
+		options = build_back_option 'locations'
 	  options = options + build_home_option  #('with_description')
 
 	  message_data['quick_reply']['options'] = options

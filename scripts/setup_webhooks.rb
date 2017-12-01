@@ -197,7 +197,7 @@ if __FILE__ == $0 #This script code is executed when running this file.
 	#end
 	
 	if $url.nil?
-		$url = 'https://floodsocial.herokuapp.com/webhooks/twitter'
+		$url = 'https://snowbotdev.herokuapp.com/webhooks/twitter'
 	end
 	
 	url = CGI::escape($url)
