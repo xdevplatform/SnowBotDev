@@ -1,16 +1,15 @@
-# Managing Welcome Message script
+# Managing Welcome Messages
 ### Script for managing chatbot Welcome Messages
 
 As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line parameters and manage API calls that create, delete, set, and list Welcome Messages. 
 
 This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory. There is also a script for [managing chatbot Welcome Messages]().
 
-
 ## Getting started
 
 The **set_welcome_messages.rb** helps manage requests to the Twitter [Direct Message API](https://developer.twitter.com/en/docs/direct-messages/beta-features). 
 
-To run this script you have several options. 
+When you run this script you have several options. 
  
 ```$ruby ./scripts/setup_welcome_messages.rb -h```
 
@@ -22,14 +21,14 @@ Usage: setup_welcome_message [options]
     -h, --help                       Display this screen.
 ```
 
-+ Code requires two standard gems:
++ The script requires two standard gems:
 
 ```
 require 'json'
 require 'optparse'
 ```
 
-+ Code requires two other SnowBotDev project objects:
++ The script also requires two other SnowBotDev project objects:
 
 
 This Ruby ```ApiOauthRequest``` class manages and abstracts away the OAuth authentication details:
