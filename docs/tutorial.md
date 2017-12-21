@@ -6,7 +6,7 @@
 + [Getting started](#getting-started)
 + [Building webhook consumer](#webhook-consumer)
 
-# Introduction <a id="intro" class="tall">&nbsp;</a>
+## Introduction <a id="intro" class="tall">&nbsp;</a>
 The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Direct Message *bots*, automated systems that respond to incoming Direct Messages. To learn more about how bots have become common on the Twitter platfrom, see [HERE](https://marketing.twitter.com/na/en/insights/from-tvs-to-beertails-how-chatbots-help-brands-engage-consumers-on-twitter.html). 
 
 These systems receive Account Activity webhook events from Twitter, process the received messages, and respond to the requester via the Direct Message API. 
@@ -38,7 +38,7 @@ While much of the narrative is language-agnostic, this material includes many co
 
 We'll start off with a how to get started with these APIs.
 
-# Getting started <a id="getting-started" class="tall">&nbsp;</a>
+## Getting started <a id="getting-started" class="tall">&nbsp;</a>
 
 First off, if you haven't reviewed the Direct Message and Account Activity API documentation, that's the place to start. 
 
@@ -60,7 +60,7 @@ As described in detail [HERE](https://developer.twitter.com/en/docs/accounts-and
 * Design and deploy default Welcome Message.
   * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb) to help with managing your Welcome Messages.
 
-## Building webhook event consumer app <a id="webhook-consumer" class="tall">&nbsp;</a>
+## Building webhook consumer <a id="webhook-consumer" class="tall">&nbsp;</a>
 
 * Developing a web app that integrates both APIs. 
   * By integrating with the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
