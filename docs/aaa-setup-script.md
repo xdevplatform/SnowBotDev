@@ -23,6 +23,9 @@ In order to start working with the Account Activity API, your event consumer nee
 This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory.
 There is also a script for [managing Direct Message Welcome messages](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb).
 
+If you are a Node.js developer, checkout these [Node-based scripts for managing webhooks](https://github.com/twitterdev/twitter-webhook-boilerplate-node/tree/master/example_scripts/webhook_management).
+
+
 ## Getting started
 
 The **setup_webooks.rb** script helps automate Account Activity account details. See [HERE](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/managing-webhooks-and-subscriptions).
