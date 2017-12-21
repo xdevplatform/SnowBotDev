@@ -1,9 +1,12 @@
 # Managing Welcome Messages
 ### Script for managing chatbot Welcome Messages
 
-As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line parameters and manage API calls that create, delete, set, and list Welcome Messages. 
+As you develop your chatbot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line parameters and manage API calls that create, delete, set, and list Welcome Messages. 
 
-This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory. There is also a script for [managing chatbot Welcome Messages]().
+This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory. There is also a script for [managing chatbot 'plumbing' details](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/aaa-setup-script.md).
+
+If you are a Node.js developer, checkout these [Node-based Welcome Message scripts](https://github.com/twitterdev/twitter-webhook-boilerplate-node/tree/master/example_scripts/welcome_messages).
+
 
 ## Getting started
 
@@ -43,7 +46,7 @@ This Ruby ```GenerateDirectMessageContent``` class contains the bot-specific Wel
 require_relative '../app/helpers/generate_direct_message_content'
 ```
 
-Since this script depends on the @SnowBotDev's DM content, content that differs from bot to bot, you'll want this script's functionality in the same language as the rest of your bot. If you are developing with Node.js, then check out this [Node-based Welcome Message sccript].
+Since this script depends on the @SnowBotDev's DM content, content that differs from bot to bot, you'll want this script's functionality in the same language as the rest of your bot. If you are developing with Node.js, then check out this [Node-based Welcome Message script].
 
 See the project's Gemfile for more details about what gems are needed for the Sinatra web app. 
 
