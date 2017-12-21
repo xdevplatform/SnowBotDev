@@ -12,7 +12,7 @@ Note: this script is currently written wo work with the *enterprise* endpoints, 
   + Enterprise: https://api.twitter.com/1.1/account_activity/webhooks.json 
 
 + Setting up Account Activity API subscriptions. This API is designed to enable receiving events from multiple Twitter accounts. This script manages calls to the API 'add account' method at these endpoints:
-  + Standard: ```https://api.twitter.com/1.1/account_activity/webhooks/all/{:env_name}/subscriptions.json``` 
+  + Standard: https://api.twitter.com/1.1/account_activity/webhooks/all/{:env_name}/subscriptions.json 
   + Enterprise: https://api.twitter.com/1.1/account_activity/webhooks/{:webhook_id}/subscriptions/all.json 
 
 + Managing CRC events from Twitter, and manually triggering those events.
