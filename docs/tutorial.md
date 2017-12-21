@@ -28,8 +28,8 @@ This example bot has the following features:
     * Links to third-party snow research and information web sites. Demonstrates how to present links to external resources via Quick Replies. 
     * Links to Spotify playlists with snow and weather themes.
 * Integrates third-party APIs:
-  * Provides weather data for user-requested location.
-  * Provides snow resort reports for a set list of 20 ski resorts.
+  * Provides weather data for user-requested location. Data is retrieved using a WeatherUnderground API.
+  * Provides snow resort reports for a set list of 20 ski resorts using http://www.snocountry.com/.
 * Supports a simple bot navigation framework with common ```help```, ```about```, and ```back``` actions.
 
 A fundamental component of any chatbot system is a webapp that reacts to Twitter webhooks and marshalls 'business' logic for reacting to incoming messages. The material below is organized in several sections including tips on getting started and overviews of implementing these bot features. 
