@@ -3,7 +3,7 @@
 ### *Building the snowbot*
 
 + [Introduction](#intro)
-+ [Getting Started](#getting-started)
++ [Getting started](#getting-started)
 + [Building webhook consumer](#webhook-consumer)
 
 # Introduction <a id="intro" class="tall">&nbsp;</a>
