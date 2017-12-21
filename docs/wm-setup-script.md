@@ -102,8 +102,7 @@ Setting default Welcome Message to message with id 913875901732941829...
 
 ```
 
-<What's the story here? when one option did not have a description, this error is triggered:>
-
+Remember, as noted [HERE](https://developer.twitter.com/en/docs/direct-messages/quick-replies/api-reference/options), if you set option descriptions (and you probably should, they are helpful), you need to set them for all options or an error message will be returned when attempting to set the message.
 
 setup_welcome_message -w "delete" -i 883450462757765123
 
