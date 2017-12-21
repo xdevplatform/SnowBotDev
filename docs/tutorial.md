@@ -6,6 +6,9 @@
 + [Getting started](#getting-started)
   + [Helper scripts](#helper-scripts) 
 + [Building webhook consumer](#webhook-consumer)
+  + [Standing up web app](#standing-up)
+  + [Receive webhook events](#)
+  + [Handle CRC events](#)
 
 ## Introduction <a id="intro" class="tall">&nbsp;</a>
 The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Direct Message *bots*, automated systems that respond to incoming Direct Messages. To learn more about how bots have become common on the Twitter platfrom, see [HERE](https://marketing.twitter.com/na/en/insights/from-tvs-to-beertails-how-chatbots-help-brands-engage-consumers-on-twitter.html). 
@@ -122,7 +125,7 @@ end
   end
 ```
 
-### Handle CRC event <a id="handling-crc" class="tall">&nbsp;</a> 
+### Handle CRC events <a id="handling-crc" class="tall">&nbsp;</a> 
 
 
 
