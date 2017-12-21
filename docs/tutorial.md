@@ -7,7 +7,9 @@
 + [Building webhook consumer](#webhook-consumer)
 
 # Introduction <a id="intro" class="tall">&nbsp;</a>
-The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Direct Message *bots*, automated systems that respond to incoming Direct Messages. These systems receive webhook events from Twitter, process the received messages, and respond to the requester. 
+The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Direct Message *bots*, automated systems that respond to incoming Direct Messages. To learn more about how bots have become common on the Twitter platfrom, see [HERE](https://marketing.twitter.com/na/en/insights/from-tvs-to-beertails-how-chatbots-help-brands-engage-consumers-on-twitter.html). 
+
+These systems receive Account Activity webhook events from Twitter, process the received messages, and respond to the requester via the Direct Message API. 
 
 + By integrating the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
 + By integrating the Direct Message (DM) API, you are building the private communication channel for your bot and its users. 
