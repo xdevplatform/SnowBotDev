@@ -4,6 +4,7 @@
 
 + [Introduction](#intro)
 + [Getting started](#getting-started)
+  + [Helper scripts](#helper-scripts) 
 + [Building webhook consumer](#webhook-consumer)
 
 ## Introduction <a id="intro" class="tall">&nbsp;</a>
@@ -56,17 +57,24 @@ As described in detail [HERE](https://developer.twitter.com/en/docs/accounts-and
    * Develop a webhook consumer. 
       * Handle CRC challenges from Twitter. 
       * Receive webhook events from Twitter.
-      * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_webhooks.rb) to help with setting up your Accounty Activity access.
 * Design and deploy default Welcome Message.
-  * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb) to help with managing your Welcome Messages.
+ 
+### Helper scripts <a id="helper-scripts" class="tall">&nbsp;</a>
+
+As you develop your chatbot, you'll need to set-up the Account Activity plumbing, and design and generate Direct Messages. Much of these actions can be thought of as one-time set-up tasks, but they are actions you'll likely take again as your chatbot evolves. 
+
+* See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_webhooks.rb) to help with setting up your Accounty Activity access.
+  * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb) to help with managing your Welcome Messages. "As a AA API client, I need to a tool to update my default Welcome Message. I need to set one up to get started, and also will update it as my bot evolves and add new features." 
 
 ## Building webhook consumer <a id="webhook-consumer" class="tall">&nbsp;</a>
 
-* Developing a web app that integrates both APIs. 
-  * By integrating with the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
-  * By integrating the Direct Message (DM) API, you are building the private communication channel to your bot users. The AA API prodives the ability to listen for Twitter account activities, and the DM API enables you to send messages back to your users. 
+At the highest level, there are two main components of a Twitter chatbot: Twitter Accounty Activity API and the webhook events it sends, and the client-side web app that receives these events and responds with Direct Messages.
 
-[Intro to why these scripts are needed and an overview of how/when used. "As a AA API client, I need to a tool to update my default Welcome Message. I need to set one up to get started, and also will update it as my bot evolves and add new features.] 
+
+
+
+
+
 
 + Deploy web app with an endpoint to handle incoming webhook events.
   + POST method that handles incoming Activity Account webhook events
