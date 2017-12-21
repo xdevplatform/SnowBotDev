@@ -13,7 +13,7 @@
   + [Twitter webhooks](#managing-events)
   + [Quick Replies](#managing-webhooks)
   + [Bot commands](#managing-commands)
-+ [Addint bot functionality](#functionality)
++ [Adding bot functionality](#functionality)
 
 
 ## Introduction <a id="intro" class="tall">&nbsp;</a>
@@ -73,7 +73,7 @@ As described in detail [HERE](https://developer.twitter.com/en/docs/accounts-and
 As you develop your chatbot, you'll need to set-up the Account Activity plumbing, and design and generate Direct Messages. Much of these actions can be thought of as one-time set-up tasks, but they are actions you'll likely take again as your chatbot evolves. 
 
 * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_webhooks.rb) to help with setting up your Accounty Activity access.
-  * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb) to help with managing your Welcome Messages. "As a AA API client, I need to a tool to update my default Welcome Message. I need to set one up to get started, and also will update it as my bot evolves and add new features." 
+* See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb) to help with managing your Welcome Messages. "As a AA API client, I need to a tool to update my default Welcome Message. I need to set one up to get started, and also will update it as my bot evolves and add new features." 
 
 ## Building webhook consumer <a id="webhook-consumer" class="tall">&nbsp;</a>
 
@@ -83,6 +83,7 @@ If you haven't already, subscribe your consumer web app using the Account Activi
  
  
 ### Standing up web app <a id="standing-up" class="tall">&nbsp;</a> 
+https://snowbotdev.herokuapp.com/snowbotdev
  
 ```
 require 'sinatra'
@@ -99,9 +100,9 @@ end
 
 ```
 
-+ Deploy web app with an endpoint to handle incoming webhook events.
-  + POST method that handles incoming Activity Account webhook events
-  + GET method that implements CRC authentication requirements.
+Deploy web app with an endpoint to handle incoming webhook events.
++ POST method that handles incoming Activity Account webhook events
++ GET method that implements CRC authentication requirements.
 
 
 
@@ -157,9 +158,13 @@ end
 
 + Putting it all together. [HERE](https://github.com/jimmoffitt/SnowBotDev/blob/master/app/controllers/snow_bot_dev_app.rb) is the Snowbot's Sinatra controller. snow_bot_dev_app.rb
 
-+ Create a default Welcome Message.
+## Create a default Welcome Message
+
+SnowBotDev/app/helpers/generate_direct_message_content.rb
 
 ## Managing events <a id="managing" class="tall">&nbsp;</a> 
+SnowBotDev/app/helpers/event_manager.rb
+
 
 ```
   # Receives DM events.
@@ -259,14 +264,20 @@ end
 ### Basic menu navigation
 
 ### Adding attachments to Direct Messages
+SnowBotDev/app/helpers/twitter_api.rb
 
 ### Serving option lists
 
 ### Integrating third-party APIs
+SnowBotDev/app/helpers/third_party_request.rb
 
-### Asking users for location
+
 
 ## Other tips
 
+### Call to action Tweets
 
 Adding a CTA Tweet: https://twitter.com/messages/compose?recipient_id=906948460078698496
+
+### Asking users for location
+
