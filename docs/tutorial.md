@@ -68,24 +68,105 @@ As you develop your chatbot, you'll need to set-up the Account Activity plumbing
 
 ## Building webhook consumer <a id="webhook-consumer" class="tall">&nbsp;</a>
 
-At the highest level, there are two main components of a Twitter chatbot: Twitter Accounty Activity API and the webhook events it sends, and the client-side web app that receives these events and responds with Direct Messages.
+At the highest level, there are two main components of a Twitter chatbot: Twitter Accounty Activity API and the webhook events it sends, and the client-side web app that receives these events and responds with Direct Messages. This section will outline what that web app looks like when using the Ruby/sinatra framework.
 
+If you haven't already, subscribe your consumer web app using the Account Activity API.
+ 
+ 
+ 
+```
+require 'sinatra'
 
+class SnowBotApp < Sinatra::Base
 
+ def initialize
+   super()
+ end
+ 
+ //Add routes, methods, etc.
 
+end
 
-
+```
 
 + Deploy web app with an endpoint to handle incoming webhook events.
   + POST method that handles incoming Activity Account webhook events
   + GET method that implements CRC authentication requirements.
- 
-+ Subscribe your consumer web app using the Account Activity API
-  + https://dev.twitter.com/webhooks/reference/post/account_activity/webhooks
 
-+ Create a default Welcome Message.
+
+
+
+```
+ //Add routes, methods, etc.
+ get '/' do
+ end
+   
+ post '/snowbot' do
+ end
+   
+ get '/snowbot' do
+ end
+```
+
+
+```
+class SnowBotApp < Sinatra::Base
+
+  get '/' do
+    "<p><b>Welcome to the snow bot...</b></p>
+  end
+  
+  # Receives DM events.
+  post '/snowbot' do
+    request.body.rewind
+    events = request.body.read
+    manager = EventManager.new
+    manager.handle_event(events)
+    status 200
+  end
+  
+  get '/snowbot' do
+    crc_token = params['crc_token']
+    response = {}
+    response['response_token'] = "sha256=#{generate_crc_response(settings.dm_api_consumer_secret, crc_token)}"
+    body response.to_json
+    status 200
+end
+  
+  
+end
+```
+
+
+
+
+
+
+
+
+
 
 + Handle CRC event.
+
+```
+def generate_crc_response(consumer_secret, crc_token)
+  hash = OpenSSL::HMAC.digest('sha256', consumer_secret, crc_token)
+  return Base64.encode64(hash).strip!
+end
+```
+Receives challenge response check (CRC).
+```
+get '/snowbot' do
+  crc_token = params['crc_token']
+  response = {}
+  response['response_token'] = "sha256=#{generate_crc_response(settings.dm_api_consumer_secret, crc_token)}"
+  body response.to_json
+  status 200
+end
+```
+
+
++ Create a default Welcome Message.
 
 ### Managing incoming events
 
