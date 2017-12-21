@@ -9,6 +9,12 @@
   + [Standing up web app](#standing-up)
   + [Receive webhook events](#)
   + [Handle CRC events](#)
++ [Managing events](#managing)
+  + [Twitter webhooks](#managing-events)
+  + [Quick Replies](#managing-webhooks)
+  + [Bot commands](#managing-commands)
++ [Addint bot functionality](#functionality)
+
 
 ## Introduction <a id="intro" class="tall">&nbsp;</a>
 The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Direct Message *bots*, automated systems that respond to incoming Direct Messages. To learn more about how bots have become common on the Twitter platfrom, see [HERE](https://marketing.twitter.com/na/en/insights/from-tvs-to-beertails-how-chatbots-help-brands-engage-consumers-on-twitter.html). 
@@ -153,7 +159,7 @@ end
 
 + Create a default Welcome Message.
 
-## Managing incoming events
+## Managing events <a id="managing" class="tall">&nbsp;</a> 
 
 ```
   # Receives DM events.
@@ -180,7 +186,7 @@ class EventManager
 ```
 
 
-Handing webhook events
+### Handing webhook events <a id="managing-events" class="tall">&nbsp;</a> 
 
 ```
 def handle_event(events)
@@ -207,7 +213,7 @@ def handle_event(events)
 	end
 ```
 
-Managing Quick Replies
+### Managing Quick Replies <a id="managing-qrs" class="tall">&nbsp;</a> 
 
 ```
 	def handle_quick_reply(dm_event)
@@ -227,7 +233,8 @@ Managing Quick Replies
   
 ```
   
-Handling commands
+### Handling bot commands <a id="managing-commands" class="tall">&nbsp;</a> 
+ 
 
 ```
 
@@ -247,7 +254,7 @@ end
 
 ```
 
-## Adding bot functionality
+## Adding bot functionality <a id="functionality" class="tall">&nbsp;</a> 
 
 ### Basic menu navigation
 
