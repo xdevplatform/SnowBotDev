@@ -14,6 +14,11 @@
   + [Quick Replies](#managing-webhooks)
   + [Bot commands](#managing-commands)
 + [Adding bot functionality](#functionality)
+  + [Basic menu navigation](#navigation)
+  + [Add attachments to Direct Messages](#attachments)
+  + [Serving option lists](#lists)
+  + [Integrating third-party APIs](#other-apis)
++ [Other tips](#tips)
 
 
 ## Introduction <a id="intro" class="tall">&nbsp;</a>
@@ -261,19 +266,21 @@ end
 
 ## Adding bot functionality <a id="functionality" class="tall">&nbsp;</a> 
 
-### Basic menu navigation
+### Basic menu navigation <a id="navigation" class="tall">&nbsp;</a> 
 
-### Adding attachments to Direct Messages
+### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
 SnowBotDev/app/helpers/twitter_api.rb
 
-### Serving option lists
+### Serving option lists <a id="'lists" class="tall">&nbsp;</a> 
 
-### Integrating third-party APIs
+### Integrating third-party APIs <a id="other-apis" class="tall">&nbsp;</a> 
 SnowBotDev/app/helpers/third_party_request.rb
 
 
 
-## Other tips
+## Other tips <a id="tips" class="tall">&nbsp;</a> 
+
+### Deploying chatbot
 
 ### Call to action Tweets
 
