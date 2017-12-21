@@ -73,6 +73,7 @@ At the highest level, there are two main components of a Twitter chatbot: Twitte
 If you haven't already, subscribe your consumer web app using the Account Activity API.
  
  
+### Standing up web app 
  
 ```
 require 'sinatra'
@@ -108,14 +109,9 @@ end
  end
 ```
 
+### Receive webhook events
 
 ```
-class SnowBotApp < Sinatra::Base
-
-  get '/' do
-    "<p><b>Welcome to the snow bot...</b></p>
-  end
-  
   # Receives DM events.
   post '/snowbot' do
     request.body.rewind
@@ -124,29 +120,23 @@ class SnowBotApp < Sinatra::Base
     manager.handle_event(events)
     status 200
   end
-  
+```
+
+### Handle CRC event.
+
+
+Receives challenge response check (CRC).
+
+```
   get '/snowbot' do
     crc_token = params['crc_token']
     response = {}
     response['response_token'] = "sha256=#{generate_crc_response(settings.dm_api_consumer_secret, crc_token)}"
     body response.to_json
     status 200
-end
-  
-  
-end
+  end
 ```
 
-
-
-
-
-
-
-
-
-
-+ Handle CRC event.
 
 ```
 def generate_crc_response(consumer_secret, crc_token)
@@ -154,21 +144,104 @@ def generate_crc_response(consumer_secret, crc_token)
   return Base64.encode64(hash).strip!
 end
 ```
-Receives challenge response check (CRC).
-```
-get '/snowbot' do
-  crc_token = params['crc_token']
-  response = {}
-  response['response_token'] = "sha256=#{generate_crc_response(settings.dm_api_consumer_secret, crc_token)}"
-  body response.to_json
-  status 200
-end
-```
 
++ Putting it all together. [HERE](https://github.com/jimmoffitt/SnowBotDev/blob/master/app/controllers/snow_bot_dev_app.rb) is the Snowbot's Sinatra controller. snow_bot_dev_app.rb
 
 + Create a default Welcome Message.
 
-### Managing incoming events
+## Managing incoming events
+
+```
+  # Receives DM events.
+  post '/snowbot' do
+    request.body.rewind
+    events = request.body.read
+    manager = EventManager.new
+    manager.handle_event(events)
+    status 200
+  end
+```
+
+EventManager class
+
+```
+#POST requests to /webhooks/twitter arrive here.
+#Twitter Account Activity API send events as POST requests with DM JSON payloads.
+
+require 'json'
+require_relative 'send_direct_message'
+
+class EventManager
+
+```
+
+
+Handing webhook events
+
+```
+def handle_event(events)
+
+		events = JSON.parse(events)
+		if events.key? ('direct_message_events')
+
+			dm_events = events['direct_message_events']
+			dm_events.each do |dm_event|
+
+				if dm_event['type'] == 'message_create'
+
+					#Is this a response? Test for the 'quick_reply_response' key.
+					is_response = dm_event['message_create'] && dm_event['message_create']['message_data'] && dm_event['message_create']['message_data']['quick_reply_response']
+
+					if is_response
+						handle_quick_reply dm_event
+					else
+						handle_command dm_event
+					end
+				end
+			end
+		end
+	end
+```
+
+Managing Quick Replies
+
+```
+	def handle_quick_reply(dm_event)
+
+		response_metadata = dm_event['message_create']['message_data']['quick_reply_response']['metadata']
+		user_id = dm_event['message_create']['sender_id']
+
+		#Default options
+		if response_metadata == 'help'
+			@DMSender.send_system_help(user_id)
+			
+		#Custom options	
+		elsif response_metadata == 'see_photo'
+			@DMSender.send_photo(user_id)
+	  
+	end
+  
+```
+  
+Handling commands
+
+```
+
+
+	def handle_command(dm_event)
+
+		#Since this DM is not a response to a QR, let's check for other 'action' commands
+
+		request = dm_event['message_create']['message_data']['text']
+		user_id = dm_event['message_create']['sender_id']
+		
+
+		if request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'bot' or request.downcase.include? 'home' or request.downcase.include? 'main' or request.downcase.include? 'hello' or request.downcase.include? 'back')
+			@DMSender.send_welcome_message(user_id)
+
+end
+
+```
 
 ## Adding bot functionality
 
