@@ -1,17 +1,27 @@
 # Account Activity API script
 ### Script for managing webbook setup and subscriptions.
 
-There are several 'plumbing' details that need attention before you can start receiving webhook events in your event consumer application. This script helps automate the fundamental plumbing of the webhook-based Account Activity (AA) API. These include:
+There are several 'plumbing' details that need attention before you can start receiving webhook events in your event consumer application. This script helps automate the fundamental plumbing of the webhook-based Account Activity (AA) API. These are summed up in our ["Security Webhooks"](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/securing-webhooks) and ["Managing webhooks and subscriptions"](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/managing-webhooks-and-subscriptions) documentations. 
 
-+ Telling Twitter where to send webhook events. This can be a one-time action, but at some point you will likely need to update the client-side web URL for receiving webhook events. This script manages calls to the API ['set URL' method](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/new-webhook-config).
+Specifically, this script helps with the steps below. See our Accounty Activity API references ([Standard/Premium](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-standard-all) and [Enterprise](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-enterprise)) for the details. 
 
-+ Setting up Account Activity API subscriptions. This API is designed to enable receiving events from multiple Twitter accounts. This script manages calls to the API ['add account' method](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/new-subscription).
+Note: this script is currently written wo work with the *enterprise* endpoints. 
+
++ Telling Twitter where to send webhook events. This can be a one-time action, but at some point you will likely need to update the client-side web URL for receiving webhook events. This script manages calls to the API 'set URL' method at these endpoints:
+  + Standard: https://api.twitter.com/1.1/account_activity/direct_messages/```:env_name```/webhooks.json 
+  + Enterprise: https://api.twitter.com/1.1/account_activity/webhooks.json 
+
++ Setting up Account Activity API subscriptions. This API is designed to enable receiving events from multiple Twitter accounts. This script manages calls to the API 'add account' method at these endpoints:
+  + Standard: ```https://api.twitter.com/1.1/account_activity/webhooks/all/```:env_name```/subscriptions.json``` 
+  + Enterprise: https://api.twitter.com/1.1/account_activity/webhooks/```:webhook_id```/subscriptions/all.json 
 
 + Managing CRC events from Twitter, and manually triggering those events.
-In order to start working with the Account Activity API, your event consumer needs to correctly respond to CRC challenges from Twitter. In fact, you will not be able to set up your web hook consumer URL until this step is made. This script manages calls to the API ['test CRC' method](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/validate-webhook-config).
+In order to start working with the Account Activity API, your event consumer needs to correctly respond to CRC challenges from Twitter. In fact, you will not be able to set up your web hook consumer URL until this step is made. This script manages calls to the API 'test CRC' method at these endpoints:
+  + Standard: https://api.twitter.com/1.1/account_activity/all/```:env_name```/webhooks/```:webhook_id```.json 
+  + Enterprise: https://api.twitter.com/1.1/account_activity/webhooks/```:webhook_id```.json 
 
 This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory.
-There is also a script for [setting up and security Account Activity webhooks]().
+There is also a script for [managing Direct Message Welcome messages](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb).
 
 ## Getting started
 
