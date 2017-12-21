@@ -73,7 +73,7 @@ At the highest level, there are two main components of a Twitter chatbot: Twitte
 If you haven't already, subscribe your consumer web app using the Account Activity API.
  
  
-### Standing up web app 
+### Standing up web app <a id="standing-up" class="tall">&nbsp;</a> 
  
 ```
 require 'sinatra'
@@ -109,7 +109,7 @@ end
  end
 ```
 
-### Receive webhook events
+### Receive webhook events <a id="receiving-events" class="tall">&nbsp;</a> 
 
 ```
   # Receives DM events.
@@ -122,7 +122,8 @@ end
   end
 ```
 
-### Handle CRC event.
+### Handle CRC event <a id="handling-crc" class="tall">&nbsp;</a> 
+
 
 
 Receives challenge response check (CRC).
