@@ -1,6 +1,15 @@
 # Account Activity API script
 ### Script for managing webbook setup and subscriptions.
 
++ [Introduction](#intro)
++ [Getting started](#getting-started)
++ [Setting up webhooks](#setting-up)
+  + [Triggering CRC challenge](#crc)
+  + [Adding subscriptions to a webhook ID](#subscriptions)
+  + [Updating webhook URL](#updating-url)
++ [Error responses](#errors)
+
+## Introduction <a id="intro" class="tall">&nbsp;</a>
 There are several 'plumbing' details that need attention before you can start receiving webhook events in your event consumer application. This script helps automate the fundamental plumbing of the webhook-based Account Activity (AA) API. These are summed up in our ["Security Webhooks"](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/securing-webhooks) and ["Managing webhooks and subscriptions"](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/managing-webhooks-and-subscriptions) documentations. 
 
 Specifically, this script helps with the steps below. See our Accounty Activity API references ([Standard/Premium](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-standard-all) and [Enterprise](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-enterprise)) for the details. 
@@ -26,7 +35,7 @@ There is also a script for [managing Direct Message Welcome messages](https://gi
 If you are a Node.js developer, checkout these [Node-based scripts for managing webhooks](https://github.com/twitterdev/twitter-webhook-boilerplate-node/tree/master/example_scripts/webhook_management).
 
 
-## Getting started
+## Getting started <a id="getting-started" class="tall">&nbsp;</a>
 
 The **setup_webooks.rb** script helps automate Account Activity account details. See [HERE](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/managing-webhooks-and-subscriptions).
 
@@ -141,7 +150,7 @@ If you receive a response saying the 'Webhook URL does not meet the requirements
 
 If you receive this message you'll need to wait to retry. The default rate limit is one request every 15 minutes. 
 
-### Adding Subscriptions to a Webhook ID <a id="subscriptions" class="tall">&nbsp;</a>
+### Adding subscriptions to a webhook ID <a id="subscriptions" class="tall">&nbsp;</a>
 
 + setup_webhooks.rb -t **"subscribe"** -i webhook_id
   
@@ -164,7 +173,7 @@ If you receive this message you'll need to wait to retry. The default rate limit
     Webhook subscription exists for 890716673514258432.
     ```
 
-### Updating Webhook URL <a id="updating-url" class="tall">&nbsp;</a>
+### Updating webhook URL <a id="updating-url" class="tall">&nbsp;</a>
 
 Sometimes you need to have the Twitter AA API point to a new client-side webhook URL. When building a bot, you may have Twitter initially send webhook events to a development site, then later point to a production system. 
 
@@ -191,7 +200,7 @@ Now, we are ready to update to our production
 + setup_webhooks.rb -t "set" -u "https://snowbotdev.herokuapp.com/snowbotdev"
 
 
-### Error responses
+### Error responses <a id="errors" class="tall">&nbsp;</a>
 
 
 + Only set the consumer key and secret.
