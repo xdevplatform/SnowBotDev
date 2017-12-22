@@ -265,6 +265,36 @@ end
 
 ### Basic menu navigation <a id="navigation" class="tall">&nbsp;</a> 
 
+
+```
+def build_default_options
+
+	options = []
+
+	option = {}
+	option['label'] = '❓ Learn more about this system'
+	option['description'] = 'At least a link to underlying code...'
+	option['metadata'] = 'learn_more'
+	options << option
+
+	option = {}
+	option['label'] = '☔ Help'
+	option['description'] = 'Help with system commands'
+	option['metadata'] = 'help'
+	options << option
+
+	option = {}
+	option['label'] = '⌂ Home'
+	option['description'] = 'Go back home'
+	option['metadata'] = "return_home"
+	options << option	
+
+	options
+
+end
+```
+
+
 ### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
 SnowBotDev/app/helpers/twitter_api.rb
 
