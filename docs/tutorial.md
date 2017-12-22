@@ -85,11 +85,17 @@ As you develop your chatbot, you'll need to set-up the Account Activity plumbing
 At the highest level, there are two main components of a Twitter chatbot: Twitter Accounty Activity API and the webhook events it sends, and the client-side web app that receives these events and responds with Direct Messages. This section will outline what that web app looks like when using the Ruby/sinatra framework.
 
 If you haven't already, subscribe your consumer web app using the Account Activity API.
- 
- 
+
 ### Standing up web app <a id="standing-up" class="tall">&nbsp;</a> 
 https://snowbotdev.herokuapp.com/
- 
+
+To build out the client-side of a Twitter chatbot, you need to deploy a web app with an endpoint to handle incoming webhook events. For this project, the ```https://snowbotdev.herokuapp.com/snowbot``` endpoint was registered with Twitter using the Account Activity API: 
+
++ Twitter will POST all Account Activity webhook events to: https://snowbotdev.herokuapp.com/snowbot. The event will come in the form of a JSON object. 
++ Twitter will also make a GET request to the https://snowbotdev.herokuapp.com/snowbot endpoint when sends a Challenge Response Check (CRC) event.
+
+These two routes are required, and you also have the option to a web app home page as well. When building a Sinatra app, this means building a *controller* that is mapped to the https://snowbotdev.herokuapp.com/snowbot endpoint with these methods:
+
 ```
 require 'sinatra'
 
@@ -98,33 +104,25 @@ class SnowBotApp < Sinatra::Base
  def initialize
    super()
  end
- 
+
  //Add routes, methods, etc.
+ 
+ get '/' do # Provide chatbot home page.
+ end
+   
+ post '/snowbot' do # Receive webhook events. Data body consists of a JSON object describing event.
+ end
+   
+ get '/snowbot' do # Respond to CRC event.
+ end
 
 end
 
 ```
 
-Deploy web app with an endpoint to handle incoming webhook events.
-+ POST method that handles incoming Activity Account webhook events
-+ GET method that implements CRC authentication requirements.
-
-
-
-
-```
- //Add routes, methods, etc.
- get '/' do
- end
-   
- post '/snowbot' do
- end
-   
- get '/snowbot' do
- end
-```
-
 ### Receive webhook events <a id="receiving-events" class="tall">&nbsp;</a> 
+
+For the Snow Bot, the https://snowbotdev.herokuapp.com/snowbot URL was registered as where Twitter should send webhook events. When Twitter sends webhook events, it makes a POST request to that endpoint and sends the event encoded as JSON. The controller ```post /snowbot``` method passes that JSON content to an *event manager*.
 
 ```
   # Receives DM events.
@@ -139,9 +137,7 @@ Deploy web app with an endpoint to handle incoming webhook events.
 
 ### Handle CRC events <a id="handling-crc" class="tall">&nbsp;</a> 
 
-
-
-Receives challenge response check (CRC).
+When Twitter sends a CRC event, it makes a GET request to the registered endpoint along with a ```crc_token``` request parameter. The controller ```get /snowbot``` method takes that token, encodes that token with the client-side *consumer secret*, and responds with that result to Twitter. 
 
 ```
   get '/snowbot' do
@@ -152,7 +148,7 @@ Receives challenge response check (CRC).
     status 200
   end
 ```
-
+The Ruby code for generating the CRC response hash looks like this:
 
 ```
 def generate_crc_response(consumer_secret, crc_token)
@@ -161,7 +157,8 @@ def generate_crc_response(consumer_secret, crc_token)
 end
 ```
 
-+ Putting it all together. [HERE](https://github.com/jimmoffitt/SnowBotDev/blob/master/app/controllers/snow_bot_dev_app.rb) is the Snowbot's Sinatra controller. snow_bot_dev_app.rb
+To see the Sinatra controller that runs the Snow Bot, [checkout SnowBotDev/app/controllers/snow_bot_dev_app.rb](https://github.com/jimmoffitt/SnowBotDev/blob/master/app/controllers/snow_bot_dev_app.rb).
+
 
 ## Create a default Welcome Message
 
