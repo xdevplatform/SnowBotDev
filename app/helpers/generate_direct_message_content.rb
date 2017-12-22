@@ -311,25 +311,6 @@ class GenerateDirectMessageContent
 	  event.to_json
 
   end
-  
-  def generate_snow_day(recipient_id)
-
-	  event = {}
-	  event['event'] = message_create_header(recipient_id)
-
-	  message_data = {}
-	  message_data['text'] = "We should make that happen... when? where? (and I should write more code for continuing that dialog)"
-
-	  message_data['quick_reply'] = {}
-	  message_data['quick_reply']['type'] = 'options'
-
-	  options = build_home_option('with_description')
-
-	  message_data['quick_reply']['options'] = options
-	  event['event']['message_create']['message_data'] = message_data
-	  event.to_json
-
-  end
 
 	#=====================================================================================
 	
@@ -486,18 +467,6 @@ class GenerateDirectMessageContent
 		option['metadata'] = 'snow_music'
 		options << option
 
-		#option = {}
-		#option['label'] = "#{BOT_CHAR} Suggest a snow day"
-		#option['description'] = 'soon?'
-		#option['metadata'] = 'snow_day'
-		#options << option
-
-		#option = {}
-		#option['label'] = 'Ask Twitter API question!'
-		#option['description'] = 'Ask a question, maybe get an answer...'
-		#option['metadata'] = 'ask_gnip'
-		#options << option
-
 		options
 
 	end
@@ -545,7 +514,7 @@ class GenerateDirectMessageContent
   #Types: list choices, going back to list. links, resorts
 	def build_back_option(type=nil, description=nil)
 		
-		puts "Incoming parameters: type = #{type}, description = #{description} "
+		#puts "Incoming parameters: type = #{type}, description = #{description} "
 
 		options = []
 
@@ -554,7 +523,7 @@ class GenerateDirectMessageContent
 		option['description'] = 'Previous list...' if description
 		option['metadata'] = "go_back #{type} "
 		
-		puts "METADATA: #{option['metadata']}"
+		#puts "METADATA: #{option['metadata']}"
 
 		options << option
 
