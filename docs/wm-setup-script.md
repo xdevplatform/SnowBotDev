@@ -1,16 +1,29 @@
-# Managing Welcome Message script
+# Managing Welcome Messages
 ### Script for managing chatbot Welcome Messages
 
-As you develop your bot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line parameters and manage API calls that create, delete, set, and list Welcome Messages. 
++ [Introduction](#intro)
++ [Getting started](#getting-started)
++ [Managing Welcome Messages](#managing)
+  + [Creating Welcome Message](#creating)
+  + [Listing Welcome Message](#listing)
+  + [Setting default Welcome Message](#setting-default)
+  + [Deleting Welcome Message](#deleting)
++ [Updating default Welcome Message](#updating)  
++ [Testing default Welcome Message](#testing)
 
-This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory. There is also a script for [managing chatbot Welcome Messages]().
+## Introduction <a id="intro" class="tall">&nbsp;</a>
 
+As you develop your chatbot, its Welcome Message will change and evolve. Each time you iterate it, you'll need to tear down the current one and assign the new one. The purpose of this Ruby script is to help automate that process. This script is designed to take one or two command-line parameters and manage API calls that create, delete, set, and list Welcome Messages. 
 
-## Getting started
+This script comes along with a clone of the [SnowBotDev repository](https://github.com/jimmoffitt/SnowBotDev), in the ./scripts directory. There is also a script for [managing chatbot 'plumbing' details](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/aaa-setup-script.md).
+
+If you are a Node.js developer, checkout these [Node-based Welcome Message scripts](https://github.com/twitterdev/twitter-webhook-boilerplate-node/tree/master/example_scripts/welcome_messages).
+
+## Getting started <a id="getting-started" class="tall">&nbsp;</a>
 
 The **set_welcome_messages.rb** helps manage requests to the Twitter [Direct Message API](https://developer.twitter.com/en/docs/direct-messages/beta-features). 
 
-To run this script you have several options. 
+When you run this script you have several options. 
  
 ```$ruby ./scripts/setup_welcome_messages.rb -h```
 
@@ -22,14 +35,14 @@ Usage: setup_welcome_message [options]
     -h, --help                       Display this screen.
 ```
 
-+ Code requires two standard gems:
++ The script requires two standard gems:
 
 ```
 require 'json'
 require 'optparse'
 ```
 
-+ Code requires two other SnowBotDev project objects:
++ The script also requires two other SnowBotDev project objects:
 
 
 This Ruby ```ApiOauthRequest``` class manages and abstracts away the OAuth authentication details:
@@ -44,12 +57,12 @@ This Ruby ```GenerateDirectMessageContent``` class contains the bot-specific Wel
 require_relative '../app/helpers/generate_direct_message_content'
 ```
 
-Since this script depends on the @SnowBotDev's DM content, content that differs from bot to bot, you'll want this script's functionality in the same language as the rest of your bot. If you are developing with Node.js, then check out this [Node-based Welcome Message sccript].
+Since this script depends on the @SnowBotDev's DM content, content that differs from bot to bot, you'll want this script's functionality in the same language as the rest of your bot. If you are developing with Node.js, then check out this [Node-based Welcome Message script].
 
 See the project's Gemfile for more details about what gems are needed for the Sinatra web app. 
 
 
-## Managing Welcome Messages
+## Managing Welcome Messages <a id="managing" class="tall">&nbsp;</a> 
 
 * [Creating Welcome Message](#creating)
 * [Listing Welcome Messages](#listing)
@@ -90,7 +103,7 @@ Message IDs:
 Message ID 913875901732941829 with message: ❄ Welcome to snowbot (ver. 0.05) ❄ 
 ```
 
-### Setting default Welcome Message <a id="creating" class="tall">&nbsp;</a>
+### Setting default Welcome Message <a id="setting-default" class="tall">&nbsp;</a>
 
 -w "set" -i 913875901732941829
 
@@ -100,10 +113,13 @@ Setting default Welcome Message to message with id 913875901732941829...
 
 ```
 
-<What's the story here? when one option did not have a description, this error is triggered:>
+Remember, as noted [HERE](https://developer.twitter.com/en/docs/direct-messages/quick-replies/api-reference/options), if you set option descriptions (and you probably should, they are helpful), you need to set them for all options or an error message will be returned when attempting to set the message.
 
+### Deleting Welcome Message <a id="deleting" class="tall">&nbsp;</a>
 
-setup_welcome_message -w "delete" -i 883450462757765123
+As you iterate the design of your Welcome Message, you will want to delete previous designs. 
+
+-w "delete" -i 883450462757765123
 
 ```
 Deleting Welcome Message with id: 883450462757765123.
@@ -141,9 +157,13 @@ Message ID 893579774534209539 with message: ❄ Welcome to snowbot (ver. 0.02) �
 ```
 ## Updating default Welcome Mesasage <a id="updating" class="tall">&nbsp;</a> 
 
+{What is the recipe using this script?} 
 
 ## Test default Welcome Message <a id="testing" class="tall">&nbsp;</a> 
 
+After creating or updating your default Welcome Message, you can confirm it renders the way you intend by starting a new Direct Message conversation with your chatbot's account. If you already have an established conversation, you will need to delete it. When a conversation is deleted, the account you were messaging with will not be listed when you go to create a new Direct Message.
+
+To start a new conversation, click the "add conversation" (envelope icon with plus sign) and start adding the account name of the chatbot. 
 
 ## Other details <a id="details" class="tall">&nbsp;</a> 
 
