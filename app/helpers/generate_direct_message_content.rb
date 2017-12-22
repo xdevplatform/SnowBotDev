@@ -393,7 +393,11 @@ class GenerateDirectMessageContent
  
   def generate_system_info(recipient_id)
 
-	  message_text = "#{BOT_CHAR} This is a snow bot... It's kinda simple, kinda not... see link https://github.com/jimmoffitt/snowbotdev"
+	  message_text = "#{BOT_CHAR} This is a snow bot... It's kinda simple, kinda not... see link https://github.com/jimmoffitt/snowbotdev. \n" + 
+	                 "\n" + 
+	                 "Snow reports are provided with wwww.SnowCountry.com API."
+	                 "Weather data are provided from Weather Underground."
+	  
 
 	  #Build DM content.
 	  event = {}
@@ -417,10 +421,10 @@ class GenerateDirectMessageContent
 
 	  message_text = "Several commands are supported: \n \n" + 
                 "#{BOT_CHAR} 'bot', 'home', 'main' ---> Main menu \n " +
-                "#{BOT_CHAR} 'photo', 'pic' --> See photo \n " + 
-                "#{BOT_CHAR} 'weather', 'wx' --> Get weather conditions \n "  +
-		            "#{BOT_CHAR} 'report', 'resort' --> Get resort snow report \n "  +
-		            "#{BOT_CHAR} 'learn', 'link' --> Learn about snow \n" +
+                "#{BOT_CHAR} 'photo', 'pic' --> See photo \n " +
+		            "#{BOT_CHAR} 'report', 'resort' --> Get resort snow report via http://feeds.snocountry.net/conditions \n "  +
+                "#{BOT_CHAR} 'weather', 'wx' --> Get weather conditions via http://api.wunderground.com \n "  +
+		             "#{BOT_CHAR} 'learn', 'link' --> Learn about snow \n" +
 		            "#{BOT_CHAR} 'playlist', 'music' --> Get playlist \n" +
 		            "#{BOT_CHAR} 'about' --> Learn about bot \n" +
 		            "#{BOT_CHAR} 'help' --> Review these commands \n"
@@ -460,7 +464,7 @@ class GenerateDirectMessageContent
 
 		option = {}
 		option['label'] = "#{BOT_CHAR} Request snow report"
-		option['description'] = 'Select areas mainly in CO, with some in CA, MN and NZ.'
+		option['description'] = 'SnoCountry.com reports for select areas.'
 		option['metadata'] = 'snow_report'
 		options << option
 		

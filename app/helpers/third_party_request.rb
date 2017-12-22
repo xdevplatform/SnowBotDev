@@ -11,36 +11,25 @@ class ThirdPartyRequest
 
 	def initialize(config_file = nil)
 
-		puts "Creating ThirdPartyAPI object."
-		
-		#@base_url = 'https://GetSnow.com/'
-		#@uri_path = ''
-		
-		#Get Twitter App keys and tokens. Pull from the 
-		#'Config Variables' via the ENV{} hash.
+		#Get Twitter App keys and tokens. Pull config details from ENV{} hash.
 		@keys = {}
 	
 		@keys['weather_consumer_key'] = ENV['WEATHERUNDERGROUND_KEY']
 		@keys['snocountry_consumer_key'] = ENV['SNOCOUNTRY_KEY']
-		#@keys['spotify_consumer_key'] = ENV['SPOTIFY_CONSUMER_KEY'] #Not used yet.
 
 	end
 
+	#This is not used in Snow Bot yet. 
 	#http://feeds.snocountry.net/conditions.php?apiKey=KEY_ID&resortType=Alpine&action=top20
 	def get_top_snow_resorts
 
 		open("http://feeds.snocountry.net/conditions.php?apiKey=#{@keys['snocountry_consumer_key']}&resortType=Alpine&action=top20") do |f|
 			json_string = f.read
-			
-			puts json_string
-			
+						
 			parsed_json = JSON.parse(json_string)
 			
-			puts parsed_json
-			
-			
-			return "Made call..."
-			
+			return parsed_json
+		
 		end	
 		
 		
@@ -90,25 +79,15 @@ class ThirdPartyRequest
 			return resort_summary
 
 		end
-
-
-
-		resort_summary = '(Not implemented yet... by this fall? Trying to find a free snow report API)'
-		return "#{resort} information: \n #{resort_summary}"
 	end
 
+	#http://api.wunderground.com/api/APIKEY/forecast/astronomy/conditions/q/42.077201843262,-8.4819002151489.json
 	def get_current_weather(lat,long)
-
-
-		#http://api.wunderground.com/api/APIKEY/forecast/astronomy/conditions/q/42.077201843262,-8.4819002151489.json
 
 		open("http://api.wunderground.com/api/#{@keys['weather_consumer_key']}/geolookup/conditions/q/#{lat},#{long}.json") do |f|
 			json_string = f.read
 			parsed_json = JSON.parse(json_string)
-			
-			
-			
-			
+
 			if parsed_json['response'] && parsed_json['response']['error']
 				return "No weather report available for that location"
 			end
@@ -146,20 +125,11 @@ if __FILE__ == $0 #This script code is executed when running this file.
 	thirdPartyAPI = ThirdPartyRequest.new
 
 	#Testing WeatherUnderground
-	#response = thirdPartyAPI.get_current_weather(5,-15)
-	#puts response
-	#response = thirdPartyAPI.get_current_weather(40.0150,-105.2705)
-	#puts response
-	#response = thirdPartyAPI.get_current_weather(42.3357,-95.3475)
-	#puts response
-	
-	
-	#response = thirdPartyAPI.get_top_snow_resorts
-	#Given Resort name, look up resort ID
-	resort_id = 303001 #A-Basin
-	#resort_id = 615013 #The Remarkables
+	response = thirdPartyAPI.get_current_weather(40.0150,-105.2705)
+	puts response
 
-	response = thirdPartyAPI.get_resort_info(resort_id)
+	#Given Resort name, look up resort ID at www.SnoCountry.com
+	response = thirdPartyAPI.get_resort_info(303001)
 	puts response
 
 end

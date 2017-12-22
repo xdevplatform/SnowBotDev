@@ -18,7 +18,6 @@ class ApiOauthRequest
 		@base_url = 'https://api.twitter.com/'
 		@uri_path = '' #'/1.1/direct_messages' or '/1.1/account_activity'
 
-		#Get Twitter App keys and tokens. Read from 'config.yaml' if provided, or if running on Heroku, pull from the 
 		#'Config Variables' via the ENV{} hash.
 		@keys = {}
 
@@ -26,6 +25,9 @@ class ApiOauthRequest
 		@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
 		@keys['access_token'] = ENV['ACCESS_TOKEN']
 		@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
+
+		#Adding in Premium/Standard details. URLs reference the dashboard environment name.
+		#@keys['environment_name'] = ENV['ENVIRONMENT_NAME']
 
 	end
 
