@@ -206,6 +206,7 @@ The ```build_custom_options``` method builds an ```options``` array with label/d
 
 	end
 ```
+
 The ```build_default_options``` method builds an ```options``` array with label/description/metadata attributes for each a set of default options that are added to the end of the custom options. The idea here is that regardless of the custom options a chatbot may have, there will always be a set of default options tacked on. 
 
 ```
@@ -328,6 +329,8 @@ When creating Quick Replies, the 'metadata' attribute assigned to it comes back 
  
 If the incoming Direct Message is not a Quick Reply response, the message text (and user ID) is parsed to see of the Direct Message comtains a support bot command. In the code below, we are looking for supported commands that trigger the response of sending the bot's Welcome Message. 
 
+All non-Quick Reply responses are routed to this method. So, this is where you can get fancy with message parsing and building responses. This implementation is sinmplistic, and only looks for supported commands if the incoming message text is 12 characters or less. If longer than 12 characters, no response is attempted. 
+
 ```
 	def handle_command(dm_event)
 
@@ -347,6 +350,7 @@ end
 ## Adding bot functionality <a id="functionality" class="tall">&nbsp;</a> 
 
 ### Basic menu navigation <a id="navigation" class="tall">&nbsp;</a> 
+
 
 
 ```
