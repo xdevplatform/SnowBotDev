@@ -151,22 +151,119 @@ When Twitter sends a CRC event, it makes a GET request to the registered endpoin
 The Ruby code for generating the CRC response hash looks like this:
 
 ```
-def generate_crc_response(consumer_secret, crc_token)
-  hash = OpenSSL::HMAC.digest('sha256', consumer_secret, crc_token)
-  return Base64.encode64(hash).strip!
-end
+  def generate_crc_response(consumer_secret, crc_token)
+    hash = OpenSSL::HMAC.digest('sha256', consumer_secret, crc_token)
+    return Base64.encode64(hash).strip!
+  end
 ```
 
 To see the Sinatra controller that runs the Snow Bot, [checkout SnowBotDev/app/controllers/snow_bot_dev_app.rb](https://github.com/jimmoffitt/SnowBotDev/blob/master/app/controllers/snow_bot_dev_app.rb).
 
-
 ## Create a default Welcome Message
 
-SnowBotDev/app/helpers/generate_direct_message_content.rb
+One of the first steps when deploying a chatbot is using the Direct Message API to set a default Welcome Message. To get started, be sure to read our [documentation on setting the default Welcome Message](https://developer.twitter.com/en/docs/direct-messages/welcome-messages/guides/setting-default-welcome-message). As described there, the first step is creating a Welcome Message and retrieving its Message ID. The second step is creating a Welcome Message Rule using that Message ID. This [Welcome Message script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb) can help you automate those two steps.
+
+That script references the ```SnowBotDev/app/helpers/generate_direct_message_content.rb``` Snow Bot class, which a few methods for generating the Welcome Message JSON that is sent as a POST request to the direct_messages/welcome_messages/new endpoint:
+
+The ```build_custom_options``` method builds an ```options``` array with label/description/metadata attributes for each custom chatbot option.
+ 
+ ```
+ def build_custom_options
+
+		options = []
+
+		option = {}
+		option['label'] = "#{BOT_CHAR} See snow picture 📷"
+		option['description'] = 'Come on, take a look...'
+		option['metadata'] = 'see_photo'
+		options << option
+
+		option = {}
+		option['label'] = "#{BOT_CHAR} Request snow report"
+		option['description'] = 'SnoCountry.com reports for select areas.'
+		option['metadata'] = 'snow_report'
+		options << option
+		
+		option = {}
+		option['label'] = "#{BOT_CHAR} Weather data from anywhere"
+		option['description'] = 'Select an exact location or Twitter Place...'
+		option['metadata'] = 'weather_info'
+		options << option
+		
+		option = {}
+		option['label'] = "#{BOT_CHAR} Learn something new about snow"
+		option['description'] = 'Other than it melts around 32°F and is fun to slide on...'
+		option['metadata'] = 'learn_snow'
+		options << option
+
+	  option = {}
+		option['label'] = "#{BOT_CHAR} Get geo, weather themed playlist"
+		option['description'] = "Carefully curated Spotify playlists...'"
+		option['metadata'] = 'snow_music'
+		options << option
+
+		options
+
+	end
+```
+
+The ```build_default_options``` method builds an ```options``` array with label/description/metadata attributes for each a set of default options that are added to the end of the custom options. The idea here is that regardless of the custom options a chatbot may have, there will always be a set of default options tacked on. 
+
+```
+def build_default_options
+
+		options = []
+
+		option = {}
+		option['label'] = '❓ Learn more about this system'
+		option['description'] = 'At least a link to underlying code...'
+		option['metadata'] = 'learn_more'
+		options << option
+
+		option = {}
+		option['label'] = '☔ Help'
+		option['description'] = 'Help with system commands'
+		option['metadata'] = 'help'
+		options << option
+
+		option = {}
+		option['label'] = '⌂ Home'
+		option['description'] = 'Go back home'
+		option['metadata'] = "return_home"
+		options << option
+
+		options
+
+	end
+```
+
+The Welcome Message script makes a call the ```generate_welcome_option``` methods, which generates the two sets of options and assembles the resulting Quick Reply JSON.
+
+```
+def generate_welcome_options
+		quick_reply = {}
+		quick_reply['type'] = 'options'
+		quick_reply['options'] = []
+
+		custom_options = []
+		custom_options = build_custom_options
+		custom_options.each do |option|
+			quick_reply['options'] << option
+		end
+
+		default_options = []
+		default_options = build_default_options
+		default_options.each do |option|
+			quick_reply['options'] << option
+		end
+
+		quick_reply
+end
+```
 
 ## Managing events <a id="managing" class="tall">&nbsp;</a> 
-SnowBotDev/app/helpers/event_manager.rb
 
+As seen previously, the Snow Bot app controller has a ```post '/snowbot'``` route that passes the incoming webhook event JSON to a ```EventManager``` helper class and its ```handle_event``` method.
 
 ```
   # Receives DM events.
@@ -178,22 +275,9 @@ SnowBotDev/app/helpers/event_manager.rb
     status 200
   end
 ```
-
-EventManager class
-
-```
-#POST requests to /webhooks/twitter arrive here.
-#Twitter Account Activity API send events as POST requests with DM JSON payloads.
-
-require 'json'
-require_relative 'send_direct_message'
-
-class EventManager
-
-```
-
-
 ### Handing webhook events <a id="managing-events" class="tall">&nbsp;</a> 
+
+The ```EventManager``` class is implemented in ```SnowBotDev/app/helpers/event_manager.rb```. The ```handle_event``` method examines the incoming (Direct Message) event and determines whether it is a Quick Reply response or a bot command.
 
 ```
 def handle_event(events)
@@ -222,30 +306,32 @@ def handle_event(events)
 
 ### Managing Quick Replies <a id="managing-qrs" class="tall">&nbsp;</a> 
 
+If the event manager is handling a Quick Reply response, the ```handle_quick_reply``` method parses both the user ID of who is responding, and the ```metadata``` associated with the Quick Reply the user is responding to. The code below illustrates how a user request for seeing a help menu is handled. 
+
+When creating Quick Replies, the 'metadata' attribute assigned to it comes back with the Quick Reply response. This 'metadata' attribute enables you to know what Quick Reply is being responded to and react accordingly.
+
 ```
 	def handle_quick_reply(dm_event)
 
 		response_metadata = dm_event['message_create']['message_data']['quick_reply_response']['metadata']
 		user_id = dm_event['message_create']['sender_id']
 
-		#Default options
+    # Handle all types of response_metadata here. 
 		if response_metadata == 'help'
 			@DMSender.send_system_help(user_id)
-			
-		#Custom options	
-		elsif response_metadata == 'see_photo'
-			@DMSender.send_photo(user_id)
-	  
+		end	
+
 	end
   
 ```
   
 ### Handling bot commands <a id="managing-commands" class="tall">&nbsp;</a> 
  
+If the incoming Direct Message is not a Quick Reply response, the message text (and user ID) is parsed to see of the Direct Message comtains a support bot command. In the code below, we are looking for supported commands that trigger the response of sending the bot's Welcome Message. 
+
+All non-Quick Reply responses are routed to this method. So, this is where you can get fancy with message parsing and building responses. This implementation is sinmplistic, and only looks for supported commands if the incoming message text is 12 characters or less. If longer than 12 characters, no response is attempted. 
 
 ```
-
-
 	def handle_command(dm_event)
 
 		#Since this DM is not a response to a QR, let's check for other 'action' commands
@@ -264,6 +350,7 @@ end
 ## Adding bot functionality <a id="functionality" class="tall">&nbsp;</a> 
 
 ### Basic menu navigation <a id="navigation" class="tall">&nbsp;</a> 
+
 
 
 ```
@@ -294,14 +381,13 @@ def build_default_options
 end
 ```
 
-
 ### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
-SnowBotDev/app/helpers/twitter_api.rb
+```SnowBotDev/app/helpers/twitter_api.rb```
 
 ### Serving option lists <a id="'lists" class="tall">&nbsp;</a> 
 
 ### Integrating third-party APIs <a id="other-apis" class="tall">&nbsp;</a> 
-SnowBotDev/app/helpers/third_party_request.rb
+```SnowBotDev/app/helpers/third_party_request.rb```
 
 
 
