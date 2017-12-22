@@ -88,7 +88,7 @@ If you haven't already, subscribe your consumer web app using the Account Activi
  
  
 ### Standing up web app <a id="standing-up" class="tall">&nbsp;</a> 
-https://snowbotdev.herokuapp.com/snowbotdev
+https://snowbotdev.herokuapp.com/
  
 ```
 require 'sinatra'
