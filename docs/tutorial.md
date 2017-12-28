@@ -7,8 +7,9 @@
   + [Helper scripts](#helper-scripts) 
 + [Building webhook consumer](#webhook-consumer)
   + [Standing up web app](#standing-up)
-  + [Receive webhook events](#)
-  + [Handle CRC events](#)
+  + [Deploying web app](#deploying)
+  + [Receive webhook events](#receiving-events)
+  + [Handle CRC events](#handling-crc)
 + [Managing events](#managing)
   + [Twitter webhooks](#managing-events)
   + [Quick Replies](#managing-webhooks)
@@ -119,6 +120,17 @@ class SnowBotApp < Sinatra::Base
 end
 
 ```
+
+### Deploying web app <a id="deploying" class="tall">&nbsp;</a> 
+
+While this example chatbot was developed, it was deployed in two places: a cloud-based server and a local laptop server environment. 
+
+The cloud-based host was the easiest server to stand up, and there are many services that provide the remote server. For this tutorial, the SnowBot was deployed on Heroku. The Heroku web app was synched with the Snowbotdev github repository, and deploying code updates is painless. Authentication details and app options are set in the web app's Settings. 
+
+The local laptop environment was where the first deployment occurred and it had more complicated *network* details to work out. The complication was enabling the Twitter webhook events to post events to a laptop's private server. This hurdle was cleared by using a port forwarding ('tunneling') service that provides a public URL associated with your private server. 
+
+For this project, ngrok was used for initial API testing and development. The free version serves up a new URL everytime, which is OK when making initial API requests, but becomes a pain when you move on to chatbot design. If you are willing to pay a small fee, then you can specify a static custom URL. The free Pagekite service was also tried. With Pagekite, the CRC always failed due to latency, which may have been user error.  
+
 
 ### Receive webhook events <a id="receiving-events" class="tall">&nbsp;</a> 
 
