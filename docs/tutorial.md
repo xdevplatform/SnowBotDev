@@ -351,19 +351,20 @@ end
 
 ### Basic menu navigation <a id="navigation" class="tall">&nbsp;</a> 
 
-The Snow Bot is the third of a line of chatbot examples. About the only thing in common, code and menu wise, is that there are a set of navigation options that are typically tacked onto the end of a set of Quick Reply options. These navigation helpers can include things like 'back', 'home', 'about' and 'help' options. Regardless of a chatbot's focus, these are helpful, and generic, features that any chatbot can benefit from. 
+The Snow Bot is the third of a line of chatbot examples. About the only thing in common, code and menu wise, is that there are a set of navigation options that are typically tacked onto the end of a set of Quick Reply options. These navigation helpers can include things like 'back', 'home', 'about' and 'help' options. Regardless of a chatbot's focus, these are helpful, and generic, features that any chatbot can benefit from: 
 
-'home'
+* Home - Returns users to the 'top' of the menu options.   
 
-'back' that returns the user to the 'parent' option of their current level. For example, a list of snow resorts has a parent option of picking bot options. 
+* Back - Returns users to the 'parent' option of their current level. For example, you are viewing a snow report, the 'Back' option will return you to the resorts list. 
 
-The Snowbot was written with a goal of having common code that can be easily ported to other new bots. 
+* Help - Returns static text of your choice. With the SnowBot, the help command returns a list of support bot commands. 
+
+* Learn - Returns static text of your choice. With the SnowBot, the 'learn' command returns a project link, and provides third-party API credits.  
+
+The Snowbot was written with a goal of having common code that can be easily ported to other new bots. A next step would be encapsulating these navigation details into it own portable class.  
 
 
-
-
-
-
+Here is what the 'packaging' looks like for default options:
 
 ```
 def build_default_options
@@ -389,8 +390,35 @@ def build_default_options
 	options << option	
 
 	options
-
 end
+```
+
+Here is where the help contents are built: generate_system_help(recipient_id)
+
+Back button require a bit more metadata to implement. 
+
+Types: 'locations', 'links', 'playlists'
+
+```
+	option = {}
+	option['label'] = '⬅ Back'
+	option['description'] = 'Previous list...' if description
+	option['metadata'] = "go_back #{type} "
+```
+
+
+```
+  if response_metadata.include? 'go_back'
+
+	type =  response_metadata['go_back'.length..-1].strip
+
+	if type == 'links'
+		@DMSender.send_links_list(user_id)
+	elsif type == 'locations'
+		@DMSender.send_locations_list(user_id)
+	elsif type == 'playlists'
+		@DMSender.send_playlists_list(user_id)
+	end
 ```
 
 ### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
@@ -404,7 +432,9 @@ The Snow Bot has two features that are driven by third-party APIs: requesting cu
 
 For this demo, two APIs were integrated: weather data from [WeatherUnderground.com](https://www.wunderground.com/weather/api/) and snow reports from [SnoCountry.com](http://www.snocountry.com/). WeatherUnderground provides a self-service for generating an API key. For the snow reports I reached out to SnoCountry.com and they were kind enough to provide a key. For both APIs, a simple HTTP GET request is made with the API key passed in as a request parameter.
 
-Note that without your own API keys, these features will fail with authentication-related errors. The assumption is that you will want to integrate APIs of your interest. To help with that the third-party API details are encapsulated in two places:
+These authentication keys are loaded in from your execution environment keys. Depending on your development/deploy environment, these can be set in different places. When running from an IDE, these keys can be set in a run/debug configuration. When deploying to a cloud platform, such as Heroku, the keys are set as part of a web app's *settings*. 
+
+Note that without your own API keys, these bot features will fail with authentication-related errors. The assumption is that you will want to integrate APIs of your interest. To help with that the third-party API details are encapsulated in two places:
 
 + ```SnowBotDev/app/helpers/third_party_request.rb```
   + Class was written to contain all the details of making these third-party API calls. This class provides two ```get_current_weather``` and ```get_resort_info``` methods. The ```get_current_weather``` method takes a point coordinate (lat and long) and includes that in the call to Weather Underground. The ```get_resort_info``` takes a *resort ID* and submits that to the SnoCountry.com API. 
