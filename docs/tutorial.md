@@ -351,6 +351,18 @@ end
 
 ### Basic menu navigation <a id="navigation" class="tall">&nbsp;</a> 
 
+The Snow Bot is the third of a line of chatbot examples. About the only thing in common, code and menu wise, is that there are a set of navigation options that are typically tacked onto the end of a set of Quick Reply options. These navigation helpers can include things like 'back', 'home', 'about' and 'help' options. Regardless of a chatbot's focus, these are helpful, and generic, features that any chatbot can benefit from. 
+
+'home'
+
+'back' that returns the user to the 'parent' option of their current level. For example, a list of snow resorts has a parent option of picking bot options. 
+
+The Snowbot was written with a goal of having common code that can be easily ported to other new bots. 
+
+
+
+
+
 
 
 ```
@@ -387,7 +399,25 @@ end
 ### Serving option lists <a id="'lists" class="tall">&nbsp;</a> 
 
 ### Integrating third-party APIs <a id="other-apis" class="tall">&nbsp;</a> 
-```SnowBotDev/app/helpers/third_party_request.rb```
+
+The Snow Bot has two features that are driven by third-party APIs: requesting current weather conditions for a location of interest, and getting snow reports for a list of ski resorts. Integrating third-party APIs was pretty simple. 
+
+For this demo, two APIs were integrated: weather data from [WeatherUnderground.com](https://www.wunderground.com/weather/api/) and snow reports from [SnoCountry.com](http://www.snocountry.com/). WeatherUnderground provides a self-service for generating an API key. For the snow reports I reached out to SnoCountry.com and they were kind enough to provide a key. For both APIs, a simple HTTP GET request is made with the API key passed in as a request parameter.
+
+Note that without your own API keys, these features will fail with authentication-related errors. The assumption is that you will want to integrate APIs of your interest. To help with that the third-party API details are encapsulated in two places:
+
++ ```SnowBotDev/app/helpers/third_party_request.rb```
+  + Class was written to contain all the details of making these third-party API calls. This class provides two ```get_current_weather``` and ```get_resort_info``` methods. The ```get_current_weather``` method takes a point coordinate (lat and long) and includes that in the call to Weather Underground. The ```get_resort_info``` takes a *resort ID* and submits that to the SnoCountry.com API. 
+  
++ ```SnowBotDev/app/helpers/generate_diect_message_content.rb```
+  + When users request weather or snow information, these requests of the thirdparty_api object are made:
+    +  ```weather_info = @thirdparty_api.get_current_weather(coordinates[1], coordinates[0])```
+    +  ```resort_info = @thirdparty_api.get_resort_info(resort_id)```
+    
+The thirdparty_api object encapsulates the 'pretty' formating of the content coming back from these two APIs. The generate_direct_message_content class, by design, knows nothing of these details and simply sets the  ```message_data['text']``` attribute to what the third party class returns. 
+
+
+
 
 
 
