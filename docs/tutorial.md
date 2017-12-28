@@ -8,8 +8,8 @@
 + [Building webhook consumer](#webhook-consumer)
   + [Standing up web app](#standing-up)
   + [Deploying web app](#deploying)
-  + [Receive webhook events](#receiving-events)
-  + [Handle CRC events](#handling-crc)
+  + [Receiving webhook events](#receiving-events)
+  + [Handling CRC events](#handling-crc)
 + [Managing events](#managing)
   + [Twitter webhooks](#managing-events)
   + [Quick Replies](#managing-webhooks)
@@ -132,7 +132,7 @@ The local laptop environment was where the first deployment occurred and it had 
 For this project, ngrok was used for initial API testing and development. The free version serves up a new URL everytime, which is OK when making initial API requests, but becomes a pain when you move on to chatbot design. If you are willing to pay a small fee, then you can specify a static custom URL. The free Pagekite service was also tried. With Pagekite, the CRC always failed due to latency, which may have been user error.  
 
 
-### Receive webhook events <a id="receiving-events" class="tall">&nbsp;</a> 
+### Receiving webhook events <a id="receiving-events" class="tall">&nbsp;</a> 
 
 For the Snow Bot, the https://snowbotdev.herokuapp.com/snowbot URL was registered as where Twitter should send webhook events. When Twitter sends webhook events, it makes a POST request to that endpoint and sends the event encoded as JSON. The controller ```post /snowbot``` method passes that JSON content to an *event manager*.
 
@@ -147,7 +147,7 @@ For the Snow Bot, the https://snowbotdev.herokuapp.com/snowbot URL was registere
   end
 ```
 
-### Handle CRC events <a id="handling-crc" class="tall">&nbsp;</a> 
+### Handling CRC events <a id="handling-crc" class="tall">&nbsp;</a> 
 
 When Twitter sends a CRC event, it makes a GET request to the registered endpoint along with a ```crc_token``` request parameter. The controller ```get /snowbot``` method takes that token, encodes that token with the client-side *consumer secret*, and responds with that result to Twitter. 
 
