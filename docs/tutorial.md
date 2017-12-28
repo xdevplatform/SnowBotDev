@@ -16,8 +16,8 @@
   + [Bot commands](#managing-commands)
 + [Adding bot functionality](#functionality)
   + [Basic menu navigation](#navigation)
-  + [Add attachments to Direct Messages](#attachments)
   + [Serving option lists](#lists)
+  + [Adding attachments to Direct Messages](#attachments)
   + [Integrating third-party APIs](#other-apis)
 + [Other tips](#tips)
 
@@ -433,34 +433,32 @@ Types: 'locations', 'links', 'playlists'
 	end
 ```
 
-### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
-
-
-https://developer.twitter.com/en/docs/direct-messages/message-attachments/guides/attaching-media
-
-https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init.html
-
-
-upload.twitter.com/1.1/media/upload'
-
-attachment['media']['id'] = media_id
-
-message_data['attachment'] = attachment
-
-event['event']['message_create']['message_data'] = message_data
-
-```SnowBotDev/app/helpers/twitter_api.rb```
-get_media_id(media)
-
-@upload_client = Twitter::REST::Client.new(@keys)
-media_id = @upload_client.upload(File.new(media))
-
-
-
-
 ### Serving option lists <a id="'lists" class="tall">&nbsp;</a> 
 
 ```SnowBotDev/app/helpers/get_resources.rb```
+
+
+
+### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
+
+The SnowBot serves snow-related photographs by ['attaching' media to Direct Messages](https://developer.twitter.com/en/docs/direct-messages/message-attachments/guides/attaching-media). As discussed there, sending a Direct Message with media is a two-step process. First the photo or video is [uploaded to the Twitter platform at upload.twitter.com/1.1/media/upload](https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init.html), then a corresponding media numeric ID is included when generating Direct Message JSON.  
+
+Since I did not want to write new code for uploading photographs and generating a media IDs, I looked for a Ruby gem that could abstract way the details. There are many Ruby gems built for the Twitter platform, and the SnowBot integrates this 'twitter' gem. 
+
+The 'serving media' details are contained in two places:
+
++ ```SnowBotDev/app/helpers/twitter_api.rb```
+  + @upload_client = Twitter::REST::Client.new(@keys)
+  + media_id = @upload_client.upload(File.new(media_path))
+
++ ```SnowBotDev/app/helpers/generate_direct_message_content.rb```
+
+attachment['media']['id'] = media_id
+message_data['attachment'] = attachment
+event['event']['message_create']['message_data'] = message_data
+
+
+get_media_id(media_path)
 
 
 
