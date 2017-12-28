@@ -434,9 +434,36 @@ Types: 'locations', 'links', 'playlists'
 ```
 
 ### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
+
+
+https://developer.twitter.com/en/docs/direct-messages/message-attachments/guides/attaching-media
+
+https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init.html
+
+
+upload.twitter.com/1.1/media/upload'
+
+attachment['media']['id'] = media_id
+
+message_data['attachment'] = attachment
+
+event['event']['message_create']['message_data'] = message_data
+
 ```SnowBotDev/app/helpers/twitter_api.rb```
+get_media_id(media)
+
+@upload_client = Twitter::REST::Client.new(@keys)
+media_id = @upload_client.upload(File.new(media))
+
+
+
 
 ### Serving option lists <a id="'lists" class="tall">&nbsp;</a> 
+
+```SnowBotDev/app/helpers/get_resources.rb```
+
+
+
 
 ### Integrating third-party APIs <a id="other-apis" class="tall">&nbsp;</a> 
 
@@ -464,8 +491,6 @@ The thirdparty_api object encapsulates the 'pretty' formating of the content com
 
 
 ## Other tips <a id="tips" class="tall">&nbsp;</a> 
-
-### Deploying chatbot
 
 ### Call to action Tweets
 
