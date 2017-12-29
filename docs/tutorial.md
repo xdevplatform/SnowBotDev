@@ -445,7 +445,7 @@ Types: 'locations', 'links', 'playlists'
 
 ### Serving option lists <a id="lists" class="tall">&nbsp;</a> 
 
-The SnowBot serves up several curated, chatbot specific lists:
+The SnowBot serves up several curated lists:
 
 + Resort names for requesting snow reports.
 + Links to web sites that have a focus on snow research. 
@@ -464,25 +464,34 @@ The GenerateDirectMessageContent class is responsible for, as its name implies, 
 @resources.locations_list
 @resources.playlists_list
 @resources.links_list
-@resources.photos_list
+
+```
+These resource arrays are loaded from these CSV files: 
+
++ SnowBotDev/app/config/data/locations/placesOfInterest.csv - Contents: display Name, longitude, latitude, Resort ID
++ SnowBotDev/app/config/data/links/links.csv - Contents: Display summary, URL, site description
+  + Note that since link metadata can be long-form with commas, semi-colons are used as the delimiter.
++ SnowBotDev/app/config/data/music/playlists.csv - Contents: Display name, description, URL 
+
+The SnowBot also loads in a long list of photographs. These are not presented in a list, but instead are served randomly to the user. The GenerateDirectMessageContent accesses the photo list via:
+
+```
+ @resources.photos_list
 ```
 
+The photo list is loaded from this CSV file:
 
-+ SnowBotDev/app/config/data/locations/placesOfInterest.csv
-+ SnowBotDev/app/config/data/links/links.csv
-+ SnowBotDev/app/config/data/music/playlists.csv
++ SnowBotDev/app/config/data/photos/photos.csv - Contents: file name, description
+  + Note that since the description can contain commas, semi-colons are used as the delimiter.
 
-
-+ SnowBotDev/app/config/data/photos/photos.csv
-+ SnowBotDev/app/config/data/photos/*.jpg
-
+Thh actual photos need to be stored here: SnowBotDev/app/config/data/photos/*.jpg. 
 
 
 ### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
 
 The SnowBot serves snow-related photographs by ['attaching' media to Direct Messages](https://developer.twitter.com/en/docs/direct-messages/message-attachments/guides/attaching-media). As discussed there, sending a Direct Message with media is a two-step process. First the photo or video is [uploaded to the Twitter platform at upload.twitter.com/1.1/media/upload](https://developer.twitter.com/en/docs/media/upload-media/api-reference/post-media-upload-init.html), then a corresponding media numeric ID is included when generating Direct Message JSON.  
 
-Since I did not want to write new code for uploading photographs and generating a media IDs, I looked for a Ruby gem that could abstract way the details. There are many Ruby gems built for the Twitter platform, and the SnowBot integrates this 'twitter' gem. 
+Since I did not want to write new code for uploading photographs and generating a media IDs, I looked for a Ruby gem that could abstract way the details. There are many Ruby gems built for the Twitter platform, and the SnowBot integrates [this 'twitter' gem](https://github.com/sferik/twitter). 
 
 The 'serving media' details are contained in two places:
 
