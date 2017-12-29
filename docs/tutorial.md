@@ -453,6 +453,8 @@ The SnowBot serves up several curated lists:
 
 These lists are configured and loaded from the server side. For each list a 'resource' file is looked up, opened, parsed, and assembled into metadata for a Quick Reply option list. For example, when a user wants to request a snow report, they are presented a list of resorts to choose from. The resort names are loaded from a *placesOfInterest.csv* file that is placed in a SnowBotDev/app/config/data/ folder. 
 
+Note that Quick Reply option lists are limited to 20 items. 
+
 The mechanics of loading these resource files is encapsulated in ```SnowBotDev/app/helpers/get_resources.rb```.
 
 The GenerateDirectMessageContent class is responsible for, as its name implies, generating content that is sent via Direct Messages. That class creates a GetResources object, which returns a set of resource arrays. 
@@ -473,6 +475,8 @@ These resource arrays are loaded from these CSV files:
   + Note that since link metadata can be long-form with commas, semi-colons are used as the delimiter.
 + SnowBotDev/app/config/data/music/playlists.csv - Contents: Display name, description, URL 
 
+Since these resource files are loaded on-demand when a user request them, you can upload them to your server and they are updated on-the-fly. When the GetResources class loads these files, it will ignore any lines that start with the '#' characters, enabling you to include notes in the resource files.
+
 The SnowBot also loads in a long list of photographs. These are not presented in a list, but instead are served randomly to the user. The GenerateDirectMessageContent accesses the photo list via:
 
 ```
@@ -484,7 +488,13 @@ The photo list is loaded from this CSV file:
 + SnowBotDev/app/config/data/photos/photos.csv - Contents: file name, description
   + Note that since the description can contain commas, semi-colons are used as the delimiter.
 
-Thh actual photos need to be stored here: SnowBotDev/app/config/data/photos/*.jpg. 
+The actual photos need to be stored here: SnowBotDev/app/config/data/photos/*.jpg.
+
+
+
+
+
+
 
 
 ### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
@@ -530,10 +540,6 @@ Note that without your own API keys, these bot features will fail with authentic
     +  ```resort_info = @thirdparty_api.get_resort_info(resort_id)```
     
 The thirdparty_api object encapsulates the 'pretty' formating of the content coming back from these two APIs. The generate_direct_message_content class, by design, knows nothing of these details and simply sets the  ```message_data['text']``` attribute to what the third party class returns. 
-
-
-
-
 
 
 ## Other tips <a id="tips" class="tall">&nbsp;</a> 
