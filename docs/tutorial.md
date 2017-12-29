@@ -417,7 +417,7 @@ end
 
 Here is where the help contents are built: ```generate_system_help(recipient_id)```
 
-Back buttona require a bit more metadata to implement. 
+Back buttons require a bit more metadata to implement. 
 
 Types: 'locations', 'links', 'playlists'
 
