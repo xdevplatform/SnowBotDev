@@ -453,9 +453,20 @@ The SnowBot serves up several curated, chatbot specific lists:
 
 These lists are configured and loaded from the server side. For each list a 'resource' file is looked up, opened, parsed, and assembled into metadata for a Quick Reply option list. For example, when a user wants to request a snow report, they are presented a list of resorts to choose from. The resort names are loaded from a *placesOfInterest.csv* file that is placed in a SnowBotDev/app/config/data/ folder. 
 
-The mechanics of 
+The mechanics of loading these resource files is encapsulated in ```SnowBotDev/app/helpers/get_resources.rb```.
 
-```SnowBotDev/app/helpers/get_resources.rb```
+The GenerateDirectMessageContent class is responsible for, as its name implies, generating content that is sent via Direct Messages. That class creates a GetResources object, which returns a set of resource arrays. 
+
+```
+@resources = {}
+@resources = GetResources.new
+
+@resources.locations_list
+@resources.playlists_list
+@resources.links_list
+@resources.photos_list
+```
+
 
 + SnowBotDev/app/config/data/locations/placesOfInterest.csv
 + SnowBotDev/app/config/data/links/links.csv
