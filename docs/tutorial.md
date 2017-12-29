@@ -369,7 +369,7 @@ The Snow Bot is the third of a line of chatbot examples. About the only thing in
 
 * ⬅ Back - Returns users to the 'parent' option of their current level. For example, you are viewing a snow report, the 'Back' option will return you to the resorts list. 
 
-* ☔ Help - Returns static text of your choice. With the SnowBot, the help command returns a list of support bot commands. 
+* ☔  Help - Returns static text of your choice. With the SnowBot, the help command returns a list of support bot commands. 
 
 * ❓ Learn - Returns static text of your choice. With the SnowBot, the 'learn' command returns a project link, and provides third-party API credits.  
 
@@ -404,9 +404,9 @@ def build_default_options
 end
 ```
 
-Here is where the help contents are built: generate_system_help(recipient_id)
+Here is where the help contents are built: ```generate_system_help(recipient_id)```
 
-Back button require a bit more metadata to implement. 
+Back buttona require a bit more metadata to implement. 
 
 Types: 'locations', 'links', 'playlists'
 
