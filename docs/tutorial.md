@@ -182,41 +182,41 @@ The ```build_custom_options``` method builds an ```options``` array with label/d
  ```
  def build_custom_options
 
-		options = []
+	options = []
 
-		option = {}
-		option['label'] = "#{BOT_CHAR} See snow picture 📷"
-		option['description'] = 'Come on, take a look...'
-		option['metadata'] = 'see_photo'
-		options << option
+	option = {}
+	option['label'] = "#{BOT_CHAR} See snow picture 📷"
+	option['description'] = 'Come on, take a look...'
+	option['metadata'] = 'see_photo'
+	options << option
 
-		option = {}
-		option['label'] = "#{BOT_CHAR} Request snow report"
-		option['description'] = 'SnoCountry.com reports for select areas.'
-		option['metadata'] = 'snow_report'
-		options << option
-		
-		option = {}
-		option['label'] = "#{BOT_CHAR} Weather data from anywhere"
-		option['description'] = 'Select an exact location or Twitter Place...'
-		option['metadata'] = 'weather_info'
-		options << option
-		
-		option = {}
-		option['label'] = "#{BOT_CHAR} Learn something new about snow"
-		option['description'] = 'Other than it melts around 32°F and is fun to slide on...'
-		option['metadata'] = 'learn_snow'
-		options << option
+	option = {}
+	option['label'] = "#{BOT_CHAR} Request snow report"
+	option['description'] = 'SnoCountry.com reports for select areas.'
+	option['metadata'] = 'snow_report'
+	options << option
 
-	  option = {}
-		option['label'] = "#{BOT_CHAR} Get geo, weather themed playlist"
-		option['description'] = "Carefully curated Spotify playlists...'"
-		option['metadata'] = 'snow_music'
-		options << option
+	option = {}
+	option['label'] = "#{BOT_CHAR} Weather data from anywhere"
+	option['description'] = 'Select an exact location or Twitter Place...'
+	option['metadata'] = 'weather_info'
+	options << option
 
-		options
+	option = {}
+	option['label'] = "#{BOT_CHAR} Learn something new about snow"
+	option['description'] = 'Other than it melts around 32°F and is fun to slide on...'
+	option['metadata'] = 'learn_snow'
+	options << option
 
-	end
+	option = {}
+	option['label'] = "#{BOT_CHAR} Get geo, weather themed playlist"
+	option['description'] = "Carefully curated Spotify playlists...'"
+	option['metadata'] = 'snow_music'
+	options << option
+
+	options
+
+end
 ```
 
 The ```build_default_options``` method builds an ```options``` array with label/description/metadata attributes for each a set of default options that are added to the end of the custom options. The idea here is that regardless of the custom options a chatbot may have, there will always be a set of default options tacked on. 
@@ -224,29 +224,29 @@ The ```build_default_options``` method builds an ```options``` array with label/
 ```
 def build_default_options
 
-		options = []
+	options = []
 
-		option = {}
-		option['label'] = '❓ Learn more about this system'
-		option['description'] = 'At least a link to underlying code...'
-		option['metadata'] = 'learn_more'
-		options << option
+	option = {}
+	option['label'] = '❓ Learn more about this system'
+	option['description'] = 'At least a link to underlying code...'
+	option['metadata'] = 'learn_more'
+	options << option
 
-		option = {}
-		option['label'] = '☔ Help'
-		option['description'] = 'Help with system commands'
-		option['metadata'] = 'help'
-		options << option
+	option = {}
+	option['label'] = '☔ Help'
+	option['description'] = 'Help with system commands'
+	option['metadata'] = 'help'
+	options << option
 
-		option = {}
-		option['label'] = '⌂ Home'
-		option['description'] = 'Go back home'
-		option['metadata'] = "return_home"
-		options << option
+	option = {}
+	option['label'] = '⌂ Home'
+	option['description'] = 'Go back home'
+	option['metadata'] = "return_home"
+	options << option
 
-		options
+	options
 
-	end
+end
 ```
 
 The Welcome Message script makes a call the ```generate_welcome_option``` methods, which generates the two sets of options and assembles the resulting Quick Reply JSON.
@@ -432,7 +432,7 @@ Types: 'locations', 'links', 'playlists'
 	end
 ```
 
-### Serving option lists <a id="'lists" class="tall">&nbsp;</a> 
+### Serving option lists <a id="lists" class="tall">&nbsp;</a> 
 
 The SnowBot serves up several curated, chatbot specific lists:
 
