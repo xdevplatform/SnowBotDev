@@ -1,6 +1,6 @@
 
 # Tutorial: Building a Twitter chatbot with Ruby and Sinatra
-### *Building the snowbot*
+### *Building the SnowBot*
 
 + [Introduction](#intro)
 + [Getting started](#getting-started)
@@ -30,7 +30,7 @@ These systems receive Account Activity webhook events from Twitter, process the 
 + By integrating the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
 + By integrating the Direct Message (DM) API, you are building the private communication channel for your bot and its users. 
 
-For this tutorial, we are going to build a *snow bot*, a Twitter-based gateway for all kinds of snow-related information. 
+For this tutorial, we are going to build a *SnowBot*, a Twitter-based gateway for all kinds of snow-related information. 
 
 ---------------------
  ####  *If you want to check out the bot, send a Direct Message to [@SnowBotDev](https://twitter.com/snowbotdev)...*
@@ -134,7 +134,7 @@ For this project, ngrok was used for initial API testing and development. The fr
 
 ### Receiving webhook events <a id="receiving-events" class="tall">&nbsp;</a> 
 
-For the Snow Bot, the https://snowbotdev.herokuapp.com/snowbot URL was registered as where Twitter should send webhook events. When Twitter sends webhook events, it makes a POST request to that endpoint and sends the event encoded as JSON. The controller ```post /snowbot``` method passes that JSON content to an *event manager*.
+For the SnowBot, the https://snowbotdev.herokuapp.com/snowbot URL was registered as where Twitter should send webhook events. When Twitter sends webhook events, it makes a POST request to that endpoint and sends the event encoded as JSON. The controller ```post /snowbot``` method passes that JSON content to an *event manager*.
 
 ```
   # Receives DM events.
@@ -275,7 +275,7 @@ end
 
 ## Managing events <a id="managing" class="tall">&nbsp;</a> 
 
-As seen previously, the Snow Bot app controller has a ```post '/snowbot'``` route that passes the incoming webhook event JSON to a ```EventManager``` helper class and its ```handle_event``` method.
+As seen previously, the SnowBot app controller has a ```post '/snowbot'``` route that passes the incoming webhook event JSON to a ```EventManager``` helper class and its ```handle_event``` method.
 
 ```
   # Receives DM events.
@@ -363,7 +363,7 @@ end
 
 ### Basic menu navigation <a id="navigation" class="tall">&nbsp;</a> 
 
-The Snow Bot is the third of a line of chatbot examples. About the only thing in common, code and menu wise, is that there are a set of navigation options that are typically tacked onto the end of a set of Quick Reply options. These navigation helpers can include things like 'back', 'home', 'about' and 'help' options. Regardless of a chatbot's focus, these are helpful, and generic, features that any chatbot can benefit from: 
+The SnowBot is the third of a line of chatbot examples. About the only thing in common, code and menu wise, is that there are a set of navigation options that are typically tacked onto the end of a set of Quick Reply options. These navigation helpers can include things like 'back', 'home', 'about' and 'help' options. Regardless of a chatbot's focus, these are helpful, and generic, features that any chatbot can benefit from: 
 
 * ⌂ Home - Returns users to the 'top' of the menu options.   
 
@@ -373,7 +373,7 @@ The Snow Bot is the third of a line of chatbot examples. About the only thing in
 
 * ❓ Learn - Returns static text of your choice. With the SnowBot, the 'learn' command returns a project link, and provides third-party API credits.  
 
-The Snowbot was written with a goal of having common code that can be easily ported to other new bots. A next step would be encapsulating these navigation details into it own portable class.  
+The SnowBot was written with a goal of having common code that can be easily ported to other new bots. A next step would be encapsulating these navigation details into it own portable class.  
 
 Here is what the 'packaging' looks like for default options:
 
@@ -483,7 +483,7 @@ get_media_id(media_path)
 
 ### Integrating third-party APIs <a id="other-apis" class="tall">&nbsp;</a> 
 
-The Snow Bot has two features that are driven by third-party APIs: requesting current weather conditions for a location of interest, and getting snow reports for a list of ski resorts. Integrating third-party APIs was pretty simple. 
+The SnowBot has two features that are driven by third-party APIs: requesting current weather conditions for a location of interest, and getting snow reports for a list of ski resorts. Integrating third-party APIs was pretty simple. 
 
 For this demo, two APIs were integrated: weather data from [WeatherUnderground.com](https://www.wunderground.com/weather/api/) and snow reports from [SnoCountry.com](http://www.snocountry.com/). WeatherUnderground provides a self-service for generating an API key. For the snow reports I reached out to SnoCountry.com and they were kind enough to provide a key. For both APIs, a simple HTTP GET request is made with the API key passed in as a request parameter.
 
