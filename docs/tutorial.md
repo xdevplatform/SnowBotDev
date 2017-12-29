@@ -275,10 +275,12 @@ end
 
 ## Managing events <a id="managing" class="tall">&nbsp;</a> 
 
-As seen previously, the SnowBot app controller has a ```post '/snowbot'``` route that passes the incoming webhook event JSON to a ```EventManager``` helper class and its ```handle_event``` method.
+Chatbots are driven by real-time communication events. The SnowBot receives Twitter Account Activity webhook events and responds with Direct Messages.     
+
+The SnowBot (sinatra) controller has a ```post '/snowbot'``` route that passes the incoming webhook event JSON to a ```EventManager``` helper class and its ```handle_event``` method. Here's how that route is implemented:
 
 ```
-  # Receives DM events.
+  # Receives Account Activity API webhook events.
   post '/snowbot' do
     request.body.rewind
     events = request.body.read
@@ -287,6 +289,15 @@ As seen previously, the SnowBot app controller has a ```post '/snowbot'``` route
     status 200
   end
 ```
+
+The entire app controller code is at [SnowBotDev/app/controllers/snow_bot_dev_app.rb](https://github.com/jimmoffitt/SnowBotDev/blob/master/app/controllers/snow_bot_dev_app.rb).
+
+We'll split the event management discussion into three parts:
+
++ Handling webhook events - Processing incoming Accunt Activity API webhook events.
++ Managing Quick Replies - Serving user content with Direct Messages API.
++ Bot commands - The SnowBot was designed to work mainly with specific commands. 
+
 ### Handing webhook events <a id="managing-events" class="tall">&nbsp;</a> 
 
 The ```EventManager``` class is implemented in ```SnowBotDev/app/helpers/event_manager.rb```. The ```handle_event``` method examines the incoming (Direct Message) event and determines whether it is a Quick Reply response or a bot command.
@@ -440,10 +451,9 @@ The SnowBot serves up several curated, chatbot specific lists:
 + Links to web sites that have a focus on snow research. 
 + Links to playlists with weather-related themes.
 
-These lists are configured and loaded from the server side. For each list a 'resource' file is looked up, opened, parsed, and assembled into metadata for a Quick Reply option list. 
+These lists are configured and loaded from the server side. For each list a 'resource' file is looked up, opened, parsed, and assembled into metadata for a Quick Reply option list. For example, when a user wants to request a snow report, they are presented a list of resorts to choose from. The resort names are loaded from a *placesOfInterest.csv* file that is placed in a SnowBotDev/app/config/data/ folder. 
 
-These resources are kept in a SnowBotDev/app/config/data/ folder. That folder 
-
+The mechanics of 
 
 ```SnowBotDev/app/helpers/get_resources.rb```
 
