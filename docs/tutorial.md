@@ -365,16 +365,15 @@ end
 
 The Snow Bot is the third of a line of chatbot examples. About the only thing in common, code and menu wise, is that there are a set of navigation options that are typically tacked onto the end of a set of Quick Reply options. These navigation helpers can include things like 'back', 'home', 'about' and 'help' options. Regardless of a chatbot's focus, these are helpful, and generic, features that any chatbot can benefit from: 
 
-* Home - Returns users to the 'top' of the menu options.   
+* ⌂ Home - Returns users to the 'top' of the menu options.   
 
-* Back - Returns users to the 'parent' option of their current level. For example, you are viewing a snow report, the 'Back' option will return you to the resorts list. 
+* ⬅ Back - Returns users to the 'parent' option of their current level. For example, you are viewing a snow report, the 'Back' option will return you to the resorts list. 
 
-* Help - Returns static text of your choice. With the SnowBot, the help command returns a list of support bot commands. 
+* ☔ Help - Returns static text of your choice. With the SnowBot, the help command returns a list of support bot commands. 
 
-* Learn - Returns static text of your choice. With the SnowBot, the 'learn' command returns a project link, and provides third-party API credits.  
+* ❓ Learn - Returns static text of your choice. With the SnowBot, the 'learn' command returns a project link, and provides third-party API credits.  
 
 The Snowbot was written with a goal of having common code that can be easily ported to other new bots. A next step would be encapsulating these navigation details into it own portable class.  
-
 
 Here is what the 'packaging' looks like for default options:
 
@@ -435,7 +434,26 @@ Types: 'locations', 'links', 'playlists'
 
 ### Serving option lists <a id="'lists" class="tall">&nbsp;</a> 
 
+The SnowBot serves up several curated, chatbot specific lists:
+
++ Resort names for requesting snow reports.
++ Links to web sites that have a focus on snow research. 
++ Links to playlists with weather-related themes.
+
+These lists are configured and loaded from the server side. For each list a 'resource' file is looked up, opened, parsed, and assembled into metadata for a Quick Reply option list. 
+
+These resources are kept in a SnowBotDev/app/config/data/ folder. That folder 
+
+
 ```SnowBotDev/app/helpers/get_resources.rb```
+
++ SnowBotDev/app/config/data/locations/placesOfInterest.csv
++ SnowBotDev/app/config/data/links/links.csv
++ SnowBotDev/app/config/data/music/playlists.csv
+
+
++ SnowBotDev/app/config/data/photos/photos.csv
++ SnowBotDev/app/config/data/photos/*.jpg
 
 
 
