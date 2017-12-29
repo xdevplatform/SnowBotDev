@@ -11,8 +11,8 @@
   + [Receiving webhook events](#receiving-events)
   + [Handling CRC events](#handling-crc)
 + [Managing events](#managing)
-  + [Twitter webhooks](#managing-events)
-  + [Quick Replies](#managing-webhooks)
+  + [Twitter webhooks](#managing-webhooks)
+  + [Quick Replies](#managing-qrs)
   + [Bot commands](#managing-commands)
 + [Adding bot functionality](#functionality)
   + [Basic menu navigation](#navigation)
@@ -298,33 +298,33 @@ We'll split the event management discussion into three parts:
 + Managing Quick Replies - Serving user content with Direct Messages API.
 + Bot commands - The SnowBot was designed to work mainly with specific commands. 
 
-### Handing webhook events <a id="managing-events" class="tall">&nbsp;</a> 
+### Handing webhook events <a id="managing-webhooks" class="tall">&nbsp;</a> 
 
 The ```EventManager``` class is implemented in ```SnowBotDev/app/helpers/event_manager.rb```. The ```handle_event``` method examines the incoming (Direct Message) event and determines whether it is a Quick Reply response or a bot command.
 
 ```
 def handle_event(events)
 
-		events = JSON.parse(events)
-		if events.key? ('direct_message_events')
+  events = JSON.parse(events)
+  if events.key? ('direct_message_events')
 
-			dm_events = events['direct_message_events']
-			dm_events.each do |dm_event|
+    dm_events = events['direct_message_events']
+    dm_events.each do |dm_event|
 
-				if dm_event['type'] == 'message_create'
+      if dm_event['type'] == 'message_create'
 
-					#Is this a response? Test for the 'quick_reply_response' key.
-					is_response = dm_event['message_create'] && dm_event['message_create']['message_data'] && dm_event['message_create']['message_data']['quick_reply_response']
+        #Is this a response? Test for the 'quick_reply_response' key.
+        is_response = dm_event['message_create'] && dm_event['message_create']['message_data'] && dm_event['message_create']['message_data']                           ['quick_reply_response']
 
-					if is_response
-						handle_quick_reply dm_event
-					else
-						handle_command dm_event
-					end
-				end
-			end
-		end
+        if is_response
+          handle_quick_reply dm_event
+        else
+          handle_command dm_event
+        end
+      end
+    end
 	end
+end
 ```
 
 ### Managing Quick Replies <a id="managing-qrs" class="tall">&nbsp;</a> 
