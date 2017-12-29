@@ -28,15 +28,15 @@ class TwitterAPI
 	
 	end
   
-	def get_media_id(media)
+	def get_media_id(media_path)
 		
-		puts "Value of media: #{media}"
+		puts "Value of media: #{media_path}"
 
 		media_id = nil
 
-		if media != '' and not media.nil?
-			puts "Calling upload with #{media}"
-      media_id = @upload_client.upload(File.new(media))
+		if media_path != '' and not media_path.nil?
+			puts "Calling upload with #{media_path}"
+      media_id = @upload_client.upload(File.new(media_path))
 		else
 			media_id = nil
 		end	

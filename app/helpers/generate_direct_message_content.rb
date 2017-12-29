@@ -9,8 +9,8 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-  VERSION = 0.08
-	BOT_NAME = 'snowbotdev'
+  VERSION = 0.88
+	BOT_NAME = 'SnowBotDev'
 	BOT_CHAR = '❄'
 
 	attr_accessor :TwitterAPI, 
@@ -289,16 +289,16 @@ class GenerateDirectMessageContent
 				break
 		  end  
 	  end
-		
-	  location_info = @thirdparty_api.get_resort_info(resort_id)
+
+		resort_info   = @thirdparty_api.get_resort_info(resort_id)
 	  
-	  puts "Location: #{location_info}"
+	  #puts "Location: #{resort_info}"
 
 	  event = {}
 	  event['event'] = message_create_header(recipient_id)
 
 	  message_data = {}
-	  message_data['text'] = location_info
+	  message_data['text'] = resort_info
 
 	  message_data['quick_reply'] = {}
 	  message_data['quick_reply']['type'] = 'options'

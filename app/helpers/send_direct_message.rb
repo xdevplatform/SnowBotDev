@@ -23,12 +23,15 @@ class SendDirectMessage
 
 	end
 
+=begin
+	#Not implemented yet.
 	def send_snow_day(recipient_id)
 		#Demonstrates easy way to stub out future functionality until customer 'generate content' method is written.
 		dm_content = @content.generate_snow_day(recipient_id)
 		send_direct_message(dm_content)
 	end
-	
+=end
+
 	def send_photo(recipient_id)
 		dm_content = @content.generate_random_photo(recipient_id)
 		send_direct_message(dm_content)
