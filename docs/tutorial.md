@@ -33,7 +33,7 @@ These systems receive Account Activity webhook events from Twitter, process the 
 For this tutorial, we are going to build a *SnowBot*, a Twitter-based gateway for all kinds of snow-related information. 
 
 ---------------------
- ####  *If you want to check out the bot, send a Direct Message to [@SnowBotDev](https://twitter.com/snowbotdev)...*
+ ####  *If you want to check out the bot, send a Direct Message to [@SnowBotDev](https://twitter.com/messages/compose?recipient_id=906948460078698496)...*
 ---------------------
 
 This example bot has the following features:
