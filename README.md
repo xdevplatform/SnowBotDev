@@ -7,4 +7,6 @@ Current home of the @SnowBotDev bot, a demo illustrating the Twitter Account Act
  ####  *If you want to check out the bot, send a Direct Message to [@SnowBotDev](https://twitter.com/snowbotdev)...*
 ---------------------
 
+See [HERE](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/tutorial.md) for a tutorial on building the SnowBot...
+
 
