@@ -16,7 +16,7 @@
   + [Bot commands](#managing-commands)
 + [Adding bot functionality](#functionality)
   + [Basic menu navigation](#navigation)
-  + [Serving option lists](#lists)
+  + [Serving Quick Reply option lists](#lists)
   + [Adding attachments to Direct Messages](#attachments)
   + [Integrating third-party APIs](#other-apis)
 + [Other tips](#tips)
@@ -164,6 +164,7 @@ When Twitter sends a CRC event, it makes a GET request to the registered endpoin
     status 200
   end
 ```
+
 The Ruby code for generating the CRC response hash looks like this:
 
 ```
@@ -319,7 +320,7 @@ def handle_event(events)
       if dm_event['type'] == 'message_create'
 
         #Is this a response? Test for the 'quick_reply_response' key.
-        is_response = dm_event['message_create'] && dm_event['message_create']['message_data'] && dm_event['message_create']['message_data']                           ['quick_reply_response']
+        is_response = dm_event['message_create'] && dm_event['message_create']['message_data'] && dm_event['message_create']['message_data']['quick_reply_response']
 
         if is_response
           handle_quick_reply dm_event
@@ -339,17 +340,17 @@ If the event manager is handling a Quick Reply response, the ```handle_quick_rep
 When creating Quick Replies, the 'metadata' attribute assigned to it comes back with the Quick Reply response. This 'metadata' attribute enables you to know what Quick Reply is being responded to and react accordingly.
 
 ```
-	def handle_quick_reply(dm_event)
+def handle_quick_reply(dm_event)
 
-		response_metadata = dm_event['message_create']['message_data']['quick_reply_response']['metadata']
-		user_id = dm_event['message_create']['sender_id']
+  response_metadata = dm_event['message_create']['message_data']['quick_reply_response']['metadata']
+  user_id = dm_event['message_create']['sender_id']
 
-    # Handle all types of response_metadata here. 
-		if response_metadata == 'help'
-			@DMSender.send_system_help(user_id)
-		end	
+  # Handle all types of response_metadata here. 
+  if response_metadata == 'help'
+    @DMSender.send_system_help(user_id)
+  end	
 
-	end
+end
   
 ```
   
@@ -365,10 +366,9 @@ All non-Quick Reply responses are routed to this method. So, this is where you c
 		#Since this DM is not a response to a QR, let's check for other 'action' commands
 
 		request = dm_event['message_create']['message_data']['text']
-		user_id = dm_event['message_create']['sender_id']
-		
+		user_id = dm_event['message_create']['sender_id']		
 
-		if request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'bot' or request.downcase.include? 'home' or              request.downcase.include? 'main' or request.downcase.include? 'hello' or request.downcase.include? 'back')
+		if request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'bot' or request.downcase.include? 'home' or request.downcase.include? 'main' or request.downcase.include? 'hello' or request.downcase.include? 'back')
 			@DMSender.send_welcome_message(user_id)
 
 end
@@ -385,7 +385,7 @@ The SnowBot is the third of a line of chatbot examples. About the only thing in 
 
 * ⬅ Back - Returns users to the 'parent' option of their current level. For example, you are viewing a snow report, the 'Back' option will return you to the resorts list. 
 
-* ☔  Help - Returns static text of your choice. With the SnowBot, the help command returns a list of support bot commands. 
+* ☔  Help - Returns static text of your choice. With the SnowBot, the 'help' command returns a list of support bot commands. 
 
 * ❓ Learn - Returns static text of your choice. With the SnowBot, the 'learn' command returns a project link, and provides third-party API credits.  
 
@@ -452,7 +452,7 @@ When the user selects a *Back* button, that event arrives in the EventManager cl
 	end
 ```
 
-### Serving option lists <a id="lists" class="tall">&nbsp;</a> 
+### Serving Quick Reply option lists <a id="lists" class="tall">&nbsp;</a> 
 
 The SnowBot serves up several curated lists:
 
@@ -462,7 +462,7 @@ The SnowBot serves up several curated lists:
 
 These lists are configured and loaded from the server side. For each list a 'resource' file is looked up, opened, parsed, and assembled into metadata for a Quick Reply option list. For example, when a user wants to request a snow report, they are presented a list of resorts to choose from. The resort names are loaded from a *placesOfInterest.csv* file that is placed in a SnowBotDev/app/config/data/ folder. 
 
-Note that Quick Reply option lists are limited to 20 items. 
+Note that Quick Reply option lists are limited to 20 items, including any navigation options such as *Home* and *Back* options. For example, since the list of snow resorts includes a *Home* button, only 19 resorts can be listed. If you have more than twenty options to display, you'll need to split them into multiple option lists. For the SnowBot, we could support more resorts by adding a *More* button that displays the next (up to) 19 resorts. 
 
 The mechanics of loading these resource files is encapsulated in ```SnowBotDev/app/helpers/get_resources.rb```.
 
