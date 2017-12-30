@@ -548,7 +548,9 @@ Once your bot is deployed and tested, it's time to help users find it. One way t
 https://twitter.com/messages/compose?recipient_id=906948460078698496
 ```
 
-The SNowbot has such a Tweet pinned to the top of its timeline:
+The SnowBot has such a Tweet pinned to the top of its timeline:
+
+![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/cta_tweet.jpg)
 
 
 
