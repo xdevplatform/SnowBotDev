@@ -272,6 +272,7 @@ def generate_welcome_options
 		quick_reply
 end
 ```
+![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/welcome_message.jpg)
 
 ## Managing events <a id="managing" class="tall">&nbsp;</a> 
 
