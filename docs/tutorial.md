@@ -417,6 +417,9 @@ end
 
 Here is where the help contents are built: ```generate_system_help(recipient_id)```
 
+![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/help.jpg)
+
+
 Back buttons require a bit more metadata to implement. 
 
 Types: 'locations', 'links', 'playlists'
