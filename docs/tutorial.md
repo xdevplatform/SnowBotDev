@@ -20,6 +20,7 @@
   + [Adding attachments to Direct Messages](#attachments)
   + [Integrating third-party APIs](#other-apis)
 + [Other tips](#tips)
++ [Next steps](#next)
 
 
 ## Introduction <a id="intro" class="tall">&nbsp;</a>
@@ -424,9 +425,9 @@ Here is where the help contents are built: ```generate_system_help(recipient_id)
 ![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/help.jpg)
 
 
-Back buttons require a bit more metadata to implement. 
+*Back* buttons require a bit more metadata to implement. *Back* buttons requires context about where they should go to, context on what is the 'parent' location to where the user should be sent. The SnowBot provides *Back* buttons when it is two levels down (first level options don't really need a *Back* button since *Home* takes the user to the top level anyway). So when the SnowBot user is presented  their choice of snow reports, snow research link, or a playlist, a *Back* button is provided to return the user to the corresponding list options. 
 
-Types: 'locations', 'links', 'playlists'
+The needed context is provided with the Quick Reply *metadata* field in the GenerateDirectMessageContent class. When a list option choice is displayed, the *Back* button is added to the options with its *metadata* field set to ```go_back #{type}``` where type is either 'locations', 'links', or 'playlists'.
 
 ```
 	option = {}
@@ -435,6 +436,7 @@ Types: 'locations', 'links', 'playlists'
 	option['metadata'] = "go_back #{type} "
 ```
 
+When the user selects a *Back* button, that event arrives in the EventManager class. There the *metadata* field is examined and the *type* is checked. Based on that, we know what option list to send to the user.
 
 ```
   if response_metadata.include? 'go_back'
@@ -495,7 +497,7 @@ The photo list is loaded from this CSV file:
 + SnowBotDev/app/config/data/photos/photos.csv - Contents: file name, description
   + Note that since the description can contain commas, semi-colons are used as the delimiter.
 
-The actual photos need to be stored here: SnowBotDev/app/config/data/photos/*.jpg.
+The actual photos need to be stored here: SnowBotDev/app/config/data/photos/*.jpg.* So to add a new photo, add an entry in the *photos.csv* resource file (with the filename and a description), and drop the photo file in the */photos* folder.
 
 ### Adding attachments to Direct Messages <a id="attachments" class="tall">&nbsp;</a> 
 
@@ -554,12 +556,19 @@ Once your bot is deployed and tested, it's time to help users find it. One way t
 ```
 https://twitter.com/messages/compose?recipient_id=906948460078698496
 ```
-
 The SnowBot has such a Tweet pinned to the top of its timeline:
 
 ![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/cta_tweet.jpg)
 
-
-
 ### Asking users for location
+
+When a SnowBot user requests current weather conditions for a location, they are presented with 'share location' process. Currently, the Direct Message API provides a ['location' type Quick Reply](https://developer.twitter.com/en/docs/direct-messages/quick-replies/api-reference/location). When this type of Quick Reply is presented to a user, they are prompted to share their location by choosing it on a map. When the user selects a location, its long/lat coordinates are returned in the Direct Message event metadata.
+
+Note that in December, 2017, it was announced that the sharing location feature would be deprecated in early 2018. At that time the 'get weather' feature will either be removed, or an alternative method for sharing location will be implemented. 
+
+## Next steps <a id="next" class="tall">&nbsp;</a> 
+
++ Review [Account Activity API documentation](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview).
++ Review [Direct Message API documentation](https://developer.twitter.com/en/docs/direct-messages/api-features).
++ Read the [Account Activity API playbook]().
 
