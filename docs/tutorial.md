@@ -48,6 +48,9 @@ This example bot has the following features:
   * Provides snow resort reports for a set list of 20 ski resorts using http://www.snocountry.com/.
 * Supports a simple bot navigation framework with common ```help```, ```about```, and ```back``` actions.
 
+![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/snowbot_features.jpg)
+
+
 A fundamental component of any chatbot system is a webapp that reacts to Twitter webhooks and marshalls 'business' logic for reacting to incoming messages. The material below is organized in several sections including tips on getting started and overviews of implementing these bot features. 
 
 While much of the narrative is language-agnostic, this material includes many code snippets written in Ruby. Since these code examples are very short and have comments, we can consider them as pseudo-code. Pseudo-code that hopefully illustrates fundamental concepts that are readily implemented in non-Ruby languages.
