@@ -75,12 +75,8 @@ class EventManager
 			@DMSender.send_location_info(user_id, choice)
 
 		elsif response_metadata.include? 'go_back'
-			puts "Parse #{response_metadata.strip} and point there."
-			
 			type =  response_metadata['go_back'.length..-1].strip
 
-			puts "------------------> type = #{type}"
-			
 			if type == 'links'
 				@DMSender.send_links_list(user_id)
 			elsif type == 'locations'
@@ -111,8 +107,6 @@ class EventManager
 
 		request = dm_event['message_create']['message_data']['text']
 		user_id = dm_event['message_create']['sender_id']
-		
-		#puts "Request with command: #{request}"
 
 		if request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'bot' or request.downcase.include? 'home' or request.downcase.include? 'main' or request.downcase.include? 'hello' or request.downcase.include? 'back')
 			@DMSender.send_welcome_message(user_id)
@@ -143,8 +137,6 @@ class EventManager
 
 	def handle_event(events)
 
-		puts "Event handler processing: #{events}"
-
 		events = JSON.parse(events)
 
 		if events.key? ('direct_message_events')
@@ -168,7 +160,7 @@ class EventManager
 				end
 			end
 		else
-			puts "Received test JSON."
+			puts "Received non-DM JSON."
 		end
 	end
 end

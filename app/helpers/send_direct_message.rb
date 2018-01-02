@@ -107,7 +107,7 @@ class SendDirectMessage
 	end
 
 	#Send a DM back to user.
-	#https://dev.twitter.com/rest/reference/post/direct_messages/events/new
+	#https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
 	def send_direct_message(message)
 
 		uri_path = "#{@dm.uri_path}/events/new.json"

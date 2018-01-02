@@ -40,13 +40,7 @@ class GenerateDirectMessageContent
 		
 		#Select photo(at random).
 		photo = @resources.photos_list.sample
-		
-		#message = ''
-		#OK, got photo message
-		#if not photo[1] == ''
-			message = photo[1]
-		#end
-
+		message = photo[1]
 		message_data['text'] = message
 		
 		#Confirm photo file exists
@@ -203,7 +197,7 @@ class GenerateDirectMessageContent
   end
 
 	#Generates Quick Reply for presenting user a Map via Direct Message.
-	#https://dev.twitter.com/rest/direct-messages/quick-replies/location
+	#https://developer.twitter.com/en/docs/direct-messages/quick-replies/api-reference/location
 	def generate_location_map(recipient_id)
 
 		event = {}
@@ -291,8 +285,6 @@ class GenerateDirectMessageContent
 	  end
 
 		resort_info   = @thirdparty_api.get_resort_info(resort_id)
-	  
-	  #puts "Location: #{resort_info}"
 
 	  event = {}
 	  event['event'] = message_create_header(recipient_id)
@@ -401,14 +393,14 @@ class GenerateDirectMessageContent
   def generate_system_help(recipient_id)
 
 	  message_text = "Several commands are supported: \n \n" + 
-                "#{BOT_CHAR} 'bot', 'home', 'main' ---> Main menu \n " +
-                "#{BOT_CHAR} 'photo', 'pic' --> See photo \n " +
-		            "#{BOT_CHAR} 'report', 'resort' --> Get resort snow report via http://feeds.snocountry.net/conditions \n "  +
-                "#{BOT_CHAR} 'weather', 'wx' --> Get weather conditions via http://api.wunderground.com \n "  +
-		             "#{BOT_CHAR} 'learn', 'link' --> Learn about snow \n" +
-		            "#{BOT_CHAR} 'playlist', 'music' --> Get playlist \n" +
-		            "#{BOT_CHAR} 'about' --> Learn about bot \n" +
-		            "#{BOT_CHAR} 'help' --> Review these commands \n"
+                "#{BOT_CHAR} 'bot', 'home', 'main' ⇨ Main menu \n " +
+                "#{BOT_CHAR} 'photo', 'pic' ⇨ See photo \n " +
+		            "#{BOT_CHAR} 'report', 'resort' ⇨ Get resort snow report via http://feeds.snocountry.net/conditions \n "  +
+                "#{BOT_CHAR} 'weather', 'wx' ⇨ Get weather conditions via http://api.wunderground.com \n "  +
+		             "#{BOT_CHAR} 'learn', 'link' ⇨ Learn about snow \n" +
+		            "#{BOT_CHAR} 'playlist', 'music' ⇨ Get playlist \n" +
+		            "#{BOT_CHAR} 'about' ⇨ Learn about bot \n" +
+		            "#{BOT_CHAR} 'help' ⇨ Review these commands \n"
 
 	  #Build DM content.
 	  event = {}
@@ -513,8 +505,6 @@ class GenerateDirectMessageContent
   
   #Types: list choices, going back to list. links, resorts
 	def build_back_option(type=nil, description=nil)
-		
-		#puts "Incoming parameters: type = #{type}, description = #{description} "
 
 		options = []
 
@@ -522,8 +512,6 @@ class GenerateDirectMessageContent
 		option['label'] = '⬅ Back'
 		option['description'] = 'Previous list...' if description
 		option['metadata'] = "go_back #{type} "
-		
-		#puts "METADATA: #{option['metadata']}"
 
 		options << option
 
