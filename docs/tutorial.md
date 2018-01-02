@@ -24,14 +24,14 @@
 
 
 ## Introduction <a id="intro" class="tall">&nbsp;</a>
-The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Direct Message *bots*, automated systems that respond to incoming Direct Messages. To learn more about how bots have become common on the Twitter platfrom, see [HERE](https://marketing.twitter.com/na/en/insights/from-tvs-to-beertails-how-chatbots-help-brands-engage-consumers-on-twitter.html). 
+The purpose of this tutorial is to help developers get started with the Twitter Account Activity (AA) and Direct Message (DM) APIs. These APIs are used to build Twitter Direct Message *bots*, automated systems that respond to incoming Direct Messages. These automated communication tools can be designed to provide information, entertain, and engage in private conversations. To learn more about how bots have become common on the Twitter platfrom, see [HERE](https://marketing.twitter.com/na/en/insights/from-tvs-to-beertails-how-chatbots-help-brands-engage-consumers-on-twitter.html). 
 
 These systems receive Account Activity webhook events from Twitter, process the received messages, and respond to the requester via the Direct Message API. 
 
 + By integrating the Account Activity (AA) API you are developing a consumer of webhook events sent from Twitter. 
 + By integrating the Direct Message (DM) API, you are building the private communication channel for your bot and its users. 
 
-For this tutorial, we are going to build a *SnowBot*, a Twitter-based gateway for all kinds of snow-related information. 
+For this tutorial, we are going to build a *SnowBot*, a Twitter-based gateway for all kinds of snow-related information. With the SnowBot you can request weather and snow reports, look at snow photographs, find resources for deeper snow research, and get music playlists with weather and geographical themes. 
 
 ---------------------
  ####  *If you want to check out the bot, send a Direct Message to [@SnowBotDev](https://twitter.com/messages/compose?recipient_id=906948460078698496)...*
@@ -51,10 +51,9 @@ This example bot has the following features:
 
 ![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/snowbot_features.jpg)
 
+A fundamental component of any chatbot system is a webapp that reacts to Twitter webhooks and manages 'business' logic for reacting to incoming messages. The material below is organized in several sections including tips on getting started with these APIs and overviews of implementing these bot features. 
 
-A fundamental component of any chatbot system is a webapp that reacts to Twitter webhooks and marshalls 'business' logic for reacting to incoming messages. The material below is organized in several sections including tips on getting started and overviews of implementing these bot features. 
-
-While much of the narrative is language-agnostic, this material includes many code snippets written in Ruby. Since these code examples are very short and have comments, we can consider them as pseudo-code. Pseudo-code that hopefully illustrates fundamental concepts that are readily implemented in non-Ruby languages.
+While much of the narrative is language-agnostic, this material includes many code snippets written in Ruby. Since these code examples are very short and have comments, we will provide them as pseudo-code. Pseudo-code that hopefully illustrates fundamental concepts that are readily implemented in non-Ruby languages.
 
 We'll start off with a how to get started with these APIs.
 
@@ -62,8 +61,8 @@ We'll start off with a how to get started with these APIs.
 
 First off, if you haven't reviewed the Direct Message and Account Activity API documentation, that's the place to start. 
 
-+ https://developer.twitter.com/en/docs/direct-messages/api-features
-+ https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
++ [Direct Message API](https://developer.twitter.com/en/docs/direct-messages/api-features)
++ [Account Activity API](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview)
 
 If you are new to building bots with these APIs, please check out our [Accounty Activity Playbook](). 
 
