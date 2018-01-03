@@ -9,7 +9,11 @@ Current home of the @SnowBotDev bot, a demo illustrating the Twitter Account Act
 
 ---------------------
 
+---------------------
+
 ![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/snowbot_features.png)
+
+---------------------
 
 ---------------------
 
