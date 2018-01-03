@@ -456,7 +456,7 @@ class GenerateDirectMessageContent
 
 	  option = {}
 		option['label'] = "#{BOT_CHAR} Get geo, weather themed playlist"
-		option['description'] = "Carefully curated Spotify playlists...'"
+		option['description'] = 'Carefully curated Spotify playlists...'
 		option['metadata'] = 'snow_music'
 		options << option
 
