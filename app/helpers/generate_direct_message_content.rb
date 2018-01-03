@@ -393,14 +393,14 @@ class GenerateDirectMessageContent
   def generate_system_help(recipient_id)
 
 	  message_text = "Several commands are supported: \n \n" + 
-                "#{BOT_CHAR} 'bot', 'home', 'main' ⇨ Main menu \n " +
-                "#{BOT_CHAR} 'photo', 'pic' ⇨ See photo \n " +
-		            "#{BOT_CHAR} 'report', 'resort' ⇨ Get resort snow report via http://feeds.snocountry.net/conditions \n "  +
-                "#{BOT_CHAR} 'weather', 'wx' ⇨ Get weather conditions via http://api.wunderground.com \n "  +
-		             "#{BOT_CHAR} 'learn', 'link' ⇨ Learn about snow \n" +
-		            "#{BOT_CHAR} 'playlist', 'music' ⇨ Get playlist \n" +
-		            "#{BOT_CHAR} 'about' ⇨ Learn about bot \n" +
-		            "#{BOT_CHAR} 'help' ⇨ Review these commands \n"
+                "#{BOT_CHAR} 'bot', 'home', 'main' \n ⇨ Main menu \n " +
+                "#{BOT_CHAR} 'photo', 'pic' \n ⇨ See photo \n " +
+		            "#{BOT_CHAR} 'report', 'resort' \n ⇨ Get resort snow report via http://feeds.snocountry.net/conditions \n "  +
+                "#{BOT_CHAR} 'weather', 'wx' \n ⇨ Get weather conditions via http://api.wunderground.com \n "  +
+		             "#{BOT_CHAR} 'learn', 'link' \n ⇨ Learn about snow \n" +
+		            "#{BOT_CHAR} 'playlist', 'music' \n ⇨ Get playlist \n" +
+		            "#{BOT_CHAR} 'about' \n ⇨ Learn about bot \n" +
+		            "#{BOT_CHAR} 'help' \n ⇨ Review these commands \n"
 
 	  #Build DM content.
 	  event = {}
