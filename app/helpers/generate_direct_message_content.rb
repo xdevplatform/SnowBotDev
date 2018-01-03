@@ -366,10 +366,11 @@ class GenerateDirectMessageContent
  
   def generate_system_info(recipient_id)
 
-	  message_text = "#{BOT_CHAR} This is a snow bot... It's kinda simple, kinda not... see link https://github.com/jimmoffitt/snowbotdev. \n" + 
+	  message_text = "#{BOT_CHAR} This is a snow bot (version #{VERSION})... It's kinda simple, kinda not... \n See link https://github.com/jimmoffitt/snowbotdev. \n" +
 	                 "\n" + 
-	                 "Snow reports are provided with wwww.SnowCountry.com API."
-	                 "Weather data are provided from Weather Underground."
+	                 "Credits: \n"
+	                 "Snow reports are provided with an API from wwww.SnowCountry.com.\n"
+	                 "Weather data are provided with an API from WeatherUnderground.\n"
 	  
 
 	  #Build DM content.
