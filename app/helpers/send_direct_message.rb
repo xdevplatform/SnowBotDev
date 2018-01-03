@@ -12,7 +12,7 @@ class SendDirectMessage
 
 	def initialize
 
-		puts "Creating SendDirectMessage object."
+		#puts "Creating SendDirectMessage object."
 		
 		@dm = ApiOauthRequest.new
 
@@ -112,6 +112,8 @@ class SendDirectMessage
 
 		uri_path = "#{@dm.uri_path}/events/new.json"
 		response = @dm.make_post_request(uri_path, message)
+		
+		puts response
 
 		#Currently, not returning anything... Errors reported in POST request code.
 		response

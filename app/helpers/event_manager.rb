@@ -13,7 +13,7 @@ class EventManager
 	attr_accessor :DMsender
 
 	def initialize
-		puts 'Creating EventManager object'
+		#puts 'Creating EventManager object'
 		@DMSender = SendDirectMessage.new
 	end
 
@@ -156,7 +156,7 @@ class EventManager
 						handle_command dm_event
 					end
 				else
-					puts "Hey a new, unhandled type has been implemented on the Twitter side."
+					puts "Hey a unhandled type has been implemented on the Twitter side."
 				end
 			end
 		else

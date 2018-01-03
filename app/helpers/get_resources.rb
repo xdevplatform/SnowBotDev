@@ -7,7 +7,7 @@
 
 # This bot builds Twitter Quick Reply (menu) lists from a set of local data files. These files are served from the webhook listener server... 
 # Bot supports: 
-#     * Single list of locations (up to 20) 
+#     * Single list of locations (up to 20)
 #           * Snowbot uses snow resort locations, @FloodSocial uses Texas cities. 
 #     * Look-up for a single list of curated links.
 #           * Snowbot presents a short of list of suggested 'learn more' URLs.
@@ -83,7 +83,7 @@ class GetResources
 		
 		begin
 			list = filter_list(CSV.read("#{@photos_home}/photos.csv", {:col_sep => ";"}))
-			puts "Have a list of #{photo_list.count} photos..."
+			#puts "Have a list of #{photo_list.count} photos..."
 		rescue
 		end
 		
@@ -96,7 +96,7 @@ class GetResources
 		
 		begin
 			list = filter_list(CSV.read("#{@links_home}/links.csv", {:col_sep => ";"}))
-			puts "Have a list of #{list.count} links..."
+			#puts "Have a list of #{list.count} links..."
 		rescue
 		end
 		
@@ -112,7 +112,7 @@ class GetResources
 		rescue
 		end	
 
-		puts "Have a list of #{list.count} locations..."
+		#puts "Have a list of #{list.count} locations..."
 		list
 	end
 
@@ -122,7 +122,7 @@ class GetResources
 		
 		begin
 			list = filter_list(CSV.read("#{@playlists_home}/playlists.csv"))
-			puts "Have a list of #{list.count} playlists..."
+			#puts "Have a list of #{list.count} playlists..."
 		rescue
 		end
 		

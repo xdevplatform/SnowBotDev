@@ -41,7 +41,6 @@ class ThirdPartyRequest
 
 		open("http://feeds.snocountry.net/conditions.php?apiKey=#{@keys['snocountry_consumer_key']}&ids=#{resort_id}") do |f|
 			json_string = f.read
-			puts json_string
 			parsed_json = JSON.parse(json_string)
 			
 			#if parsed_json['openDownHillLifts'] && parsed_json['openDownHillTrails']
