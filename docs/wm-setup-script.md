@@ -157,7 +157,75 @@ Message ID 893579774534209539 with message: ❄ Welcome to snowbot (ver. 0.02) �
 ```
 ## Updating default Welcome Mesasage <a id="updating" class="tall">&nbsp;</a> 
 
-{What is the recipe using this script?} 
+As you develop your chatbot, your default Welcome Message will likely evolve and change many times. When it's time to make an update, here are the steps that need to be taken:
+
++ Create new Welcome Message.
++ Delete existing Welcome Message rule.
++ Set the new Welcome Message as the new default.
+
+Using this helper script, we can easily take those steps:
+
++ Create new Welcome Message:
+```
+setup_welcome_messages.rb -w "create"
+
+>> Creating Welcome Message...
+
+```
+
++ List messages, confirming we have two messages, old and new:
+
+```
+setup_welcome_messages.rb -w "get"
+
+>> Getting welcome message list.
+>> Message IDs: 
+>> Message ID 948357678862024708 with message: ❄ Welcome to SnowBotDev (ver. 0.6) ❄ 
+>> Message ID 948605959420641285 with message: ❄ Welcome to SnowBotDev (ver. 0.7) ❄ 
+
+```
+
++ List current Welcome Message rule to retrieve its ID:
+
+```
+setup_welcome_messages.rb -r "get"
+
+>> Getting welcome message rules list.
+>>Rule 948358533958967296 points to 948357678862024708
+
+```
+
++ Delete current Welcome Message rule, referencing the current rule ID:
+
+```
+setup_welcome_messages.rb -r "delete" -i 948358533958967296 
+>> Deleting rule with id: 948358533958967296.
+```
+
++ Set the updated Welcome Message as the new default.
+```
+-w "set" -i 948605959420641285
+```
+
+This method sets the new Welcome Message rule. This can be comfirmed by listing the rules:
+
+```
+setup_welcome_messages.rb -r "get"
+
+>> Getting welcome message rules list.
+>> Rule 948611569490984960 points to 948605959420641285
+
+```
+
+Now is a good time to delete the old Welcome Message:
+
+```
+setup_welcome_messages.rb -w "delete" -i 948357678862024708
+
+```
+
+Now you can confirm the new default Welcome Message by starting a new Direct Message conversation with your chatbot (deleting an existing conversation if need be).
+
 
 ## Test default Welcome Message <a id="testing" class="tall">&nbsp;</a> 
 
@@ -167,7 +235,7 @@ To start a new conversation, click the "add conversation" (envelope icon with pl
 
 ## Other details <a id="details" class="tall">&nbsp;</a> 
 
-### Bot account must accept DM from any user. If not, the following error will be thrown:
+**Bot account must accept DM from any user. If not, the following error will be thrown:**
 
 ```
 Creating GenerateDirectMessageContent object.
@@ -175,7 +243,25 @@ Creating Welcome Message...
 POST ERROR occurred with /1.1/direct_messages/welcome_messages/new.json, request: {"welcome_message":{"message_data":{"text":"❄ Welcome to snowbot (ver. 0.05) ❄","quick_reply":{"type":"options","options":[{"label":"❄ See snow picture 📷","description":"Come on, take a look...","metadata":"see_photo"},{"label":"❄ Weather data from anywhere","description":"Select an exact location or Twitter Place...","metadata":"weather_info"},{"label":"❄ Learn something new about snow","description":"Other than it melts around 32°F and is fun to slide on...","metadata":"learn_snow"},{"label":"❄ Get geo, weather themed playlist","description":"Carefully curated Spotify playlists...'","metadata":"snow_music"},{"label":"❄ Request snow report","description":"Select areas mainly in CO, with some in CA, MN and NZ.","metadata":"snow_report"},{"label":"❓ Learn more about this system","description":"At least a link to underlying code...","metadata":"learn_more"},{"label":"☔ Help","description":"Help with system commands","metadata":"help"},{"label":"⌂ Home","description":"Go back home","metadata":"return_home"}]}}}} 
 Error code: 400 #<Net::HTTPBadRequest:0x007fa752544b78>
 Error Message: {"errors":[{"code":214,"message":"owner must allow dms from anyone"}]}
-Errors occurred.
-{"code"=>214, "message"=>"owner must allow dms from anyone"}
 ```
+
+**You'll receive an error if you include a Quick Reply/Welcome Message with a web link in the description:**
+
+For example, the following Quick Reply option has a description with the ```SnoCountry.com``` web address:
+
+```
+  option = {}
+	option['label'] = "#{BOT_CHAR} Request snow report"
+	option['description'] = 'SnoCountry.com reports for select areas.'
+	option['metadata'] = 'snow_report'
+	options << option
+```
+
+Attempting to create this Welcome Message/Quick Reply results in the following error:
+
+```
+Error code: 403 #<Net::HTTPForbidden:0x007f9527518998>
+Error Message: {"errors":[{"code":151,"message":"There was an error sending your message: Invalid QuickReply field description containing url(s)."}]}
+```
+
 
