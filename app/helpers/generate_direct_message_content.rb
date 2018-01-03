@@ -437,7 +437,7 @@ class GenerateDirectMessageContent
 
 		option = {}
 		option['label'] = "#{BOT_CHAR} Request snow report"
-		option['description'] = 'SnoCountry.com reports for select areas.'
+		option['description'] = 'SnoCountry reports for select areas.'
 		option['metadata'] = 'snow_report'
 		options << option
 		
