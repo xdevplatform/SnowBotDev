@@ -29,7 +29,7 @@ class SnowBotDevApp < Sinatra::Base
      <p>I serve a local hive of snow photos, weather conditions, snow reports, snow research links... </p>
      <p></p>
      <p><a href="https://github.com/jimmoffitt/snowbotdev/">Project code</a></p>
-     <p>Think snow...</p>'
+     <p>#ThinkSnow...</p>'
 	end
 
 	# Receives challenge response check (CRC).
