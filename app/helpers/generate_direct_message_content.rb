@@ -19,7 +19,7 @@ class GenerateDirectMessageContent
 
 	def initialize(setup=nil) #'Setup Welcome Message' script using this too, but does not require many helper objects.
 
-		puts "Creating GenerateDirectMessageContent object."
+		#puts "Creating GenerateDirectMessageContent object."
 		
 		if setup.nil?
 			@twitter_api = TwitterAPI.new
