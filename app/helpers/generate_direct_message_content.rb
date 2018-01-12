@@ -308,7 +308,7 @@ class GenerateDirectMessageContent
 	
 	def generate_greeting
 
-		greeting = "#{BOT_CHAR} Welcome to #{BOT_NAME} (ver. #{VERSION}) #{BOT_CHAR}"
+		greeting = "#{BOT_CHAR} Welcome to #{BOT_NAME} (ver. #{VERSION}) #{BOT_CHAR}. Send 'home' for main menu and 'help' for a list of supported commands."
 		greeting
 
 	end
@@ -366,10 +366,11 @@ class GenerateDirectMessageContent
  
   def generate_system_info(recipient_id)
 
-	  message_text = "#{BOT_CHAR} This is a snow bot (version #{VERSION})... It's kinda simple, kinda not... \n See link https://github.com/jimmoffitt/snowbotdev. \n" +
+	  message_text = "#{BOT_CHAR} This is a snow bot (version #{VERSION})... It's kinda simple, kinda not... \n " +
+		               "See here for project code and tutorial: https://github.com/jimmoffitt/snowbotdev. \n" +
 	                 "\n" + 
-	                 "Credits: \n"
-	                 "Snow reports are provided with an API from wwww.SnowCountry.com.\n"
+	                 "Credits: \n" + 
+	                 "Snow reports are provided with an API from wwww.SnowCountry.com.\n" + 
 	                 "Weather data are provided with an API from WeatherUnderground.\n"
 	  
 
@@ -394,14 +395,14 @@ class GenerateDirectMessageContent
   def generate_system_help(recipient_id)
 
 	  message_text = "Several commands are supported: \n \n" + 
-                "#{BOT_CHAR} 'bot', 'home', 'main' \n ⇨ Main menu \n " +
-                "#{BOT_CHAR} 'photo', 'pic' \n ⇨ See photo \n " +
-		            "#{BOT_CHAR} 'report', 'resort' \n ⇨ Get resort snow report via http://feeds.snocountry.net/conditions \n "  +
-                "#{BOT_CHAR} 'weather', 'wx' \n ⇨ Get weather conditions via http://api.wunderground.com \n "  +
-		             "#{BOT_CHAR} 'learn', 'link' \n ⇨ Learn about snow \n" +
-		            "#{BOT_CHAR} 'playlist', 'music' \n ⇨ Get playlist \n" +
-		            "#{BOT_CHAR} 'about' \n ⇨ Learn about bot \n" +
-		            "#{BOT_CHAR} 'help' \n ⇨ Review these commands \n"
+                "#{BOT_CHAR} ⇨ Main menu \n  send: 'bot', 'home', 'main' \n " +
+                "#{BOT_CHAR} ⇨ See photo \n  send: 'photo', 'pic' \n  " +
+		            "#{BOT_CHAR} ⇨ Get resort snow report \n  send: 'report', 'resort' \n  via http://feeds.snocountry.net/conditions \n "  +
+                "#{BOT_CHAR} ⇨ Get weather conditions \n  send: 'weather', 'wx' \n via http://api.wunderground.com \n "  +
+                "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
+	              "#{BOT_CHAR} ⇨ Get playlist \n  send: 'playlist', 'music' \n " +
+	              "#{BOT_CHAR} ⇨ Learn about the #{BOT_NAME} \n   send: 'about' \n " +
+	              "#{BOT_CHAR} ⇨ Review these commands \n  send: 'help' \n "
 
 	  #Build DM content.
 	  event = {}
