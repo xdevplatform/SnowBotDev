@@ -64,7 +64,7 @@ First off, if you haven't reviewed the Direct Message and Account Activity API d
 + [Direct Message API](https://developer.twitter.com/en/docs/direct-messages/api-features)
 + [Account Activity API](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview)
 
-If you are new to building bots with these APIs, please check out our [Accounty Activity Playbook](). 
+If you are new to building bots with these APIs, please check out our [Accounty Activity Playbook](TODO). 
 
 As described in detail [HERE](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/guides/getting-started-with-webhooks), there are several steps of getting started with developing Twitter chatbots: 
 
@@ -80,6 +80,8 @@ As described in detail [HERE](https://developer.twitter.com/en/docs/accounts-and
 ### Helper scripts <a id="helper-scripts" class="tall">&nbsp;</a>
 
 As you develop your chatbot, you'll need to set-up the Account Activity plumbing, and design and generate Direct Messages. Much of these actions can be thought of as one-time set-up tasks, but they are actions you'll likely take again as your chatbot evolves. 
+
+Below are links to two Ruby scripts in support of the SnowBot project. If you are developing in node, then check out [these helper scripts](TODO).
 
 * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_webhooks.rb) to help with setting up your Accounty Activity access.
 * See [this script](https://github.com/jimmoffitt/SnowBotDev/blob/master/scripts/setup_welcome_messages.rb) to help with managing your Welcome Messages. "As a AA API client, I need to a tool to update my default Welcome Message. I need to set one up to get started, and also will update it as my bot evolves and add new features." 
@@ -527,11 +529,16 @@ return event.to_json
 
 ### Integrating third-party APIs <a id="other-apis" class="tall">&nbsp;</a> 
 
-The SnowBot has two features that are driven by third-party APIs: requesting current weather conditions for a location of interest, and getting snow reports for a list of ski resorts. Integrating third-party APIs was pretty simple. 
+The SnowBot has two features that are based on receiving and formating responses from third-party APIs: requesting current weather conditions for a location of interest, and getting snow reports for a list of ski resorts. Integrating third-party APIs was pretty simple... 
 
-For this demo, two APIs were integrated: weather data from [WeatherUnderground.com](https://www.wunderground.com/weather/api/) and snow reports from [SnoCountry.com](http://www.snocountry.com/). WeatherUnderground provides a self-service for generating an API key. For the snow reports I reached out to SnoCountry.com and they were kind enough to provide a key. For both APIs, a simple HTTP GET request is made with the API key passed in as a request parameter.
+For this demo, two APIs were integrated: 
 
-These authentication keys are loaded in from your execution environment keys. Depending on your development/deploy environment, these can be set in different places. When running from an IDE, these keys can be set in a run/debug configuration. When deploying to a cloud platform, such as Heroku, the keys are set as part of a web app's *settings*. 
++ Weather data from [WeatherUnderground.com](https://www.wunderground.com/weather/api/) 
++ Snow reports from [SnoCountry.com](http://www.snocountry.com/). 
+
+For both APIs, a simple HTTP GET request is made with the API key passed in as a request parameter.
+
+These authentication keys are loaded in from your execution environment keys. Depending on your development/deploy environment, these can be set in different places. When running from an IDE, these keys can (usually) be set in a run/debug configuration. When deploying to a cloud platform, such as Heroku, the keys are set as part of a web app's *settings*. 
 
 Note that without your own API keys, these bot features will fail with authentication-related errors. The assumption is that you will want to integrate APIs of your interest. To help with that the third-party API details are encapsulated in two places:
 
