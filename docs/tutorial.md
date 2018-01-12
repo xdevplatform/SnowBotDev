@@ -88,14 +88,13 @@ Below are links to two Ruby scripts in support of the SnowBot project. If you ar
 
 ## Building webhook consumer <a id="webhook-consumer" class="tall">&nbsp;</a>
 
-At the highest level, there are two main components of a Twitter chatbot: Twitter Accounty Activity API and the webhook events it sends, and the client-side web app that receives these events and responds with Direct Messages. This section will outline what that web app looks like when using the Ruby/sinatra framework.
+At the highest level, there are two main components of a Twitter chatbot: Twitter Accounty Activity API and the webhook events it sends, and the [client-side web app](https://snowbotdev.herokuapp.com/) that receives these events and responds with Direct Messages. This section will outline what that web app looks like when using the Ruby/sinatra framework.
 
-If you haven't already, subscribe your consumer web app using the Account Activity API.
+If you haven't already, subscribe your consumer web app using the [Account Activity API](TODO).
 
 ### Standing up web app <a id="standing-up" class="tall">&nbsp;</a> 
-https://snowbotdev.herokuapp.com/
 
-To build out the client-side of a Twitter chatbot, you need to deploy a web app with an endpoint to handle incoming webhook events. For this project, the ```https://snowbotdev.herokuapp.com/snowbot``` endpoint was registered with Twitter using the Account Activity API: 
+To build out the client-side of a Twitter chatbot, you need to deploy a web app with an endpoint to handle incoming webhook events. For this project, the ```https://snowbotdev.herokuapp.com/snowbot``` endpoint was registered with Twitter using the [Account Activity API](TODO): 
 
 + Twitter will POST all Account Activity webhook events to: https://snowbotdev.herokuapp.com/snowbot. The event will come in the form of a JSON object. 
 + Twitter will also make a GET request to the https://snowbotdev.herokuapp.com/snowbot endpoint when sends a Challenge Response Check (CRC) event.
@@ -113,7 +112,7 @@ class SnowBotApp < Sinatra::Base
 
  //Add routes, methods, etc.
  
- get '/' do # Provide chatbot home page.
+ get '/' do # Provide chatbot home page. https://snowbotdev.herokuapp.com/
  end
    
  post '/snowbot' do # Receive webhook events. Data body consists of a JSON object describing event.
