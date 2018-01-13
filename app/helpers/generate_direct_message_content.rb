@@ -433,7 +433,7 @@ class GenerateDirectMessageContent
 
 		option = {}
 		option['label'] = "#{BOT_CHAR} See snow picture 📷"
-		option['description'] = 'Check out a random snow-related photo...'
+		option['description'] = 'Check out a random snow related photo...'
 		option['metadata'] = 'see_photo'
 		options << option
 
