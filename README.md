@@ -22,7 +22,7 @@ See [HERE](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/tutorial.md
 ---------------------
 
 
-![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/help_commands.png)
+![](https://github.com/jimmoffitt/SnowBotDev/blob/master/docs/screenshots/help_commands.jpg)
 
 
 
