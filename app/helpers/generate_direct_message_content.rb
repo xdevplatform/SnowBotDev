@@ -433,7 +433,7 @@ class GenerateDirectMessageContent
 
 		option = {}
 		option['label'] = "#{BOT_CHAR} See snow picture 📷"
-		option['description'] = 'Come on, take a look...'
+		option['description'] = 'Check out a random snow-related photo...'
 		option['metadata'] = 'see_photo'
 		options << option
 
@@ -451,7 +451,7 @@ class GenerateDirectMessageContent
 		
 		option = {}
 		option['label'] = "#{BOT_CHAR} Learn something new about snow"
-		option['description'] = 'Other than it melts around 32°F and is fun to slide on...'
+		option['description'] = 'Other than it is fun to slide on...'
 		option['metadata'] = 'learn_snow'
 		options << option
 
@@ -471,7 +471,7 @@ class GenerateDirectMessageContent
 
 		option = {}
 		option['label'] = '❓ Learn more about this system'
-		option['description'] = 'At least a link to underlying code...'
+		option['description'] = 'Including a link to underlying code...'
 		option['metadata'] = 'learn_more'
 		options << option
 
