@@ -121,8 +121,8 @@ class EventManager
 			@DMSender.send_system_help(user_id)
 		else
 			# This is where you'd plug in more fancy message processing...
-			message = "I only support a basic set of commands, send 'help' to review those... "
-			@DMSender.send_custom_message(user_id, message)
+			#message = "I only support a basic set of commands, send 'help' to review those... "
+			#@DMSender.send_custom_message(user_id, message)
 		end
 	end
 
