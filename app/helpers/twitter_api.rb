@@ -10,7 +10,7 @@ class TwitterAPI
 
 		def initialize()
 
-			puts "Creating Twitter (public) API object."
+			#puts "Creating Twitter (public) API object."
 
       @base_url = 'upload.twitter.com'
 			@uri_path = '/1.1/media/upload'
@@ -30,7 +30,7 @@ class TwitterAPI
   
 	def get_media_id(media_path)
 		
-		puts "Value of media: #{media_path}"
+		#puts "Value of media: #{media_path}"
 
 		media_id = nil
 
