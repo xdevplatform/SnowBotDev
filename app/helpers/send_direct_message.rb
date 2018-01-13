@@ -93,16 +93,14 @@ class SendDirectMessage
 		send_direct_message(dm_content)
 	end
 
-	def send_status(recipient_id, message)
-		dm_content = @content.generate_message(recipient_id, message)
-		send_direct_message(dm_content)
-	end
-
 	def send_welcome_message(recipient_id)
 		dm_content = @content.generate_welcome_message(recipient_id)
-		
-		puts dm_content
-		
+
+		send_direct_message(dm_content)
+	end
+	
+	def send_custom_message(recipient_id, message)
+		dm_content = @content.generate_message(recipient_id, message)
 		send_direct_message(dm_content)
 	end
 
@@ -113,8 +111,6 @@ class SendDirectMessage
 		uri_path = "#{@dm.uri_path}/events/new.json"
 		response = @dm.make_post_request(uri_path, message)
 		
-		puts response
-
 		#Currently, not returning anything... Errors reported in POST request code.
 		response
 
