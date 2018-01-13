@@ -95,7 +95,6 @@ class SendDirectMessage
 
 	def send_welcome_message(recipient_id)
 		dm_content = @content.generate_welcome_message(recipient_id)
-
 		send_direct_message(dm_content)
 	end
 	

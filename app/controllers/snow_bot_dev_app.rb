@@ -54,7 +54,7 @@ class SnowBotDevApp < Sinatra::Base
 
 	# Receives DM events.
 	post '/snowbotdev' do
-		puts "Received event(s) from DM API"
+		#puts "Received event(s) from DM API"
 		request.body.rewind
 		events = request.body.read
 

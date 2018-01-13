@@ -370,7 +370,7 @@ class GenerateDirectMessageContent
 		               "See here for project code and tutorial: https://github.com/jimmoffitt/snowbotdev. \n" +
 	                 "\n" + 
 	                 "Credits: \n" + 
-	                 "Snow reports are provided with an API from SnoCountry.com.\n" +
+	                 "Snow reports are provided with an API from @SnoCountryCom.\n" +
 	                 "Weather data are provided with an API from Weather Underground.\n"
 	  
 
