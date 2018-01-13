@@ -64,12 +64,7 @@ class EventManager
 
 		elsif response_metadata == 'snow_report'
 			@DMSender.send_locations_list(user_id)
-			
-	#TODO - IMPLEMENT	------------------------------------------
 
-		elsif response_metadata == 'snow_day'
-			@DMSender.send_snow_day(user_id)
-	
 		elsif response_metadata.include? 'location_choice'
 			choice = response_metadata['location_choice: '.length..-1]
 			@DMSender.send_location_info(user_id, choice)
@@ -114,10 +109,8 @@ class EventManager
 			@DMSender.send_photo(user_id)
 		elsif request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'wx' or request.downcase.include? 'weather')
 			@DMSender.send_map(user_id)
-		elsif request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'report' or request.downcase.include? 'resort')
+		elsif request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'report' or request.downcase.include? 'resort' or request.downcase.include? 'rpt')
 			@DMSender.send_locations_list(user_id)
-		elsif request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'day')
-			@DMSender.send_snow_day(user_id)
 		elsif request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'learn')
 			@DMSender.send_links_list(user_id)
 		elsif request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'playlist' or request.downcase.include? 'music')
@@ -127,7 +120,9 @@ class EventManager
 		elsif request.length <= COMMAND_MESSAGE_LIMIT and (request.downcase.include? 'help')
 			@DMSender.send_system_help(user_id)
 		else
-			#"Listen, I only understand a few commands like: learn, about, help"
+			# This is where you'd plug in more fancy message processing...
+			message = "I only support a basic set of commands, send 'help' to review those... "
+			@DMSender.send_custom_messagemessage(user_id, message)
 		end
 	end
 
@@ -156,11 +151,11 @@ class EventManager
 						handle_command dm_event
 					end
 				else
-					puts "Hey a unhandled type has been implemented on the Twitter side."
+					puts "A unhandled DM type arrived via Twitter Account Activity API...  "
 				end
 			end
 		else
-			puts "Received non-DM JSON."
+			puts "Hey, a unhandled Account Activity event has been send from the Twitter side... A new follower? A Tweet liked? "
 		end
 	end
 end
