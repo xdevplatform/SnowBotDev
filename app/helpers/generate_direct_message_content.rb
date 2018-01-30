@@ -9,18 +9,18 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-  VERSION = 0.88
+	VERSION = 0.88
 	BOT_NAME = 'SnowBotDev'
 	BOT_CHAR = '❄'
 
 	attr_accessor :TwitterAPI, 
-	              :resources,
-	              :thirdparty_api
+		      :resources,
+		      :thirdparty_api
 
 	def initialize(setup=nil) #'Setup Welcome Message' script using this too, but does not require many helper objects.
 
 		#puts "Creating GenerateDirectMessageContent object."
-		
+
 		if setup.nil?
 			@twitter_api = TwitterAPI.new
 			@resources = GetResources.new
@@ -28,7 +28,7 @@ class GenerateDirectMessageContent
 		end
 
 	end
-	
+
 	#================================================================
 	def generate_random_photo(recipient_id)
 
@@ -367,7 +367,7 @@ class GenerateDirectMessageContent
   def generate_system_info(recipient_id)
 
 	  message_text = "#{BOT_CHAR} This is a snow bot (version #{VERSION})... It's kinda simple, kinda not... \n " +
-		               "See here for project code and tutorial: https://github.com/TwitterDev/SnowBotDev. \n" +
+		               "See here for project code and tutorial: https://github.com/twitterdev/SnowBotDev/wiki. \n" +
 	                 "\n" + 
 	                 "Credits: \n" + 
 	                 "Snow reports are provided with an API from @SnoCountryCom.\n" +
