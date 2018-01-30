@@ -28,7 +28,7 @@ class SnowBotDevApp < Sinatra::Base
      <p>I consume Twitter Account Activity webhook events and manage DM bot dialogs...</p>
      <p>I serve a local hive of snow photos, weather conditions, snow reports, snow research links... </p>
      <p></p>
-     <p><a href="https://github.com/jimmoffitt/snowbotdev/">Project code</a></p>
+     <p><a href="https://github.com/TwitterDev/SnowBotDev/">Project code</a></p>
      <p>#ThinkSnow...</p>'
 	end
 
