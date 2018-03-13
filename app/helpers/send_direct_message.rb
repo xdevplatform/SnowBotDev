@@ -36,13 +36,8 @@ class SendDirectMessage
 		dm_content = @content.generate_random_photo(recipient_id)
 		send_direct_message(dm_content)
 	end
-	
-	#Weather data is map based.
-	def send_map(recipient_id)
-		dm_content = @content.generate_location_map(recipient_id)
-		send_direct_message(dm_content)
-	end
 
+	#Saved for when we have a workaround for getting user location coordinates.
 	def send_weather_info(recipient_id, coordinates)
 		dm_content = @content.generate_weather_info(recipient_id, coordinates)
 		send_direct_message(dm_content)

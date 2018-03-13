@@ -25,8 +25,10 @@ class EventManager
 		#Default options
 		if response_metadata == 'help'
 			@DMSender.send_system_help(user_id)
+		
 		elsif response_metadata == 'learn_more'
 			@DMSender.send_system_info(user_id)
+		
 		elsif response_metadata == 'return_home'
 			puts "Returning to home in event manager...."
 			@DMSender.send_welcome_message(user_id)
@@ -34,19 +36,6 @@ class EventManager
 		#Custom options	
 		elsif response_metadata == 'see_photo'
 			@DMSender.send_photo(user_id)
-	
-			elsif response_metadata.include? 'weather_info'
-			@DMSender.send_map(user_id)
-
-		elsif response_metadata == 'map_selection'
-			#Do we have a Twitter Place or exact coordinates....?
-			location_type = dm_event['message_create']['message_data']['attachment']['location']['type']
-			if location_type == 'shared_coordinate'
-				coordinates = dm_event['message_create']['message_data']['attachment']['location']['shared_coordinate']['coordinates']['coordinates']
-			else
-				coordinates = dm_event['message_create']['message_data']['attachment']['location']['shared_place']['place']['centroid']
-			end
-			@DMSender.send_weather_info(user_id, coordinates)
 
 		elsif response_metadata == 'learn_snow'
 			@DMSender.send_links_list(user_id)

@@ -196,31 +196,7 @@ class GenerateDirectMessageContent
 		
   end
 
-	
-	#REMOVE
-	#Generates Quick Reply for presenting user a Map via Direct Message.
-	#https://developer.twitter.com/en/docs/direct-messages/quick-replies/api-reference/location
-	def generate_location_map(recipient_id)
-
-		event = {}
-		event['event'] = message_create_header(recipient_id)
-
-		message_data = {}
-		message_data['text'] = 'Select weather area of interest:'
-
-		message_data['quick_reply'] = {}
-		message_data['quick_reply']['type'] = 'location'
-		message_data['quick_reply']['location'] = {}
-		message_data['quick_reply']['location']['metadata'] = 'map_selection'
-
-		event['event']['message_create']['message_data'] = message_data
-
-		event.to_json
-	end
-
-	
-	
-	#Saved for when we have a workaround for getting user lcoation coordinates.
+	#Saved for when we have a workaround for getting user location coordinates.
   def generate_weather_info(recipient_id, coordinates)
 
 	  weather_info = @thirdparty_api.get_current_weather(coordinates[1], coordinates[0])
