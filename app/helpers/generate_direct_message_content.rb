@@ -196,6 +196,8 @@ class GenerateDirectMessageContent
 		
   end
 
+	
+	#REMOVE
 	#Generates Quick Reply for presenting user a Map via Direct Message.
 	#https://developer.twitter.com/en/docs/direct-messages/quick-replies/api-reference/location
 	def generate_location_map(recipient_id)
@@ -216,6 +218,9 @@ class GenerateDirectMessageContent
 		event.to_json
 	end
 
+	
+	
+	#Saved for when we have a workaround for getting user lcoation coordinates.
   def generate_weather_info(recipient_id, coordinates)
 
 	  weather_info = @thirdparty_api.get_current_weather(coordinates[1], coordinates[0])
@@ -398,7 +403,6 @@ class GenerateDirectMessageContent
                 "#{BOT_CHAR} ⇨ Main menu \n  send: 'bot', 'home', 'main' \n " +
                 "#{BOT_CHAR} ⇨ See photo \n  send: 'photo', 'pic' \n  " +
 		            "#{BOT_CHAR} ⇨ Get resort snow report \n  send: 'report', 'resort' \n    via http://feeds.snocountry.net/conditions \n "  +
-                "#{BOT_CHAR} ⇨ Get weather conditions \n  send: 'weather', 'wx' \n   via http://api.wunderground.com \n "  +
                 "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
 	              "#{BOT_CHAR} ⇨ Get playlist \n  send: 'playlist', 'music' \n " +
 	              "#{BOT_CHAR} ⇨ Learn about the #{BOT_NAME} \n   send: 'about' \n " +
@@ -442,13 +446,7 @@ class GenerateDirectMessageContent
 		option['description'] = 'SnoCountry reports for select areas.'
 		option['metadata'] = 'snow_report'
 		options << option
-		
-		option = {}
-		option['label'] = "#{BOT_CHAR} Weather data from anywhere"
-		option['description'] = 'Select an exact location or Twitter Place...'
-		option['metadata'] = 'weather_info'
-		options << option
-		
+
 		option = {}
 		option['label'] = "#{BOT_CHAR} Learn something new about snow"
 		option['description'] = 'Other than it is fun to slide on...'
