@@ -28,7 +28,7 @@ class TaskManager
 		#@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
 
 		@twitter_api = ApiOauthRequest.new()
-		@twitter_api.uri_path = '/1.1/account_activity'
+		@twitter_api.uri_path = '/1.1/account_activity/all/env-beta'
 		@twitter_api.get_api_access
 		
 		@webhook_configs = []
@@ -89,7 +89,7 @@ class TaskManager
 	def get_webhook_subscription(id)
 		puts "Retrieving webhook subscriptions..."
 
-		uri_path = "#{@twitter_api.uri_path}/webhooks/#{id}/subscriptions.json"
+		uri_path = "#{@twitter_api.uri_path}/subscriptions.json"
 
 		response = @twitter_api.make_get_request(uri_path)
 
@@ -107,7 +107,7 @@ class TaskManager
 	def set_webhook_subscription(id)
 		puts "Setting subscription for 'host' account for webhook id: #{id}"
 
-		uri_path = "#{@twitter_api.uri_path}/webhooks/#{id}/subscriptions.json"
+		uri_path = "#{@twitter_api.uri_path}/subscriptions.json"
 		response = @twitter_api.make_post_request(uri_path, nil)
 		
 		if response == '204'
@@ -121,7 +121,7 @@ class TaskManager
 	
 	def delete_webhook_subscription(id)
 		puts "Attempting to delete subscription for webhook: #{id}."
-		uri_path =  "#{@twitter_api.uri_path}/webhooks/#{id}/subscriptions.json"
+		uri_path = "#{@twitter_api.uri_path}/subscriptions.json"
 		response = @twitter_api.make_delete_request(uri_path)
 
 		if response == '204'
