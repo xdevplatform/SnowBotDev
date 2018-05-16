@@ -1,6 +1,8 @@
 require 'twitter' #Opens doors to rest of public Twitter APIs.
 #https://github.com/sferik/twitter/blob/master/examples/Configuration.md
 
+#tl;dr This class provides a method for uploading a photo. @SnowBotDev chatbot has a feature to view a photo attached to a Direct Message. The 'twitter' gem does so much more, but that is all this bot needed. 
+
 class TwitterAPI
 
 	attr_accessor :keys,
