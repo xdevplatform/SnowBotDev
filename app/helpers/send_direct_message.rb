@@ -4,6 +4,11 @@ require 'pathname'
 require_relative 'api_oauth_request'
 require_relative 'generate_direct_message_content'
 
+
+#This class implements the [Direct Message API](https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/overview) method for sending Direct Messages:
+#https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
+
+
 class SendDirectMessage
 
 	attr_accessor :dm,            #Object that manages DM API requests.
