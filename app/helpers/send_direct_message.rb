@@ -5,8 +5,8 @@ require_relative 'api_oauth_request'
 require_relative 'generate_direct_message_content'
 
 
-#This class implements the [Direct Message API](https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/overview) method for sending Direct Messages:
-#https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
+#This class implements the Direct Message API method for sending Direct Messages:
+# https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
 
 
 class SendDirectMessage
@@ -117,7 +117,7 @@ class SendDirectMessage
 
 end
 
-#And here you can unit test sending different types of DMs... send map? attach media?
+#And here you can unit test sending different types of DMs... attach media? Verify receipt in AA API?
 
 if __FILE__ == $0 #This script code is executed when running this file.
 
