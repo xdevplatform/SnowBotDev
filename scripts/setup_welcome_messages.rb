@@ -11,12 +11,14 @@ require_relative '../app/helpers/generate_direct_message_content'
 class WelcomeMessageManager
 
 	attr_accessor :twitter_api,
-	              :message_generator
+	              :message_generator,
+								:uri_path
+
 
 	def initialize()
 
 		@twitter_api = ApiOauthRequest.new
-		@twitter_api.uri_path = '/1.1/direct_messages'
+		@uri_path = '/1.1/direct_messages'
 		@twitter_api.get_api_access
 
 		@message_generator = GenerateDirectMessageContent.new(true)
@@ -26,7 +28,7 @@ class WelcomeMessageManager
 	def create_welcome_message(message)
 		puts "Creating Welcome Message..."
 
-		uri_path = "#{@twitter_api.uri_path}/welcome_messages/new.json"
+		uri_path = "#{@uri_path}/welcome_messages/new.json"
 
 		response = @twitter_api.make_post_request(uri_path, message)
 		results = JSON.parse(response)
@@ -41,6 +43,7 @@ class WelcomeMessageManager
 			
 		else
 			results = JSON.parse(response)
+			puts results
 		end
 	end
 
@@ -63,7 +66,7 @@ class WelcomeMessageManager
 		set_rule['welcome_message_rule'] = {}
 		set_rule['welcome_message_rule']['welcome_message_id'] = message_id
 
-		uri_path = "#{@twitter_api.uri_path}/welcome_messages/rules/new.json"
+		uri_path = "#{@uri_path}/welcome_messages/rules/new.json"
 
 		response = @twitter_api.make_post_request(uri_path, set_rule.to_json)
 		results = JSON.parse(response)
@@ -77,7 +80,7 @@ class WelcomeMessageManager
 
 		puts "Getting welcome message list."
 
-		uri_path = "#{@twitter_api.uri_path}/welcome_messages/list.json"
+		uri_path = "#{@uri_path}/welcome_messages/list.json"
 		response = @twitter_api.make_get_request(uri_path)
 
 		if response == '{}'
@@ -95,7 +98,7 @@ class WelcomeMessageManager
 
 		puts "Deleting Welcome Message with id: #{id}."
 
-		uri_path = "#{@twitter_api.uri_path}/welcome_messages/destroy.json?id=#{id}"
+		uri_path = "#{@uri_path}/welcome_messages/destroy.json?id=#{id}"
 		response = @twitter_api.make_delete_request(uri_path)
 
 		if response == '204'
@@ -119,7 +122,7 @@ class WelcomeMessageManager
 
 		puts "Getting welcome message rules list."
 
-		uri_path = "#{@twitter_api.uri_path}/welcome_messages/rules/list.json"
+		uri_path = "#{@uri_path}/welcome_messages/rules/list.json"
 		response = @twitter_api.make_get_request(uri_path)
 
 		if response == '{}'
@@ -138,7 +141,7 @@ class WelcomeMessageManager
 		set_rule['welcome_message_rule'] = {}
 		set_rule['welcome_message_rule']['welcome_message_id'] = id
 
-		uri_path = "#{@twitter_api.uri_path}/welcome_messages/rules/new.json"
+		uri_path = "#{@uri_path}/welcome_messages/rules/new.json"
 
 		response = @twitter_api.make_post_request(uri_path, set_rule.to_json)
 		results = JSON.parse(response)
@@ -153,7 +156,7 @@ class WelcomeMessageManager
 
 		puts "Deleting rule with id: #{id}."
 
-		uri_path = "#{@twitter_api.uri_path}/welcome_messages/rules/destroy.json?id=#{id}"
+		uri_path = "#{@uri_path}/welcome_messages/rules/destroy.json?id=#{id}"
 		response = @twitter_api.make_delete_request(uri_path)
 
 		results = JSON.parse(response)
@@ -186,10 +189,6 @@ if __FILE__ == $0 #This script code is executed when running this file.
 		o.parse!
 	end
 
-	#welcome message id: 868179877014290436
-	#maintenance message id: 868169781060317187
-	#rule id: 
-
 	message_manager = WelcomeMessageManager.new
 	
 	if $welcome == 'create' #Ad hoc, not too often? 
@@ -198,12 +197,8 @@ if __FILE__ == $0 #This script code is executed when running this file.
 
 	elsif $welcome == 'set'
 
-		#TODO: Get messages and retrieve ID?
-		#response = @twitter_api.make_post_request(uri_path, welcome_message)
-		#results = JSON.parse(response)
-		#message_id = results['welcome_message']['id']
-
 		message_manager.set_default_welcome_message($id)
+
 	elsif $welcome == 'get'
 		welcome_messages = message_manager.get_welcome_messages
 
