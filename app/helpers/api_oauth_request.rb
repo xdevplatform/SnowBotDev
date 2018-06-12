@@ -3,6 +3,7 @@
 
 require 'json'
 require 'oauth'
+require 'yaml'
 
 class ApiOauthRequest
 
@@ -10,26 +11,30 @@ class ApiOauthRequest
 
 	attr_accessor :keys,
 	              :twitter_api,
-	              :base_url, #Default: 'https://api.twitter.com/'
-	              :uri_path #No default.
+	              :base_url #Default: 'https://api.twitter.com/'
 
-	def initialize()
 
-		@base_url = 'https://api.twitter.com/'
-		@uri_path = '' #'/1.1/direct_messages' or '/1.1/account_activity'
+	def initialize(config=nil)
+
+		@base_url = 'https://api.twitter.com'
 
 		#'Config Variables' via the ENV{} hash.
 		@keys = {}
 
-		@keys['consumer_key'] = ENV['CONSUMER_KEY']
-		@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
-		@keys['access_token'] = ENV['ACCESS_TOKEN']
-		@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
+		if config.nil?
+      #Load keys from ENV.
+			@keys['consumer_key'] = ENV['CONSUMER_KEY']
+			@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
+			@keys['access_token'] = ENV['ACCESS_TOKEN']
+			@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
+		else
+			#Load from config file.
+			@keys = YAML::load_file(config)
+		end
 
-		#Adding in Premium/Standard details. URLs reference the dashboard environment name.
-		#@keys['environment_name'] = ENV['ENVIRONMENT_NAME']
+  end
 
-	end
+  #API client object is created with the @base_url context, then individual requests are made with specific URI paths passed in.
 
 	def get_api_access
 		consumer = OAuth::Consumer.new(@keys['consumer_key'], @keys['consumer_secret'], {:site => @base_url})
@@ -39,9 +44,9 @@ class ApiOauthRequest
 
 		@twitter_api = OAuth::AccessToken.from_hash(consumer, token)
 
-	end
+  end
 
-	def make_post_request(uri_path, request)
+  def make_post_request(uri_path, request)
 		get_api_access if @twitter_api.nil? #token timeout?
 
 		response = @twitter_api.post(uri_path, request, HEADERS)
