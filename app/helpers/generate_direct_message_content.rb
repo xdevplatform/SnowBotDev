@@ -9,7 +9,7 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-	VERSION = 0.88
+	VERSION = 0.888
 	BOT_NAME = 'SnowBotDev'
 	BOT_CHAR = '❄'
 
