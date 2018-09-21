@@ -1,4 +1,4 @@
-require 'twitter' #Opens doors to rest of public Twitter APIs.
+require 'twitter' #Opens doors to the rest of the standard Twitter APIs.
 #https://github.com/sferik/twitter/blob/master/examples/Configuration.md
 
 class TwitterAPI
