@@ -1,4 +1,24 @@
+#Datastore of resort requests.
+#If using snocountry.net API, it only needs resort ID.
+#Retreiving resort IDs:
 #http://feeds.snocountry.net/getResortList.php?apiKey=KEY_ID&states=co&resortType=alpine&output=json
+#Geo coordinates are not used yet, but good to compile this metadata for future features, e.g. weather.
+#Order matters here ;(
+#----------------------------------------------------
+#Top results
+Menu main
+Breckenridge, -106.0384, 39.4817, 303007
+Eldora, -105.5639, 39.9486, 303011
+Vail, -106.3742, 39.640,303023
+Squaw Valley CA,,,916011
+Colorado areas
+California areas
+Midwest areas
+East Coast areas
+Internationq areas
+#----------------------------------------------------
+#Colorado areas
+Menu Colorado
 Arapahoe Basin, -105.8717, 39.6423, 303001
 Aspen, -106.8175, 39.1911, 303003
 Beaver Creek,,,303005
@@ -10,12 +30,34 @@ Keystone, -105.9347, 39.5792,303014
 Loveland,,,303015
 Snowmass,,,303020
 Steamboat, -106.8317, 40.4850,303021
-Squaw Valley CA,,,916011
 Telluride, -107.8123, 37.9375,303022
-Vail, -106.3742, 39.640,303023
 Winter Park, -105.7631, 39.8917, 303024
 Wolf Creek, -106.8021, 7.4827, 303025
+#----------------------------------------------------
+#California areas
+Menu California
+Alpine Meadows CA,,,916001
+Heavenly CA,,, 916004
+Kirkwood CA,,,209004
+Mammoth Mountain CA,,,619002
+Mt. Rose Ski Tahoe,,,702003
+Squaw Valley CA,,,916011
+Sugar Bowl CA,,,916012
+#----------------------------------------------------
+#East Coast areas
+Menu Eastcoast 
+#----------------------------------------------------
+#Midwest areas
+Menu midwest 
+Afton Alps MN, -92.7907, 44.8545,612002
+Buckhill MN, -93.2873, 44.7231, 612004
+Hyland Hills MN,,,612006
+Lutsen Mountains MN,,,218003
+Spirit Mountain,,,612004
+Welsh Village MN,,,612008
+Wild Mountain MN,,,612009
+#----------------------------------------------------
+#International areas
+Menu international
 Coronet Peak NZ,,,4424660
 The Remarkables NZ,,,615013
-Afton Alps MN, -92.7907, 44.8545,612002
-#Buckhill MN, -93.2873, 44.7231, 612004
