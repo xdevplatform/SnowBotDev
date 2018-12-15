@@ -5,59 +5,53 @@
 #Geo coordinates are not used yet, but good to compile this metadata for future features, e.g. weather.
 #Order matters here ;(
 #----------------------------------------------------
-#Top results
-Menu main
-Breckenridge, -106.0384, 39.4817, 303007
-Eldora, -105.5639, 39.9486, 303011
-Vail, -106.3742, 39.640,303023
-Squaw Valley CA,,,916011
-Colorado areas
-California areas
-Midwest areas
-East Coast areas
-Internationq areas
+#Top results - Menu main
+Main, Breckenridge, -106.0384, 39.4817, 303007
+Main, Eldora, -105.5639, 39.9486, 303011
+Main, Vail, -106.3742, 39.640,303023
+Main, Squaw Valley CA,,,916011
+Main, Colorado areas
+Main, California areas
+Main, Midwest areas
+Main, East Coast areas
+Main, Internation areas
 #----------------------------------------------------
-#Colorado areas
-Menu Colorado
-Arapahoe Basin, -105.8717, 39.6423, 303001
-Aspen, -106.8175, 39.1911, 303003
-Beaver Creek,,,303005
-Breckenridge, -106.0384, 39.4817, 303007
-Copper Mountain, -106.1516, 39.5014, 303009
-Crested Butte, -106.9878, 38.8697,303010
-Eldora, -105.5639, 39.9486, 303011
-Keystone, -105.9347, 39.5792,303014
-Loveland,,,303015
-Snowmass,,,303020
-Steamboat, -106.8317, 40.4850,303021
-Telluride, -107.8123, 37.9375,303022
-Winter Park, -105.7631, 39.8917, 303024
-Wolf Creek, -106.8021, 7.4827, 303025
+#Colorado areas - Menu Colorado
+Colorado, Arapahoe Basin, -105.8717, 39.6423, 303001
+Colorado, Aspen, -106.8175, 39.1911, 303003
+Colorado, Beaver Creek,,,303005
+Colorado, Breckenridge, -106.0384, 39.4817, 303007
+Colorado, Copper Mountain, -106.1516, 39.5014, 303009
+Colorado, Crested Butte, -106.9878, 38.8697,303010
+Colorado, Eldora, -105.5639, 39.9486, 303011
+Colorado, Keystone, -105.9347, 39.5792,303014
+Colorado, Loveland,,,303015
+Colorado, Snowmass,,,303020
+Colorado, Steamboat, -106.8317, 40.4850,303021
+Colorado, Telluride, -107.8123, 37.9375,303022
+Colorado, Winter Park, -105.7631, 39.8917, 303024
+Colorado, Wolf Creek, -106.8021, 7.4827, 303025
 #----------------------------------------------------
-#California areas
-Menu California
-Alpine Meadows CA,,,916001
-Heavenly CA,,, 916004
-Kirkwood CA,,,209004
-Mammoth Mountain CA,,,619002
-Mt. Rose Ski Tahoe,,,702003
-Squaw Valley CA,,,916011
-Sugar Bowl CA,,,916012
+#California areas - Menu California
+California, Alpine Meadows,,,916001
+California, Heavenly,,, 916004
+California, Kirkwood,,,209004
+California, Mammoth Mountain,,,619002
+California, Mt. Rose Ski Tahoe,,,702003
+California, Squaw Valley,,,916011
+California, Sugar Bowl,,,916012
 #----------------------------------------------------
-#East Coast areas
-Menu Eastcoast 
+#East Coast areas - Menu Eastcoast 
 #----------------------------------------------------
-#Midwest areas
-Menu midwest 
-Afton Alps MN, -92.7907, 44.8545,612002
-Buckhill MN, -93.2873, 44.7231, 612004
-Hyland Hills MN,,,612006
-Lutsen Mountains MN,,,218003
-Spirit Mountain,,,612004
-Welsh Village MN,,,612008
-Wild Mountain MN,,,612009
+#Midwest areas - Menu midwest 
+Midwest, Afton Alps MN, -92.7907, 44.8545,612002
+Midwest, Buckhill MN, -93.2873, 44.7231, 612004
+Midwest, Hyland Hills MN,,,612006
+Midwest, Lutsen Mountains MN,,,218003
+Midwest, Spirit Mountain,,,612004
+Midwest, Welsh Village MN,,,612008
+Midwest, Wild Mountain MN,,,612009
 #----------------------------------------------------
-#International areas
-Menu international
-Coronet Peak NZ,,,4424660
-The Remarkables NZ,,,615013
+#International areas - Menu international
+International, Coronet Peak NZ,,,4424660
+International, The Remarkables NZ,,,615013
