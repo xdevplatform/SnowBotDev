@@ -2,21 +2,25 @@
 #If using snocountry.net API, it only needs resort ID.
 #Retreiving resort IDs:
 #http://feeds.snocountry.net/getResortList.php?apiKey=KEY_ID&states=co&resortType=alpine&output=json
+#http://feeds.snocountry.net/getResortList.php?apiKey=SnoCountry.example&states=fra&resortType=alpine&output=json&intl=complete
 #Geo coordinates are not used yet, but good to compile this metadata for future features, e.g. weather.
 #Order matters here ;(
+#For main menu, entries with more than one token (comma-delimited) token means its a resort entry.
 #----------------------------------------------------
-#Top results - Menu main
-Main, Breckenridge, -106.0384, 39.4817, 303007
-Main, Eldora, -105.5639, 39.9486, 303011
-Main, Vail, -106.3742, 39.640,303023
-Main, Squaw Valley CA,,,916011
-Main, Colorado areas
-Main, California areas
-Main, Midwest areas
-Main, East Coast areas
-Main, Internation areas
+#Top results - Menu top ('top' of the resort menu, as opposed to the 'main' menu).
+Top, Colorado
+Top, Utah
+Top, California
+Top, Northeast
+Top, Canadian Rockies
+Top, Midwest
+Top, Europe
+Top, Down Under
+Top, Breckenridge CO, -106.0384, 39.4817, 303007
+Top, Eldora CO, -105.5639, 39.9486, 303011
+Top, Vail CO, -106.3742, 39.640,303023
+Top, Squaw Valley CA,,,916011
 #----------------------------------------------------
-#Colorado areas - Menu Colorado
 Colorado, Arapahoe Basin, -105.8717, 39.6423, 303001
 Colorado, Aspen, -106.8175, 39.1911, 303003
 Colorado, Beaver Creek,,,303005
@@ -32,26 +36,62 @@ Colorado, Telluride, -107.8123, 37.9375,303022
 Colorado, Winter Park, -105.7631, 39.8917, 303024
 Colorado, Wolf Creek, -106.8021, 7.4827, 303025
 #----------------------------------------------------
-#California areas - Menu California
+Utah, Alta,,,801001
+Utah, Beaver Mountain,,,801002
+Utah, Brighton,,,801003
+Utah, Deer Valley,,,801004
+Utah, Park City,,,801006
+Utah, Snowbird,,,801010
+Utah, Solitude Mountain,,,801011
+Utah, Sundance,,,801012
+#----------------------------------------------------
 California, Alpine Meadows,,,916001
 California, Heavenly,,, 916004
 California, Kirkwood,,,209004
 California, Mammoth Mountain,,,619002
 California, Mt. Rose Ski Tahoe,,,702003
+California, Northstar,,,916007
 California, Squaw Valley,,,916011
 California, Sugar Bowl,,,916012
 #----------------------------------------------------
-#East Coast areas - Menu Eastcoast 
+Northeast, Bretton Woods NH,,,603005
+Northeast, Cranmore Mountain NH,,,603007
+Northeast, Loon Mountain Resort NH,,,603014
+Northeast, Jay Peak VT,,,802006
+Northeast, Killington Resort VT,,,802007
+Northeast, Mad River Glen VT,,,802008
+Northeast, Mount Sunapee,,,603017
+Northeast, Stowe Mountain VT,,,802018
 #----------------------------------------------------
-#Midwest areas - Menu midwest 
 Midwest, Afton Alps MN, -92.7907, 44.8545,612002
+Midwest, Big Powderhorn Mountain WI,,,906001
+Midwest, Boyne Mountain MI,,,616003
 Midwest, Buckhill MN, -93.2873, 44.7231, 612004
 Midwest, Hyland Hills MN,,,612006
-Midwest, Lutsen Mountains MN,,,218003
-Midwest, Spirit Mountain,,,612004
+Midwest, Lutsen Mountain MN,,,218003
+Midwest, Spirit Mountain MN,,,612004
+Midwest, Trollhaugen WI,,,715004
 Midwest, Welsh Village MN,,,612008
+Midwest, Whitecap Mountain WI,,,715005
 Midwest, Wild Mountain MN,,,612009
 #----------------------------------------------------
-#International areas - Menu international
-International, Coronet Peak NZ,,,4424660
-International, The Remarkables NZ,,,615013
+Europe, Alpe d'Huez FR,,,127
+Europe, Andermatt SW,,,13002
+Europe, Balderschwang GE, 8000067
+Europe, Chamonix Mont-Blanc FR,,,333003
+Europe, Davos SW,,,13006
+Europe, Garmisch-Partenkirchen GE,,,444002
+Europe, Grindelwald SW,,,13010
+Europe, SkiWelt Wilder Kaiser Aus,,,222043
+Europe, St Anton am Arlberg Aus,,,222021
+Europe, St Moritz SW,,,13023
+Europe, Val D'Isere FR,,,333019
+Europe, Verbier/Val de Bagnes SW,,,13034
+Europe, Zermatt SW,,,13026
+#----------------------------------------------------
+Down Under, Coronet Peak NZ,,,4424660
+Down Under, Mt Hutt NZ,,,811002
+Down Under, The Remarkables NZ,,,615013
+Down Under, Treble Cone NZ,,,4437443
+Down Under, Perisher Ski AUS,,,549488
+Down Under, Tredbo Alpine AUS,,,100001
