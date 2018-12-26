@@ -9,8 +9,8 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-	VERSION = 0.888
-	BOT_NAME = 'SnowBotDev'
+	VERSION = 2.008
+	BOT_NAME = '@SnowBotDev'
 	BOT_CHAR = '❄'
 
 	attr_accessor :TwitterAPI, 
@@ -19,17 +19,41 @@ class GenerateDirectMessageContent
 
 	def initialize(setup=nil) #'Setup Welcome Message' script using this too, but does not require many helper objects.
 
-		#puts "Creating GenerateDirectMessageContent object."
+
 
 		if setup.nil?
-			@twitter_api = TwitterAPI.new
+			@api_request = TwitterAPI.new
 			@resources = GetResources.new
 			@thirdparty_api = ThirdPartyRequest.new
 		end
 
+		puts "Created GenerateDirectMessageContent object."
+
 	end
 
 	#================================================================
+	def generate_tweet(recipient_id)
+
+		#Build DM content.
+		event = {}
+		event['event'] = message_create_header(recipient_id)
+
+		message_data = {}
+		message_data['text'] = 'Coming soon? Currently teaching the SnowBot to search for "snow" Tweets and display the most favorited one.'
+
+    options = []
+    options += build_home_option
+
+    message_data['quick_reply'] = {}
+    message_data['quick_reply']['type'] = 'options'
+    message_data['quick_reply']['options'] = options
+    event['event']['message_create']['message_data'] = message_data
+
+    event.to_json
+
+	end
+
+
 	def generate_random_photo(recipient_id)
 
 		#Build DM content.
@@ -47,7 +71,7 @@ class GenerateDirectMessageContent
 		photo_file = "#{@resources.photos_home}/#{photo[0]}"
 		
 		if File.file? photo_file
-			media_id = @twitter_api.get_media_id(photo_file)
+			media_id = @api_request.get_media_id(photo_file)
 
 			attachment = {}
 			attachment['type'] = "media"
@@ -181,7 +205,7 @@ class GenerateDirectMessageContent
 		event = {}
 	  event['event'] = message_create_header(recipient_id)
 
-	  message_data = {}
+	  message_data = "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
 	  message_data['text'] = message
 
 	  message_data['quick_reply'] = {}
@@ -221,15 +245,21 @@ class GenerateDirectMessageContent
 
   end
 
+
+	#TODO V2: pass in 'region', and serve up sub menu
   #Generates Quick Reply for presenting user a Location List via Direct Message.
 	#https://dev.twitter.com/rest/direct-messages/quick-replies/options
-	def generate_location_list(recipient_id)
+	# #V1: the 'locations of interest' file is read in and there is a 1-1, in order, rendering here.
+	#TODO V2: There is now a "main" location list, and some of those point to sublists.
+	def generate_location_list(recipient_id, region)
+
+		#puts "Generating list of resorts..."
 
 		event = {}
 		event['event'] = message_create_header(recipient_id)
 
 		message_data = {}
-		message_data['text'] = "#{BOT_CHAR} Select your area of interest:"
+		message_data['text'] = "#{BOT_CHAR} Select your region of interest:"
 
 		message_data['quick_reply'] = {}
 		message_data['quick_reply']['type'] = 'options'
@@ -237,35 +267,65 @@ class GenerateDirectMessageContent
 		options = []
 
 		@resources.locations_list.each do |item|
-			if item.count > 0
-				option = {}
-				option['label'] = "#{BOT_CHAR} " + item[0]
-				option['metadata'] = "location_choice: #{item[0].strip}"
-				#option['description'] = 'what is there to say here?'
-				options << option
+
+			puts "#{item[0].downcase} to be compared with #{region.downcase}. item has #{item.length}"
+
+			option = {}
+
+      if item[0].downcase == region.downcase
+
+        if item.length == 2 #We are serving up a sub menu
+          option = {}
+          option['label'] = "#{BOT_CHAR} " + item[1]
+          option['metadata'] = "region_choice: #{item[1].strip}"
+          #option['description'] = 'what is there to say here?'
+        else  #We are serving up a resort selection
+          option = {}
+          option['label'] = "#{BOT_CHAR} " + item[1]
+          option['metadata'] = "location_choice: #{item[1].strip}|#{region}"
+          #option['description'] = 'what is there to say here?'
+        end
+
+				puts "adding option: #{option}"
+        options << option
 			end
 		end
-		
+
+		#puts "building back button with region: #{region}"
+		if region != 'top'
+			options += build_back_option 'top'
+		end
 		options += build_home_option
 
 		message_data['quick_reply']['options'] = options
 
 		event['event']['message_create']['message_data'] = message_data
+
 		event.to_json
 
 	end
 
-  def generate_location_info(recipient_id, location_name)
+	#TODO V2: Main change is when and where to call this, e.g. not always from level 1 as with V1.
+	# TODO: Only come here if the metadata has 5 items, otherwise a sub menu has been requested.
+  # 'top' is passed in when coming from the top menu in order to handle the 'back' button properly....
+  def generate_location_info(recipient_id, location_name, region)
+
+		puts "Make a request for #{location_name} in region #{region}"
 
 		resort_id = 0
-	  @resources.locations_list.each do |location|
-		  if location[0] == location_name
-				resort_id = location[3]
+
+	  @resources.locations_list.each do |item|
+			#puts item
+
+			if item[1].strip == location_name.strip
+
+				#puts "Comparing #{item[1]} with #{location_name}"
+				resort_id = item[4].strip
 				break
 		  end  
 	  end
 
-		resort_info   = @thirdparty_api.get_resort_info(resort_id)
+		resort_info = @thirdparty_api.get_resort_info(resort_id)
 
 	  event = {}
 	  event['event'] = message_create_header(recipient_id)
@@ -276,8 +336,10 @@ class GenerateDirectMessageContent
 	  message_data['quick_reply'] = {}
 	  message_data['quick_reply']['type'] = 'options'
 
-		options = build_back_option 'locations'
-	  options = options + build_home_option  #('with_description')
+		puts "building back button with region: #{region}"
+    options = build_back_option region
+
+    options = options + build_home_option  #('with_description')
 
 	  message_data['quick_reply']['options'] = options
 	  event['event']['message_create']['message_data'] = message_data
@@ -289,7 +351,7 @@ class GenerateDirectMessageContent
 	
 	def generate_greeting
 
-		greeting = "#{BOT_CHAR} Welcome to #{BOT_NAME} (ver. #{VERSION}) #{BOT_CHAR}. Send 'home' for main menu and 'help' for a list of supported commands."
+		greeting = "#{BOT_CHAR} Welcome to #{BOT_NAME} (ver. #{VERSION}) #{BOT_CHAR}. Send 'main' for main menu and 'help' for a list of supported commands."
 		greeting
 
 	end
@@ -330,12 +392,14 @@ class GenerateDirectMessageContent
 	#Users are shown this when returning home... A way to 're-start' dialogs...
 	#https://dev.twitter.com/rest/reference/post/direct_messages/welcome_messages/new
 	def generate_welcome_message(recipient_id)
+
+		#puts "In generate welcome message"
 		
 		event = {}
 		event['event'] = message_create_header(recipient_id)
 
 		message_data = {}
-		message_data['text'] = "#{BOT_CHAR} Welcome back..." #generate_main_message
+		message_data['text'] = "#{BOT_CHAR} Hi again..." #generate_main_message
 
 		message_data['quick_reply'] = generate_welcome_options
 
@@ -347,12 +411,15 @@ class GenerateDirectMessageContent
  
   def generate_system_info(recipient_id)
 
-	  message_text = "#{BOT_CHAR} This is a snow bot (version #{VERSION})... It's kinda simple, kinda not... \n " +
-		               "See here for project code and tutorial: https://github.com/twitterdev/SnowBotDev/wiki. \n" +
+	  message_text = "#{BOT_CHAR} This is a snow bot (version #{VERSION})... \n " +
+		               "A demo based on the Twitter Account Activity and Direct Messasge APIs.    \n" +
+				            "\n" +
+				            "See here for project code and tutorial: https://github.com/twitterdev/SnowBotDev/wiki. \n" +
 	                 "\n" + 
 	                 "Credits: \n" + 
-	                 "Snow reports are provided with an API from @SnoCountryCom.\n" +
-	                 "Weather data are provided with an API from Weather Underground.\n"
+	                 "Snow reports are provided with an API from @SnoCountryCom.\n"
+
+		#+ "Weather data are provided with an API from Weather Underground.\n"
 	  
 
 	  #Build DM content.
@@ -376,10 +443,11 @@ class GenerateDirectMessageContent
   def generate_system_help(recipient_id)
 
 	  message_text = "Several commands are supported: \n \n" + 
-                "#{BOT_CHAR} ⇨ Main menu \n  send: 'bot', 'home', 'main' \n " +
+                "#{BOT_CHAR} ⇨ Main menu \n  send: 'main', 'home', 'bot' \n " +
                 "#{BOT_CHAR} ⇨ See photo \n  send: 'photo', 'pic' \n  " +
 		            "#{BOT_CHAR} ⇨ Get resort snow report \n  send: 'report', 'resort' \n    via http://feeds.snocountry.net/conditions \n "  +
-                "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
+				        "#{BOT_CHAR} ⇨ See snow Tweet of the day \n  send: 'Tweet', 'TOD' \n " +
+				        "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
 	              "#{BOT_CHAR} ⇨ Get playlist \n  send: 'playlist', 'music' \n " +
 	              "#{BOT_CHAR} ⇨ Learn about the #{BOT_NAME} \n   send: 'about' \n " +
 	              "#{BOT_CHAR} ⇨ Review these commands \n  send: 'help' \n "
@@ -412,15 +480,21 @@ class GenerateDirectMessageContent
 		options = []
 
 		option = {}
-		option['label'] = "#{BOT_CHAR} See snow picture 📷"
-		option['description'] = 'Check out a random snow related photo...'
-		option['metadata'] = 'see_photo'
-		options << option
-
-		option = {}
 		option['label'] = "#{BOT_CHAR} Request snow report"
 		option['description'] = 'SnoCountry reports for select areas.'
 		option['metadata'] = 'snow_report'
+		options << option
+
+    option = {}
+    option['label'] = "#{BOT_CHAR} See snow picture 📷"
+    option['description'] = 'Check out a random snow related photo...'
+    option['metadata'] = 'see_photo'
+    options << option
+
+		option = {}
+		option['label'] = "#{BOT_CHAR} See (deep) snow Tweet of the day"
+		option['description'] = 'Most engaged Tweet from last 24 hours.'
+		option['metadata'] = 'snow_tweet'
 		options << option
 
 		option = {}
@@ -481,6 +555,10 @@ class GenerateDirectMessageContent
   
   #Types: list choices, going back to list. links, resorts
 	def build_back_option(type=nil, description=nil)
+
+		#type: locations_top, locations_sub
+		#
+		puts "Building 'back' button with type: #{type} with #{description}"
 
 		options = []
 
