@@ -1,5 +1,6 @@
 #With many Twitter (Public) APIs, you can just use something like the 'twitter' gem.
 #This example instead builds requests making the 'oauth' gem, and is not Twitter specific.
+#(Well, beyond base_url and some other naming details.)
 
 require 'json'
 require 'oauth'
