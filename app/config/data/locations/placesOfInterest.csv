@@ -18,7 +18,6 @@ Top, Canadian Rockies
 Top, Midwest
 #Top, Europe
 Top, Australia and New Zealand
-#Was pondering mixing in the top 3 requested resorts at the top menu.
 #Top, Eldora CO, -105.5639, 39.9486, 303011
 #Top, Vail CO, -106.3742, 39.640,303023
 #Top, Squaw Valley CA,,,916011
@@ -79,8 +78,10 @@ New England, Loon Mountain Resort NH,,,603014
 New England, Jay Peak VT,,,802006
 New England, Killington Resort VT,,,802007
 New England, Mad River Glen VT,,,802008
-New England, Mount Sunapee,,,603017
+New England, Mount Sunapee NH,,,603017
 New England, Stowe Mountain VT,,,802018
+New England, Stratton VT,,,80219
+New England, Sugarbush VT,,,802023
 #----------------------------------------------------
 Midwest, Afton Alps MN, -92.7907, 44.8545,612002
 Midwest, Big Powderhorn Mountain WI,,,906001
