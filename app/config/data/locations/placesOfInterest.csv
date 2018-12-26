@@ -5,21 +5,23 @@
 #http://feeds.snocountry.net/getResortList.php?apiKey=SnoCountry.example&states=fra&resortType=alpine&output=json&intl=complete
 #Geo coordinates are not used yet, but good to compile this metadata for future features, e.g. weather.
 #Order matters here ;(
-#For main menu, entries with more than one token (comma-delimited) token means its a resort entry.
+#For main menu, entries with more than two tokens (comma-delimited) means its a resort entry.
+#A blank line will end parsing... 
 #----------------------------------------------------
 #Top results - Menu top ('top' of the resort menu, as opposed to the 'main' menu).
 Top, Colorado
-Top, Utah
 Top, California
-Top, Northeast
+Top, Utah
+Top, ID/NM/OR/WA/WY
+Top, New England
 Top, Canadian Rockies
 Top, Midwest
-Top, Europe
-Top, Down Under
-Top, Breckenridge CO, -106.0384, 39.4817, 303007
-Top, Eldora CO, -105.5639, 39.9486, 303011
-Top, Vail CO, -106.3742, 39.640,303023
-Top, Squaw Valley CA,,,916011
+#Top, Europe
+Top, Australia and New Zealand
+#Was pondering mixing in the top 3 requested resorts at the top menu.
+#Top, Eldora CO, -105.5639, 39.9486, 303011
+#Top, Vail CO, -106.3742, 39.640,303023
+#Top, Squaw Valley CA,,,916011
 #----------------------------------------------------
 Colorado, Arapahoe Basin, -105.8717, 39.6423, 303001
 Colorado, Aspen, -106.8175, 39.1911, 303003
@@ -36,15 +38,6 @@ Colorado, Telluride, -107.8123, 37.9375,303022
 Colorado, Winter Park, -105.7631, 39.8917, 303024
 Colorado, Wolf Creek, -106.8021, 7.4827, 303025
 #----------------------------------------------------
-Utah, Alta,,,801001
-Utah, Beaver Mountain,,,801002
-Utah, Brighton,,,801003
-Utah, Deer Valley,,,801004
-Utah, Park City,,,801006
-Utah, Snowbird,,,801010
-Utah, Solitude Mountain,,,801011
-Utah, Sundance,,,801012
-#----------------------------------------------------
 California, Alpine Meadows,,,916001
 California, Heavenly,,, 916004
 California, Kirkwood,,,209004
@@ -54,14 +47,40 @@ California, Northstar,,,916007
 California, Squaw Valley,,,916011
 California, Sugar Bowl,,,916012
 #----------------------------------------------------
-Northeast, Bretton Woods NH,,,603005
-Northeast, Cranmore Mountain NH,,,603007
-Northeast, Loon Mountain Resort NH,,,603014
-Northeast, Jay Peak VT,,,802006
-Northeast, Killington Resort VT,,,802007
-Northeast, Mad River Glen VT,,,802008
-Northeast, Mount Sunapee,,,603017
-Northeast, Stowe Mountain VT,,,802018
+Utah, Alta,,,801001
+Utah, Beaver Mountain,,,801002
+Utah, Brighton,,,801003
+Utah, Deer Valley,,,801004
+Utah, Park City,,,801006
+Utah, Snowbird,,,801010
+Utah, Solitude Mountain,,,801011
+Utah, Sundance,,,801012
+#----------------------------------------------------
+ID/NM/OR/WA/WY, Grand Targhee WY,,,307002
+ID/NM/OR/WA/WY, Jackson Hole WY,,,307008
+ID/NM/OR/WA/WY, Mt Bachelor OR,,,503004
+ID/NM/OR/WA/WY, Mt Baker WA,,,206003
+ID/NM/OR/WA/WY, Mt Hood Meadows OR,,,503006
+ID/NM/OR/WA/WY, Mt Hood Skibowl OR,,,503007
+ID/NM/OR/WA/WY, Sun Valley ID,,,208012
+#----------------------------------------------------
+#http://feeds.snocountry.net/getResortList.php?regions=canada&apiKey=SnoCountry.example&intl=complete
+Canadian Rockies, Banff Sunshine Village,,,403022
+Canadian Rockies, Fernie Alpine,,,604010
+Canadian Rockies, Kicking Horse,,,250002
+Canadian Rockies, Lake Louise Ski Resort,,,403008
+Canadian Rockies, Mount Norquary,,,403001
+Canadian Rockies, Revelstoke Mountain Resort,,,604021
+Canadian Rockies, Whistler Blackcomb,,,604038
+#----------------------------------------------------
+New England, Bretton Woods NH,,,603005
+New England, Cranmore Mountain NH,,,603007
+New England, Loon Mountain Resort NH,,,603014
+New England, Jay Peak VT,,,802006
+New England, Killington Resort VT,,,802007
+New England, Mad River Glen VT,,,802008
+New England, Mount Sunapee,,,603017
+New England, Stowe Mountain VT,,,802018
 #----------------------------------------------------
 Midwest, Afton Alps MN, -92.7907, 44.8545,612002
 Midwest, Big Powderhorn Mountain WI,,,906001
@@ -89,9 +108,9 @@ Europe, Val D'Isere FR,,,333019
 Europe, Verbier/Val de Bagnes SW,,,13034
 Europe, Zermatt SW,,,13026
 #----------------------------------------------------
-Down Under, Coronet Peak NZ,,,4424660
-Down Under, Mt Hutt NZ,,,811002
-Down Under, The Remarkables NZ,,,615013
-Down Under, Treble Cone NZ,,,4437443
-Down Under, Perisher Ski AUS,,,549488
-Down Under, Tredbo Alpine AUS,,,100001
+Australia and New Zealand, Coronet Peak NZ,,,4424660
+Australia and New Zealand, Mt Hutt NZ,,,811002
+Australia and New Zealand, The Remarkables NZ,,,615013
+Australia and New Zealand, Treble Cone NZ,,,4437443
+Australia and New Zealand, Perisher Ski AUS,,,549488
+Australia and New Zealand, Tredbo Alpine AUS,,,100001
