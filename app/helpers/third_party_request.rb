@@ -30,14 +30,14 @@ class ThirdPartyRequest
 			
 			return parsed_json
 		
-		end	
-		
-		
+		end
 	end
 	
 	
   #http://feeds.snocountry.net/conditions.php?apiKey=KEY_ID&ids=303001
 	def get_resort_info(resort_id)
+
+		#puts "http://feeds.snocountry.net/conditions.php?apiKey=#{@keys['snocountry_consumer_key']}&ids=#{resort_id}"
 
 		open("http://feeds.snocountry.net/conditions.php?apiKey=#{@keys['snocountry_consumer_key']}&ids=#{resort_id}") do |f|
 			json_string = f.read
@@ -46,6 +46,8 @@ class ThirdPartyRequest
 			#if parsed_json['openDownHillLifts'] && parsed_json['openDownHillTrails']
 			#	return "Ski area is not open."
 			#end
+			#
+			#puts parsed_json
 			
 			resort_data = parsed_json["items"][0]
 
