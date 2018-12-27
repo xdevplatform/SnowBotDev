@@ -15,25 +15,21 @@ class SendDirectMessage
 		#puts "Creating SendDirectMessage object."
 		
 		@dm = ApiOauthRequest.new
-
-		@dm.uri_path = '/1.1/direct_messages'
+		@dm.base_url = 'https://api.twitter.com'
+		@dm.uri_path = "#{@dm.base_url}/1.1/direct_messages"
 		@dm.get_api_access
 
 		@content = GenerateDirectMessageContent.new
 
 	end
 
-=begin
-	#Not implemented yet.
-	def send_snow_day(recipient_id)
-		#Demonstrates easy way to stub out future functionality until customer 'generate content' method is written.
-		dm_content = @content.generate_snow_day(recipient_id)
-		send_direct_message(dm_content)
-	end
-=end
-
 	def send_photo(recipient_id)
 		dm_content = @content.generate_random_photo(recipient_id)
+		send_direct_message(dm_content)
+	end
+
+	def send_tweet(recipient_id)
+		dm_content = @content.generate_tweet(recipient_id)
 		send_direct_message(dm_content)
 	end
 
@@ -55,13 +51,15 @@ class SendDirectMessage
 	end
 
 	#Snow reports are list based, and currently app has just one location list.
-	def send_locations_list(recipient_id)
-		dm_content = @content.generate_location_list(recipient_id)
+	#TODO V2: introduce levels of reports. Two levels, both can trigger API call.
+	def send_locations_list(recipient_id, region)
+		#puts "calling generate_location_list with region: #{region}"
+		dm_content = @content.generate_location_list(recipient_id, region)
 		send_direct_message(dm_content)
 	end
 
-	def send_location_info(recipient_id, choice)
-		dm_content = @content.generate_location_info(recipient_id, choice)
+	def send_location_info(recipient_id, choice, region)
+		dm_content = @content.generate_location_info(recipient_id, choice, region)
 		send_direct_message(dm_content)
 	end
 
@@ -90,6 +88,8 @@ class SendDirectMessage
 
 	def send_welcome_message(recipient_id)
 		dm_content = @content.generate_welcome_message(recipient_id)
+
+		#puts "dm_content = #{dm_content}"
 		send_direct_message(dm_content)
 	end
 	
@@ -102,7 +102,13 @@ class SendDirectMessage
 	#https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/new-event
 	def send_direct_message(message)
 
+		#puts "In send_direct_message: #{message}"
+
 		uri_path = "#{@dm.uri_path}/events/new.json"
+		#uri_path = "#{@dm.base_url}/events/new.json"
+
+		puts uri_path
+
 		response = @dm.make_post_request(uri_path, message)
 		
 		#Currently, not returning anything... Errors reported in POST request code.
@@ -123,6 +129,6 @@ if __FILE__ == $0 #This script code is executed when running this file.
 	#sender.send_links_list(944480690)
 	#sender.respond_with_link(944480690,'NASA')
 	
-	sender.send_location_info(944480690,"The Remarkables NZ")
+	sender.send_location_info(944480690,"The Remarkables NZ",'top')
 
 end
