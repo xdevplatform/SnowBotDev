@@ -9,10 +9,11 @@ class EventManager
 	#Design: Identifying explicit commands is easy and can restrict text length based on its own length.
 	#        If you want to be more flexible,
 	COMMAND_MESSAGE_LIMIT = 12	#Simplistic way to detect an incoming, short, 'commmand' DM.
+	#This should be served up by 'resources' class:
 	RESORT_REGIONS = ['Colorado', 'California', 'Utah', 'New England', 'Midwest', 'Canadian Rockies',' Australia and New Zealand', 'ID/NM/OR/WA/WY']
 	
 	attr_accessor :DMsender,
-								:commands #adding a command? Add to string array, then add "handling" code.
+				   :commands #adding a command? Add to string array, then add "handling" code.
 
 	def initialize
 		puts 'Got an event, creating EventManager object to manage it...'
@@ -27,11 +28,20 @@ class EventManager
 		# A primitive attempt to make reasonable responses.
 		#puts "----------------- \nConversation to parse: #{dm_event.to_json}"
 
-		message_default = "* To kick off the snowbot, send 'main' or 'menu'. \n* To get straight to the snow reports, send 'reports'."
+		#TODO: this code will be moved to the "generate content" class.
 
-		response = "Hello #{dm_event[:message_create][:sender_id]}... you said '#{dm_event[:message_create][:message_data][:text]}'..."
+		get_started_default = "* To kick off the SnowBot, send 'main' or 'menu'. \n* To get straight to the snow reports, send 'reports'."
+        
+        message = dm_event[:message_create][:message_data][:text]
+        puts "User #{dm_event[:message_create][:sender_id]}: #{message}"
 
-		puts "#{response} + \n + #{message_default}"
+        if message.include? ("thanks")
+           response = "You're welcome!"
+        else
+		   response = "Hello #{dm_event[:message_create][:sender_id]}."
+        end
+
+		puts "#{response} + \n + #{get_started_default}"
 
 	end
 
