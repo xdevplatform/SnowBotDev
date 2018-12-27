@@ -1,6 +1,5 @@
 #With many Twitter (Public) APIs, you can just use something like the 'twitter' gem.
 #This example instead builds requests making the 'oauth' gem, and is not Twitter specific.
-#(Well, beyond base_url and some other naming details.)
 
 require 'json'
 require 'oauth'
@@ -8,14 +7,16 @@ require 'yaml'
 
 class ApiOauthRequest
 
-	HEADERS = {"content-type" => "application/json"} #Suggested set? Any?
+	HEADERS = {"content-type" => "application/json"}
 
 	attr_accessor :keys,
-	              :twitter_api,
-	              :base_url #Default: 'https://api.twitter.com/'
-
+	              :api_request,
+	              :base_url, #Default: 'https://api.twitter.com/'
+								:uri_path
 
 	def initialize(config=nil)
+
+		#puts "Creating OAuth manager object..."
 
 		@base_url = 'https://api.twitter.com'
 
@@ -28,6 +29,7 @@ class ApiOauthRequest
 			@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
 			@keys['access_token'] = ENV['ACCESS_TOKEN']
 			@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
+
 		else
 			#Load from config file.
 			@keys = YAML::load_file(config)
@@ -43,14 +45,20 @@ class ApiOauthRequest
 		         :oauth_token_secret => @keys['access_token_secret']
 		}
 
-		@twitter_api = OAuth::AccessToken.from_hash(consumer, token)
+		@api_request = OAuth::AccessToken.from_hash(consumer, token)
 
   end
 
   def make_post_request(uri_path, request)
-		get_api_access if @twitter_api.nil? #token timeout?
+		get_api_access if @api_request.nil? #token timeout?
 
-		response = @twitter_api.post(uri_path, request, HEADERS)
+		#puts "request = #{request}"
+		#puts uri_path
+		#puts HEADERS
+
+		response = @api_request.post(uri_path, request, HEADERS)
+
+		#puts "response = #{response}"
 
 		if response.code.to_i >= 300
 			puts "POST ERROR occurred with #{uri_path}, request: #{request} "
@@ -67,9 +75,9 @@ class ApiOauthRequest
 	end
 
 	def make_get_request(uri_path)
-		get_api_access if @twitter_api.nil? #token timeout?
+		get_api_access if @api_request.nil? #token timeout?
 
-		response = @twitter_api.get(uri_path, HEADERS)
+		response = @api_request.get(uri_path, HEADERS)
 		
 		if response.code.to_i >= 300
 			puts "GET ERROR occurred with #{uri_path}: "
@@ -84,9 +92,9 @@ class ApiOauthRequest
 	end
 
 	def make_delete_request(uri_path)
-		get_api_access if @twitter_api.nil? #token timeout?
+		get_api_access if @api_request.nil? #token timeout?
 
-		response = @twitter_api.delete(uri_path, HEADERS)
+		response = @api_request.delete(uri_path, HEADERS)
 
 		if response.code.to_i >= 300
 			puts "DELETE ERROR occurred with #{uri_path}: "
@@ -102,9 +110,9 @@ class ApiOauthRequest
 
 	def make_put_request(uri_path)
 
-		get_api_access if @twitter_api.nil? #token timeout?
+		get_api_access if @api_request.nil? #token timeout?
 
-		response = @twitter_api.put(uri_path, '', {"content-type" => "application/json"})
+		response = @api_request.put(uri_path, '', {"content-type" => "application/json"})
 
 		if response.code.to_i == 429
 			puts "#{response.message}  - Rate limited..."
