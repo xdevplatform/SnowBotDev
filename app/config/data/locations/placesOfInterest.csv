@@ -55,13 +55,17 @@ Utah, Snowbird,,,801010
 Utah, Solitude Mountain,,,801011
 Utah, Sundance,,,801012
 #----------------------------------------------------
+ID/NM/OR/WA/WY, Angel Fire NM,,,505001
 ID/NM/OR/WA/WY, Grand Targhee WY,,,307002
 ID/NM/OR/WA/WY, Jackson Hole WY,,,307008
 ID/NM/OR/WA/WY, Mt Bachelor OR,,,503004
 ID/NM/OR/WA/WY, Mt Baker WA,,,206003
 ID/NM/OR/WA/WY, Mt Hood Meadows OR,,,503006
 ID/NM/OR/WA/WY, Mt Hood Skibowl OR,,,503007
+ID/NM/OR/WA/WY, Ski Apache NM,,,505007
+ID/NM/OR/WA/WY, Ski Santa Fe NM,,,505005
 ID/NM/OR/WA/WY, Sun Valley ID,,,208012
+ID/NM/OR/WA/WY, Taos Ski Valley NM,,,505009
 #----------------------------------------------------
 #http://feeds.snocountry.net/getResortList.php?regions=canada&apiKey=SnoCountry.example&intl=complete
 Canadian Rockies, Banff Sunshine Village,,,403022
@@ -78,10 +82,10 @@ New England, Loon Mountain Resort NH,,,603014
 New England, Jay Peak VT,,,802006
 New England, Killington Resort VT,,,802007
 New England, Mad River Glen VT,,,802008
-New England, Mount Sunapee NH,,,603017
+New England, Mount Sunapee,,,603017
 New England, Stowe Mountain VT,,,802018
 New England, Stratton VT,,,80219
-New England, Sugarbush VT,,,802023
+New England, Sugarbush,,,802023
 #----------------------------------------------------
 Midwest, Afton Alps MN, -92.7907, 44.8545,612002
 Midwest, Big Powderhorn Mountain WI,,,906001
