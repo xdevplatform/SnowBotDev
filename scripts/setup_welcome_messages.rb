@@ -17,9 +17,9 @@ class WelcomeMessageManager
 
 	def initialize()
 
-		@twitter_api = ApiOauthRequest.new
+		@api_request = ApiOauthRequest.new
 		@uri_path = '/1.1/direct_messages'
-		@twitter_api.get_api_access
+		@api_request.get_api_access
 
 		@message_generator = GenerateDirectMessageContent.new(true)
 
@@ -30,7 +30,7 @@ class WelcomeMessageManager
 
 		uri_path = "#{@uri_path}/welcome_messages/new.json"
 
-		response = @twitter_api.make_post_request(uri_path, message)
+		response = @api_request.make_post_request(uri_path, message)
 		results = JSON.parse(response)
 		
 		if not results['errors'].nil?
@@ -68,7 +68,7 @@ class WelcomeMessageManager
 
 		uri_path = "#{@uri_path}/welcome_messages/rules/new.json"
 
-		response = @twitter_api.make_post_request(uri_path, set_rule.to_json)
+		response = @api_request.make_post_request(uri_path, set_rule.to_json)
 		results = JSON.parse(response)
 
 		rule_id = results['id']
@@ -81,7 +81,7 @@ class WelcomeMessageManager
 		puts "Getting welcome message list."
 
 		uri_path = "#{@uri_path}/welcome_messages/list.json"
-		response = @twitter_api.make_get_request(uri_path)
+		response = @api_request.make_get_request(uri_path)
 
 		if response == '{}'
 			puts "No Welcome Messages created."
@@ -99,7 +99,7 @@ class WelcomeMessageManager
 		puts "Deleting Welcome Message with id: #{id}."
 
 		uri_path = "#{@uri_path}/welcome_messages/destroy.json?id=#{id}"
-		response = @twitter_api.make_delete_request(uri_path)
+		response = @api_request.make_delete_request(uri_path)
 
 		if response == '204'
 			puts "Deleted message id: #{id} (if it existed)."
@@ -123,7 +123,7 @@ class WelcomeMessageManager
 		puts "Getting welcome message rules list."
 
 		uri_path = "#{@uri_path}/welcome_messages/rules/list.json"
-		response = @twitter_api.make_get_request(uri_path)
+		response = @api_request.make_get_request(uri_path)
 
 		if response == '{}'
 			puts "No rules exist."
@@ -143,7 +143,7 @@ class WelcomeMessageManager
 
 		uri_path = "#{@uri_path}/welcome_messages/rules/new.json"
 
-		response = @twitter_api.make_post_request(uri_path, set_rule.to_json)
+		response = @api_request.make_post_request(uri_path, set_rule.to_json)
 		results = JSON.parse(response)
 
 		rule_id = results['id']
@@ -157,7 +157,7 @@ class WelcomeMessageManager
 		puts "Deleting rule with id: #{id}."
 
 		uri_path = "#{@uri_path}/welcome_messages/rules/destroy.json?id=#{id}"
-		response = @twitter_api.make_delete_request(uri_path)
+		response = @api_request.make_delete_request(uri_path)
 
 		results = JSON.parse(response)
 

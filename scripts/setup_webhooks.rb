@@ -21,14 +21,14 @@ class TaskManager
     @uri_path = "/1.1/account_activity"
 
     #Create a 'wrapper' to the the Twitter Account Activity API, and get authenticated.
-		@twitter_api = ApiOauthRequest.new(config)
+		@api_request = ApiOauthRequest.new(config)
 		#OAuth keys are loaded from ENV by ApiOAuthRequest object, unless a config file is specified.
 		#@keys['consumer_key'] = ENV['CONSUMER_KEY']
 		#@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
 		#@keys['access_token'] = ENV['ACCESS_TOKEN']
 		#@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
 
-		@twitter_api.get_api_access
+		@api_request.get_api_access
 		
 		@webhook_configs = []
 		
@@ -37,15 +37,16 @@ class TaskManager
 	def get_webhook_configs
 		puts "Retrieving webhook configurations..."
 
-		@twitter_api.get_api_access
+		@api_request.get_api_access
 
 		if @api_tier == 'premium'
-			@uri_path = "#{@uri_path}/all/#{@env_name}/webhooks.json"
+			#@uri_path = "#{@uri_path}/all/#{@env_name}/webhooks.json"
+			@uri_path = "#{@uri_path}/all/webhooks.json"
 		else
 			@uri_path = "#{@uri_path}/webhooks.json"
 		end
 
-		response = @twitter_api.make_get_request(@uri_path)
+		response = @api_request.make_get_request(@uri_path)
 
 		results = JSON.parse(response)
 
@@ -66,11 +67,12 @@ class TaskManager
 
 		if @api_tier == 'premium'
 			@uri_path = "#{@uri_path}/all/#{@env_name}/webhooks.json?url=#{url}"
+			#@uri_path = "#{@uri_path}/all/webhooks.json?url=#{url}"
 		else
 			@uri_path = "#{@uri_path}/webhooks.json?url=#{url}"
 		end
 
-		response = @twitter_api.make_post_request(@uri_path,nil)
+		response = @api_request.make_post_request(@uri_path, nil)
 		results = JSON.parse(response)
 		
 		if results['errors'].nil?
@@ -83,16 +85,16 @@ class TaskManager
 	end
 
 	# id: webhook_id (enterprise), :env_name (premium)
-	def delete_webhook_config(id, name=nil)
+	def delete_webhook_config(id)
 		puts "Attempting to delete configuration for webhook id: #{id}."
 
 		if @api_tier == 'premium'
-			@uri_path = "#{@uri_path}/all/#{name}/webhooks/#{id}.json"
+			@uri_path = "#{@uri_path}/all/#{@env_name}/webhooks/#{id}.json"
 		else
 			@uri_path = "#{@uri_path}/webhooks/#{id}.json"
 		end
 
-		response = @twitter_api.make_delete_request(@uri_path)
+		response = @api_request.make_delete_request(@uri_path)
 
 		if response == '204'
 			puts "Webhook configuration for #{id} was successfully deleted."
@@ -113,7 +115,7 @@ class TaskManager
 			@uri_path = "#{@uri_path}/webhooks/#{id}/subscriptions/all.json"
 		end
 
-		response = @twitter_api.make_get_request(@uri_path)
+		response = @api_request.make_get_request(@uri_path)
 
 		if response == '204'
 			puts "Webhook subscription exists for #{id}."
@@ -135,7 +137,7 @@ class TaskManager
 			@uri_path = "#{@uri_path}/webhooks/#{id}/subscriptions/all.json"
 		end
 
-		response = @twitter_api.make_post_request(@uri_path, nil)
+		response = @api_request.make_post_request(@uri_path, nil)
 		
 		if response == '204'
 			puts "Webhook subscription for #{id} was successfully added."
@@ -156,7 +158,7 @@ class TaskManager
 			@uri_path =  "#{@uri_path}/webhooks/#{id}/subscriptions.json"
 		end
 
-		response = @twitter_api.make_delete_request(@uri_path)
+		response = @api_request.make_delete_request(@uri_path)
 
 		if response == '204'
 			puts "Webhook subscription for #{id} was successfully deleted."
@@ -176,7 +178,7 @@ class TaskManager
 		  @uri_path =  "#{@uri_path}/webhooks/#{id}.json"
 		end
 
-		response = @twitter_api.make_put_request(uri_path)
+		response = @api_request.make_put_request(uri_path)
 		
 		puts response
 		
@@ -238,14 +240,14 @@ if __FILE__ == $0 #This script code is executed when running this file.
 		task_manager.env_name = $name
 	end
 
-  if task_manager.api_tier == 'premium' and $task != 'crc'
+  if task_manager.api_tier == 'premium' and $task != 'crc' and $task != 'delete'
     $id = task_manager.env_name
   end
 
 	if $task == 'list'
 		configs = task_manager.get_webhook_configs
 		configs.each do |config|
-			puts "Webhook ID #{config['id']} --> #{config['url']}"
+			puts config[1]
 		end
   elsif $task == 'set'
     if $url.nil?
