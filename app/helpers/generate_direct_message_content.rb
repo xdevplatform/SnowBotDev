@@ -27,7 +27,7 @@ class GenerateDirectMessageContent
 			@thirdparty_api = ThirdPartyRequest.new
 		end
 
-		puts "Created GenerateDirectMessageContent object."
+		#puts "Created GenerateDirectMessageContent object."
 
 	end
 
@@ -253,8 +253,6 @@ class GenerateDirectMessageContent
 	#TODO V2: There is now a "main" location list, and some of those point to sublists.
 	def generate_location_list(recipient_id, region)
 
-		#puts "Generating list of resorts..."
-
 		event = {}
 		event['event'] = message_create_header(recipient_id)
 
@@ -268,7 +266,6 @@ class GenerateDirectMessageContent
 
 		@resources.locations_list.each do |item|
 
-			puts "#{item[0].downcase} to be compared with #{region.downcase}. item has #{item.length}"
 
 			option = {}
 
@@ -286,7 +283,7 @@ class GenerateDirectMessageContent
           #option['description'] = 'what is there to say here?'
         end
 
-				puts "adding option: #{option}"
+				#puts "adding option: #{option}"
         options << option
 			end
 		end
@@ -310,16 +307,12 @@ class GenerateDirectMessageContent
   # 'top' is passed in when coming from the top menu in order to handle the 'back' button properly....
   def generate_location_info(recipient_id, location_name, region)
 
-		puts "Make a request for #{location_name} in region #{region}"
-
-		resort_id = 0
+	  resort_id = 0
 
 	  @resources.locations_list.each do |item|
-			#puts item
 
 			if item[1].strip == location_name.strip
 
-				#puts "Comparing #{item[1]} with #{location_name}"
 				resort_id = item[4].strip
 				break
 		  end  
@@ -336,7 +329,7 @@ class GenerateDirectMessageContent
 	  message_data['quick_reply'] = {}
 	  message_data['quick_reply']['type'] = 'options'
 
-		puts "building back button with region: #{region}"
+		#puts "building back button with region: #{region}"
     options = build_back_option region
 
     options = options + build_home_option  #('with_description')
