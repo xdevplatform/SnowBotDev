@@ -199,8 +199,6 @@ class EventManager
 			answer = dm_event[:message_create] && dm_event[:message_create][:message_data] && dm_event[:message_create][:message_data][:quick_reply]
 		end
 
-		#puts "is_response? => #{answer}"
-
 		answer
 
 	end
@@ -237,18 +235,15 @@ class EventManager
 		elsif payload.key? (:direct_message_events) #Unpack whether this is an array of "direct_message_events" or a single incoming DM.
 
 			dm_events = payload[:direct_message_events]
-			puts "Have array of events to parse... Have #{dm_events.length} events..."
+			#puts "Have array of events to parse... Have #{dm_events.length} events..."
 
 			dm_events.each do |dm_event|
 
  				if sending_QR? (dm_event)
-					puts "Sending QR to user..."
-
+					#puts "Sending QR to user..."
 				elsif is_QR_response?(dm_event)
-					#puts "QR RESPONSE from event array"
 					handle_quick_reply dm_event
 				elsif is_command?(dm_event)
-					#puts "COMMAND"
 					handle_command(dm_event)
 				else
 					#puts "Seems this was not a command or QR. Would be good to log there for future responses... "
