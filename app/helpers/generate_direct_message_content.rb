@@ -93,7 +93,7 @@ class GenerateDirectMessageContent
 		#Select photo(at random).
 		photo = @resources.photos_list.sample
 		message = "#{photo[1]}"
-		message_data['text'] = message
+
 		
 		#Confirm photo file exists
 		photo_file = "#{@resources.photos_home}/photos/#{photo[0]}"
@@ -110,9 +110,10 @@ class GenerateDirectMessageContent
 			message_data['attachment'] = attachment
 
 		else
-			media_id = nil
 			message = "Sorry, could not load photo: #{photo_file}."
-		end
+    end
+
+    message_data['text'] = message
 
 		message_data['quick_reply'] = {}
 		message_data['quick_reply']['type'] = 'options'

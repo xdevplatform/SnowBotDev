@@ -34,8 +34,7 @@ class TwitterAPI
 		media_id = nil
 
 		if media_path != '' and not media_path.nil?
-			puts "Calling upload with #{media_path}"
-			puts "NEED TO REDO upload CLIENT?"
+			#puts "Calling upload with #{media_path}"
       media_id = @upload_client.upload(File.new(media_path))
 		else
 			media_id = nil
