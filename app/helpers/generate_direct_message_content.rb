@@ -92,8 +92,8 @@ class GenerateDirectMessageContent
 		
 		#Select photo(at random).
 		photo = @resources.photos_list.sample
+    puts photo
 		message = "#{photo[1]}"
-
 		
 		#Confirm photo file exists
 		photo_file = "#{@resources.photos_home}/photos/#{photo[0]}"
