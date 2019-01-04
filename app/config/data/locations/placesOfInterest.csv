@@ -12,7 +12,8 @@
 Top, Colorado
 Top, California
 Top, Utah
-Top, ID/NM/OR/WA/WY
+Top, ID/NM/WY
+Top, OR/WA
 Top, New England
 Top, Canadian Rockies
 Top, Midwest
@@ -55,17 +56,18 @@ Utah, Snowbird,,,801010
 Utah, Solitude Mountain,,,801011
 Utah, Sundance,,,801012
 #----------------------------------------------------
-ID/NM/OR/WA/WY, Angel Fire NM,,,505001
-ID/NM/OR/WA/WY, Grand Targhee WY,,,307002
-ID/NM/OR/WA/WY, Jackson Hole WY,,,307008
-ID/NM/OR/WA/WY, Mt Bachelor OR,,,503004
-ID/NM/OR/WA/WY, Mt Baker WA,,,206003
-ID/NM/OR/WA/WY, Mt Hood Meadows OR,,,503006
-ID/NM/OR/WA/WY, Mt Hood Skibowl OR,,,503007
-ID/NM/OR/WA/WY, Ski Apache NM,,,505007
-ID/NM/OR/WA/WY, Ski Santa Fe NM,,,505005
-ID/NM/OR/WA/WY, Sun Valley ID,,,208012
-ID/NM/OR/WA/WY, Taos Ski Valley NM,,,505009
+OR/WA, Mt Bachelor OR,,,503004
+OR/WA, Mt Baker WA,,,206003
+OR/WA, Mt Hood Meadows OR,,,503006
+OR/WA, Mt Hood Skibowl OR,,,503007
+#----------------------------------------------------
+ID/NM/WY, Angel Fire NM,,,505001
+ID/NM/WY, Grand Targhee WY,,,307002
+ID/NM/WY, Jackson Hole WY,,,307008
+ID/NM/WY, Ski Apache NM,,,505007
+ID/NM/WY, Ski Santa Fe NM,,,505005
+ID/NM/WY, Sun Valley ID,,,208012
+ID/NM/WY, Taos Ski Valley NM,,,505009
 #----------------------------------------------------
 #http://feeds.snocountry.net/getResortList.php?regions=canada&apiKey=SnoCountry.example&intl=complete
 Canadian Rockies, Banff Sunshine Village,,,403022
