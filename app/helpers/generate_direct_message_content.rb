@@ -12,6 +12,7 @@ class GenerateDirectMessageContent
 	VERSION = 2.008
 	BOT_NAME = '@SnowBotDev'
 	BOT_CHAR = '❄'
+  GET_STARTED_MESSAGE = "Send 'main' for main menu and 'help' for a list of supported commands. \n To get straight to the snow reports, send 'reports'"
 
 	attr_accessor :TwitterAPI, 
 		      :resources,
@@ -32,7 +33,35 @@ class GenerateDirectMessageContent
 	end
 
 	#================================================================
-	def generate_tweet(recipient_id)
+
+  def generate_conversational_message(recipient_id, message)
+
+    message_text = "#{BOT_CHAR} #{message}"
+
+    #+ "Weather data are provided with an API from Weather Underground.\n"
+
+
+    #Build DM content.
+    event = {}
+    event['event'] = message_create_header(recipient_id)
+
+    message_data = {}
+    message_data['text'] = message_text
+
+    message_data['quick_reply'] = {}
+    message_data['quick_reply']['type'] = 'options'
+
+    options = build_home_option
+
+    message_data['quick_reply']['options'] = options
+
+    event['event']['message_create']['message_data'] = message_data
+    event.to_json
+
+
+  end
+
+  def generate_tweet(recipient_id)
 
 		#Build DM content.
 		event = {}
@@ -64,26 +93,27 @@ class GenerateDirectMessageContent
 		
 		#Select photo(at random).
 		photo = @resources.photos_list.sample
-		message = photo[1]
+		message = "#{photo[1]} \n[UNDER MAINTENANCE] "
 		message_data['text'] = message
 		
 		#Confirm photo file exists
-		photo_file = "#{@resources.photos_home}/#{photo[0]}"
+		photo_file = "#{@resources.photos_home}/photos/#{photo[0]}"
+		puts photo_file
 		
-		if File.file? photo_file
-			media_id = @api_request.get_media_id(photo_file)
-
-			attachment = {}
-			attachment['type'] = "media"
-			attachment['media'] = {}
-			attachment['media']['id'] = media_id
-
-			message_data['attachment'] = attachment
-			
-		else
-			media_id = nil
-			message = "Sorry, could not load photo: #{photo_file}."
-		end
+		# if File.file? photo_file
+		# 	media_id = @api_request.get_media_id(photo_file)
+    #
+		# 	attachment = {}
+		# 	attachment['type'] = "media"
+		# 	attachment['media'] = {}
+		# 	attachment['media']['id'] = media_id
+    #
+		# 	message_data['attachment'] = attachment
+		#
+		# else
+		# 	media_id = nil
+		# 	message = "Sorry, could not load photo: #{photo_file}."
+		# end
 
 		message_data['quick_reply'] = {}
 		message_data['quick_reply']['type'] = 'options'
@@ -246,11 +276,9 @@ class GenerateDirectMessageContent
   end
 
 
-	#TODO V2: pass in 'region', and serve up sub menu
+	#Pass in 'region', and serve up sub menu.
   #Generates Quick Reply for presenting user a Location List via Direct Message.
 	#https://dev.twitter.com/rest/direct-messages/quick-replies/options
-	# #V1: the 'locations of interest' file is read in and there is a 1-1, in order, rendering here.
-	#TODO V2: There is now a "main" location list, and some of those point to sublists.
 	def generate_location_list(recipient_id, region)
 
 		event = {}
@@ -263,6 +291,13 @@ class GenerateDirectMessageContent
 		message_data['quick_reply']['type'] = 'options'
 
 		options = []
+
+    #puts "building back button with region: #{region}"
+    if region != 'top'
+      options += build_back_option 'top'
+    else
+      options += build_back_option 'main'
+    end
 
 		@resources.locations_list.each do |item|
 
@@ -288,10 +323,7 @@ class GenerateDirectMessageContent
 			end
 		end
 
-		#puts "building back button with region: #{region}"
-		if region != 'top'
-			options += build_back_option 'top'
-		end
+
 		options += build_home_option
 
 		message_data['quick_reply']['options'] = options
@@ -302,8 +334,7 @@ class GenerateDirectMessageContent
 
 	end
 
-	#TODO V2: Main change is when and where to call this, e.g. not always from level 1 as with V1.
-	# TODO: Only come here if the metadata has 5 items, otherwise a sub menu has been requested.
+  #V2: Main change is when and where to call this, e.g. not always from level 1 as with V1.
   # 'top' is passed in when coming from the top menu in order to handle the 'back' button properly....
   def generate_location_info(recipient_id, location_name, region)
 
@@ -344,7 +375,7 @@ class GenerateDirectMessageContent
 	
 	def generate_greeting
 
-		greeting = "#{BOT_CHAR} Welcome to #{BOT_NAME} (ver. #{VERSION}) #{BOT_CHAR}. Send 'main' for main menu and 'help' for a list of supported commands."
+		greeting = "#{BOT_CHAR} Welcome to #{BOT_NAME} (ver. #{VERSION}) #{BOT_CHAR}. #{GET_STARTED_MESSAGE}."
 		greeting
 
 	end
@@ -392,7 +423,7 @@ class GenerateDirectMessageContent
 		event['event'] = message_create_header(recipient_id)
 
 		message_data = {}
-		message_data['text'] = "#{BOT_CHAR} Hi again..." #generate_main_message
+		message_data['text'] = "#{BOT_CHAR} Hi again...\n\n#{GET_STARTED_MESSAGE}." #generate_main_message
 
 		message_data['quick_reply'] = generate_welcome_options
 
@@ -438,7 +469,7 @@ class GenerateDirectMessageContent
 	  message_text = "Several commands are supported: \n \n" + 
                 "#{BOT_CHAR} ⇨ Main menu \n  send: 'main', 'home', 'bot' \n " +
                 "#{BOT_CHAR} ⇨ See photo \n  send: 'photo', 'pic' \n  " +
-		            "#{BOT_CHAR} ⇨ Get resort snow report \n  send: 'report', 'resort' \n    via http://feeds.snocountry.net/conditions \n "  +
+		            "#{BOT_CHAR} ⇨ Get resort snow report \n  send: 'report(s)', 'resort(s)' \n    via http://feeds.snocountry.net/conditions \n "  +
 				        "#{BOT_CHAR} ⇨ See snow Tweet of the day \n  send: 'Tweet', 'TOD' \n " +
 				        "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
 	              "#{BOT_CHAR} ⇨ Get playlist \n  send: 'playlist', 'music' \n " +
@@ -479,7 +510,7 @@ class GenerateDirectMessageContent
 		options << option
 
     option = {}
-    option['label'] = "#{BOT_CHAR} See snow picture 📷"
+    option['label'] = "#{BOT_CHAR} See snow picture 📷 (ON PAUSE)"
     option['description'] = 'Check out a random snow related photo...'
     option['metadata'] = 'see_photo'
     options << option
@@ -550,8 +581,7 @@ class GenerateDirectMessageContent
 	def build_back_option(type=nil, description=nil)
 
 		#type: locations_top, locations_sub
-		#
-		puts "Building 'back' button with type: #{type} with #{description}"
+		#puts "Building 'back' button with type: #{type} with #{description}"
 
 		options = []
 
