@@ -94,7 +94,7 @@ class SendDirectMessage
 	end
 	
 	def send_custom_message(recipient_id, message)
-		dm_content = @content.generate_message(recipient_id, message)
+		dm_content = @content.generate_conversational_message(recipient_id, message)
 		send_direct_message(dm_content)
 	end
 
@@ -105,7 +105,6 @@ class SendDirectMessage
 		#puts "In send_direct_message: #{message}"
 
 		uri_path = "#{@dm.uri_path}/events/new.json"
-		#uri_path = "#{@dm.base_url}/events/new.json"
 
 		puts uri_path
 
