@@ -10,13 +10,13 @@ class EventManager
 	#        If you want to be more flexible,
 	COMMAND_MESSAGE_LIMIT = 12	#Simplistic way to detect an incoming, short, 'commmand' DM.
 	#This should be served up by 'resources' class:
-	RESORT_REGIONS = ['Colorado', 'California', 'Utah', 'New England', 'Midwest', 'Canadian Rockies',' Australia and New Zealand', 'ID/NM/OR/WA/WY']
+	RESORT_REGIONS = ['Colorado', 'California', 'Utah', 'New England', 'Midwest', 'Canadian Rockies',' Australia and New Zealand', 'ID/NM/WY', 'OR/WA']
 	
 	attr_accessor :DMsender,
 				   :commands #adding a command? Add to string array, then add "handling" code.
 
 	def initialize
-		puts 'Got an event, creating EventManager object to manage it...'
+		#puts 'Got an event, creating EventManager object to manage it...'
 		@DMSender = SendDirectMessage.new
 
 		@commands = %w(bot home main back photo pic see wx weather report reports resort resorts rpt top learn snow playlist music about help)
@@ -28,20 +28,22 @@ class EventManager
 		# A primitive attempt to make reasonable responses.
 		#puts "----------------- \nConversation to parse: #{dm_event.to_json}"
 
-		#TODO: this code will be moved to the "generate content" class.
+		user_id = dm_event[:message_create][:sender_id]
+		message = dm_event[:message_create][:message_data][:text]
+		message = message.downcase
 
-		get_started_default = "* To kick off the SnowBot, send 'main' or 'menu'. \n* To get straight to the snow reports, send 'reports'."
-        
-        message = dm_event[:message_create][:message_data][:text]
-        puts "User #{dm_event[:message_create][:sender_id]}: #{message}"
+		response = ''
 
-        if message.include? ("thanks")
-           response = "You're welcome!"
-        else
-		   response = "Hello #{dm_event[:message_create][:sender_id]}."
-        end
+		if message.include? ("thanks")
 
-		puts "#{response} + \n + #{get_started_default}"
+			response = "You're welcome!"
+
+		else
+			response = "Hello #{dm_event[:message_create][:sender_id]}."
+			response = response + "\n* To kick off the SnowBot, send 'main' or 'menu'. \n* To get straight to the snow reports, send 'reports'."
+		end
+
+		@DMSender.send_custom_message(user_id, response)
 
 	end
 
@@ -104,8 +106,9 @@ class EventManager
 			type =  response_metadata['go_back'.length..-1].strip
 
 			#puts "\n #{type} \n"
-
-			if type == 'links'
+			if type == 'main'
+				@DMSender.send_welcome_message(user_id)
+			elsif type == 'links'
 				@DMSender.send_links_list(user_id)
 			elsif type == 'top'
 				@DMSender.send_locations_list(user_id, 'top')
@@ -145,7 +148,7 @@ class EventManager
 		#puts "command=#{command}"
 
 		if (command.include? 'bot' or command.include? 'home' or command.include? 'main' or command.include? 'hello' or command.include? 'back' or command.include? 'hi')
-			puts "Got home command"
+			#puts "Got home command"
 			@DMSender.send_welcome_message(user_id)
 		elsif (command.include? 'photo' or command.include? 'pic' or command.include? 'see')
 			@DMSender.send_photo(user_id)
