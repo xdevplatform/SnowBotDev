@@ -82,7 +82,6 @@ class GenerateDirectMessageContent
 
 	end
 
-
 	def generate_random_photo(recipient_id)
 
 		#Build DM content.
@@ -93,7 +92,7 @@ class GenerateDirectMessageContent
 		
 		#Select photo(at random).
 		photo = @resources.photos_list.sample
-		message = "#{photo[1]} \n[UNDER MAINTENANCE] "
+		message = "#{photo[1]}"
 		message_data['text'] = message
 		
 		#Confirm photo file exists
@@ -510,7 +509,7 @@ class GenerateDirectMessageContent
 		options << option
 
     option = {}
-    option['label'] = "#{BOT_CHAR} See snow picture 📷 (ON PAUSE)"
+    option['label'] = "#{BOT_CHAR} See snow picture 📷 "
     option['description'] = 'Check out a random snow related photo...'
     option['metadata'] = 'see_photo'
     options << option
