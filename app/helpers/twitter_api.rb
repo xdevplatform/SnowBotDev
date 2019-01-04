@@ -1,5 +1,5 @@
 require 'twitter' #Opens doors to the rest of the standard Twitter APIs.
-#https://github.com/sferik/twitter/blob/master/examples/Configuration.md
+                  #https://github.com/sferik/twitter/blob/master/examples/Configuration.md
 
 class TwitterAPI
 
@@ -15,8 +15,7 @@ class TwitterAPI
       @base_url = 'upload.twitter.com'
 			@uri_path = '/1.1/media/upload'
 
-			#Get Twitter App keys and tokens. Read from 'config.yaml' if provided, or if running on Heroku, pull from the
-			#'Config Variables' via the ENV{} hash.
+			#Get Twitter App keys and tokens via the ENV{} hash.
 			@keys = {}
 
 			@keys['consumer_key'] = ENV['CONSUMER_KEY']
@@ -30,12 +29,13 @@ class TwitterAPI
   
 	def get_media_id(media_path)
 		
-		#puts "Value of media: #{media_path}"
+		puts "Value of media: #{media_path}"
 
 		media_id = nil
 
 		if media_path != '' and not media_path.nil?
 			puts "Calling upload with #{media_path}"
+			puts "NEED TO REDO upload CLIENT?"
       media_id = @upload_client.upload(File.new(media_path))
 		else
 			media_id = nil
