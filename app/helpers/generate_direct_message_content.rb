@@ -100,20 +100,20 @@ class GenerateDirectMessageContent
 		photo_file = "#{@resources.photos_home}/photos/#{photo[0]}"
 		puts photo_file
 		
-		# if File.file? photo_file
-		# 	media_id = @api_request.get_media_id(photo_file)
-    #
-		# 	attachment = {}
-		# 	attachment['type'] = "media"
-		# 	attachment['media'] = {}
-		# 	attachment['media']['id'] = media_id
-    #
-		# 	message_data['attachment'] = attachment
-		#
-		# else
-		# 	media_id = nil
-		# 	message = "Sorry, could not load photo: #{photo_file}."
-		# end
+		if File.file? photo_file
+			media_id = @api_request.get_media_id(photo_file)
+
+			attachment = {}
+			attachment['type'] = "media"
+			attachment['media'] = {}
+			attachment['media']['id'] = media_id
+
+			message_data['attachment'] = attachment
+
+		else
+			media_id = nil
+			message = "Sorry, could not load photo: #{photo_file}."
+		end
 
 		message_data['quick_reply'] = {}
 		message_data['quick_reply']['type'] = 'options'
