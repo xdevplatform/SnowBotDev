@@ -2,7 +2,6 @@
 #Twitter Account Activity API send events as POST requests with JSON payloads.
 
 require 'json'
-#Two helper classes... 
 require_relative 'send_direct_message'
 
 class EventManager
@@ -10,7 +9,7 @@ class EventManager
 	#        If you want to be more flexible,
 	COMMAND_MESSAGE_LIMIT = 12	#Simplistic way to detect an incoming, short, 'commmand' DM.
 	#This should be served up by 'resources' class:
-	RESORT_REGIONS = ['Colorado', 'California', 'Utah', 'New England', 'Midwest', 'Canadian Rockies',' Australia and New Zealand', 'ID/NM/WY', 'OR/WA']
+	RESORT_REGIONS = ['Colorado', 'California', 'Utah', 'New England', 'Midwest', 'Canadian Rockies',' Australia & New Zealand', 'Idaho, Montana & Wyoming', 'Oregon & Washington', 'Arizona & New Mexico']
 	
 	attr_accessor :DMsender,
 				   :commands #adding a command? Add to string array, then add "handling" code.

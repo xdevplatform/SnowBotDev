@@ -12,10 +12,11 @@
 Top, Colorado
 Top, California
 Top, Utah
-Top, ID/NM/WY
-Top, OR/WA
+Top, Idaho, Montana & Wyoming
+Top, Oregon & Washington
 Top, New England
 Top, Canadian Rockies
+Top, Arizona & New Mexico
 Top, Midwest
 #Top, Europe
 Top, Australia and New Zealand
@@ -25,13 +26,19 @@ Top, Australia and New Zealand
 #----------------------------------------------------
 Colorado, Arapahoe Basin, -105.8717, 39.6423, 303001
 Colorado, Aspen, -106.8175, 39.1911, 303003
+Colorado, Aspen Highlands,,, 303004
 Colorado, Beaver Creek,,,303005
 Colorado, Breckenridge, -106.0384, 39.4817, 303007
+#Colorado, Buttermilk,,,303027
 Colorado, Copper Mountain, -106.1516, 39.5014, 303009
 Colorado, Crested Butte, -106.9878, 38.8697,303010
 Colorado, Eldora, -105.5639, 39.9486, 303011
 Colorado, Keystone, -105.9347, 39.5792,303014
 Colorado, Loveland,,,303015
+Colorado, Monarch Mountain,,,719002
+#Colorado, Powderhorn Mountain,,,303016
+Colorado, Purgatory,,,303017
+Colorado, Ski Cooper,,,719003
 Colorado, Snowmass,,,303020
 Colorado, Steamboat, -106.8317, 40.4850,303021
 Colorado, Telluride, -107.8123, 37.9375,303022
@@ -56,18 +63,46 @@ Utah, Snowbird,,,801010
 Utah, Solitude Mountain,,,801011
 Utah, Sundance,,,801012
 #----------------------------------------------------
-OR/WA, Mt Bachelor OR,,,503004
-OR/WA, Mt Baker WA,,,206003
-OR/WA, Mt Hood Meadows OR,,,503006
-OR/WA, Mt Hood Skibowl OR,,,503007
+Idaho, Montana & Wyoming, Big Sky MT,,,406002
+Idaho, Montana & Wyoming, Blacktail MT,,,406015
+Idaho, Montana & Wyoming, Bridger Bowl MT,,,406003
+Idaho, Montana & Wyoming, Grand Targhee WY,,,307002
+Idaho, Montana & Wyoming, Great Divide MT,,,406005
+Idaho, Montana & Wyoming, Jackson Hole WY,,,307008
+Idaho, Montana & Wyoming, Magic Mountain ID,,,208005
+Idaho, Montana & Wyoming, Maverick Mountain MT,,,406007
+Idaho, Montana & Wyoming, Montana Snowbowl MT,,,406008
+Idaho, Montana & Wyoming, Red Lodge MT,,,406009
+Idaho, Montana & Wyoming, Silver Mountain ID,,,208009
+Idaho, Montana & Wyoming, Snowy Range WY,,,307011
+Idaho, Montana & Wyoming, Sun Valley ID,,,208012
+Idaho, Montana & Wyoming, Tamarack Resort ID,,,208021
+Idaho, Montana & Wyoming, Whitefish MT,,,406001
+Idaho, Montana & Wyoming, White Pine WY,,,307016
 #----------------------------------------------------
-ID/NM/WY, Angel Fire NM,,,505001
-ID/NM/WY, Grand Targhee WY,,,307002
-ID/NM/WY, Jackson Hole WY,,,307008
-ID/NM/WY, Ski Apache NM,,,505007
-ID/NM/WY, Ski Santa Fe NM,,,505005
-ID/NM/WY, Sun Valley ID,,,208012
-ID/NM/WY, Taos Ski Valley NM,,,505009
+Oregon & Washington, Badger Mountain WA,,,509010
+Oregon & Washington, Crystal Mountain WA,,,206002
+Oregon & Washington, Hoodoo OR,,,503003
+Oregon & Washington, Mt. Ashland OR,,,503008
+Oregon & Washington, Mt Bachelor OR,,,503004
+Oregon & Washington, Mt Baker WA,,,206003
+Oregon & Washington, Mt Hood Meadows OR,,,503006
+Oregon & Washington, Mt Hood Skibowl OR,,,503007
+Oregon & Washington, Stevens Pass WA,,,206004
+Oregon & Washington, Timberline Lodge OR,,,503009
+Oregon & Washington, Whit3e Pass WA,,,509004
+Oregon & Washington, Williamette Pass OR,,,503010
+#----------------------------------------------------
+Arizona & New Mexico, Angel Fire NM,,,505001
+Arizona & New Mexico, Arizona Snowbowl AZ,,,602001
+Arizona & New Mexico, Pajarito Mountain NM,,,505002
+Arizona & New Mexico, Red River NM,,,505003
+Arizona & New Mexico, Sandia Peak NM,,,505004
+Arizona & New Mexico, Sipapu NM,,,505006
+Arizona & New Mexico, Ski Apache NM,,,505007
+Arizona & New Mexico, Ski Santa Fe NM,,,505005
+Arizona & New Mexico, Sunrise Park AZ,,,602003
+Arizona & New Mexico, Taos Ski Valley NM,,,505009
 #----------------------------------------------------
 #http://feeds.snocountry.net/getResortList.php?regions=canada&apiKey=SnoCountry.example&intl=complete
 Canadian Rockies, Banff Sunshine Village,,,403022
@@ -115,9 +150,9 @@ Europe, Val D'Isere FR,,,333019
 Europe, Verbier/Val de Bagnes SW,,,13034
 Europe, Zermatt SW,,,13026
 #----------------------------------------------------
-Australia and New Zealand, Coronet Peak NZ,,,4424660
-Australia and New Zealand, Mt Hutt NZ,,,811002
-Australia and New Zealand, The Remarkables NZ,,,615013
-Australia and New Zealand, Treble Cone NZ,,,4437443
-Australia and New Zealand, Perisher Ski AUS,,,549488
-Australia and New Zealand, Tredbo Alpine AUS,,,100001
+Australia & New Zealand, Coronet Peak NZ,,,4424660
+Australia & New Zealand, Mt Hutt NZ,,,811002
+Australia & New Zealand, The Remarkables NZ,,,615013
+Australia & New Zealand, Treble Cone NZ,,,4437443
+Australia & New Zealand, Perisher Ski AUS,,,549488
+Australia & New Zealand, Tredbo Alpine AUS,,,100001
