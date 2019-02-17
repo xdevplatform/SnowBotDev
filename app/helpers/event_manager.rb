@@ -3,6 +3,8 @@
 
 require 'json'
 require_relative 'send_direct_message'
+require_relative 'twitter_api'          #Hooks to Twitter Public APIs via 'twitter' gem.
+
 
 class EventManager
 	#Design: Identifying explicit commands is easy and can restrict text length based on its own length.
@@ -12,13 +14,16 @@ class EventManager
 	RESORT_REGIONS = ['Colorado', 'California', 'Utah', 'New England', 'Midwest', 'Canadian Rockies',' Australia & New Zealand', 'Idaho & Montana & Wyoming', 'Oregon & Washington', 'Arizona & New Mexico']
 	
 	attr_accessor :DMsender,
-				   :commands #adding a command? Add to string array, then add "handling" code.
+				        :commands, #adding a command? Add to string array, then add "handling" code.
+								:twitter_client
 
 	def initialize
 		#puts 'Got an event, creating EventManager object to manage it...'
 		@DMSender = SendDirectMessage.new
 
 		@commands = %w(bot home main back photo pic see wx weather report reports resort resorts rpt top learn snow playlist music about help)
+
+		@twitter_client = TwitterAPI.new
 
 	end
 
@@ -34,11 +39,10 @@ class EventManager
 		response = ''
 
 		if message.include? ("thanks")
-
 			response = "You're welcome!"
-
 		else
-			response = "Hello #{dm_event[:message_create][:sender_id]}."
+			user_handle = @twitter_client.get_user_handle(dm_event[:message_create][:sender_id])
+			response = "Hello #{user_handle}."
 			response = response + "\n* To kick off the SnowBot, send 'main' or 'menu'. \n* To get straight to the snow reports, send 'reports'."
 		end
 
