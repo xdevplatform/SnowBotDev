@@ -22,7 +22,7 @@ class TwitterAPI
 			@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
 			@keys['access_token'] = ENV['ACCESS_TOKEN']
 			@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
-			
+
 			@twitter_client = Twitter::REST::Client.new(@keys)
 	
 	end
@@ -44,12 +44,12 @@ class TwitterAPI
 	
 	end
 
-	def get_user_name(id)
+	def get_user_handle(id)
 
 		user = @twitter_client.user(id.to_i)
-		name = user.to_h[:screen_name]
+		handle = user.to_h[:screen_name]
 
-		name
+		handle
 	end
 
 end
