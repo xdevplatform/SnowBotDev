@@ -4,7 +4,7 @@ require 'twitter' #Opens doors to the rest of the standard Twitter APIs.
 class TwitterAPI
 
 	attr_accessor :keys,
-	              :upload_client,
+	              :twitter_client,
 	              :base_url, # 'https://api.twitter.com/' or 'upload.twitter.com' or ?
 	              :uri_path #No default.
 
@@ -22,8 +22,8 @@ class TwitterAPI
 			@keys['consumer_secret'] = ENV['CONSUMER_SECRET']
 			@keys['access_token'] = ENV['ACCESS_TOKEN']
 			@keys['access_token_secret'] = ENV['ACCESS_TOKEN_SECRET']
-
-			@upload_client = Twitter::REST::Client.new(@keys)
+			
+			@twitter_client = Twitter::REST::Client.new(@keys)
 	
 	end
   
@@ -35,14 +35,22 @@ class TwitterAPI
 
 		if media_path != '' and not media_path.nil?
 			#puts "Calling upload with #{media_path}"
-      media_id = @upload_client.upload(File.new(media_path))
+      media_id = @twitter_client.upload(File.new(media_path))
 		else
 			media_id = nil
 		end	
 
 		media_id
 	
-  end
+	end
+
+	def get_user_name(id)
+
+		user = @twitter_client.user(id.to_i)
+		name = user.to_h[:screen_name]
+
+		name
+	end
 
 end
 
