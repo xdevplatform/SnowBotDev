@@ -22,11 +22,11 @@ class SnowBotDevApp < Sinatra::Base
 		return Base64.encode64(hash).strip!
 	end
 
-	get '/' do
+	get '/' do #TODO: future project to build the snowbot main page.
 		'<p><b>Welcome to snowbotdev, home of the @SnowBotDev system...</b></p>
      <p>I am a sinatra-based web app...</p>
      <p>I consume Twitter Account Activity webhook events and manage DM bot dialogs...</p>
-     <p>I serve a local hive of snow photos, weather conditions, snow reports, snow research links... </p>
+     <p>I serve a local hive of snow photos, snow reports, snow research links... </p>
      <p></p>
      <p><a href="https://github.com/twitterdev/SnowBotDev/wiki">Project tutorial and code</a></p>
      <p>#ThinkSnow...</p>'
