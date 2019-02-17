@@ -9,21 +9,21 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-	VERSION = 2.008
+	VERSION = 2.0088
 	BOT_NAME = '@SnowBotDev'
 	BOT_CHAR = '❄'
   GET_STARTED_MESSAGE = "Send 'main' for main menu and 'help' for a list of supported commands. \n To get straight to the snow reports, send 'reports'"
 
-	attr_accessor :TwitterAPI, 
-		      :resources,
-		      :thirdparty_api
+	attr_accessor :twitter_client,
+		            :resources,
+		            :thirdparty_api
 
 	def initialize(setup=nil) #'Setup Welcome Message' script using this too, but does not require many helper objects.
 
 
 
 		if setup.nil?
-			@api_request = TwitterAPI.new
+			@twitter_client = TwitterAPI.new
 			@resources = GetResources.new
 			@thirdparty_api = ThirdPartyRequest.new
 		end
@@ -100,7 +100,7 @@ class GenerateDirectMessageContent
 		puts photo_file
 		
 		if File.file? photo_file
-			media_id = @api_request.get_media_id(photo_file)
+			media_id = @twitter_client.get_media_id(photo_file)
 
 			attachment = {}
 			attachment['type'] = "media"
@@ -235,8 +235,9 @@ class GenerateDirectMessageContent
 		event = {}
 	  event['event'] = message_create_header(recipient_id)
 
-	  message_data = "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
-	  message_data['text'] = message
+	  #message_data = "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
+	  message_data = {}
+		message_data['text'] = message
 
 	  message_data['quick_reply'] = {}
 	  message_data['quick_reply']['type'] = 'options'
@@ -285,7 +286,11 @@ class GenerateDirectMessageContent
 		event['event'] = message_create_header(recipient_id)
 
 		message_data = {}
-		message_data['text'] = "#{BOT_CHAR} Select your region of interest:"
+		if region == 'top'
+		  message_data['text'] = "#{BOT_CHAR} Select your region of interest:"
+		else
+			message_data['text'] = "#{BOT_CHAR} Select your area of interest:"
+		end
 
 		message_data['quick_reply'] = {}
 		message_data['quick_reply']['type'] = 'options'
@@ -470,9 +475,9 @@ class GenerateDirectMessageContent
                 "#{BOT_CHAR} ⇨ Main menu \n  send: 'main', 'home', 'bot' \n " +
                 "#{BOT_CHAR} ⇨ See photo \n  send: 'photo', 'pic' \n  " +
 		            "#{BOT_CHAR} ⇨ Get resort snow report \n  send: 'report(s)', 'resort(s)' \n    via http://feeds.snocountry.net/conditions \n "  +
-				        "#{BOT_CHAR} ⇨ See snow Tweet of the day \n  send: 'Tweet', 'TOD' \n " +
 				        "#{BOT_CHAR} ⇨ Learn about snow \n  send: 'learn', 'link' \n " +
 	              "#{BOT_CHAR} ⇨ Get playlist \n  send: 'playlist', 'music' \n " +
+				        "#{BOT_CHAR} ⇨ See snow Tweet of the day \n  send: 'Tweet', 'TOD' \n " +
 	              "#{BOT_CHAR} ⇨ Learn about the #{BOT_NAME} \n   send: 'about' \n " +
 	              "#{BOT_CHAR} ⇨ Review these commands \n  send: 'help' \n "
 
@@ -516,21 +521,21 @@ class GenerateDirectMessageContent
     options << option
 
 		option = {}
-		option['label'] = "#{BOT_CHAR} See (deep) snow Tweet of the day"
-		option['description'] = 'Most engaged Tweet from last 24 hours.'
-		option['metadata'] = 'snow_tweet'
-		options << option
-
-		option = {}
 		option['label'] = "#{BOT_CHAR} Learn something new about snow"
 		option['description'] = 'Other than it is fun to slide on...'
 		option['metadata'] = 'learn_snow'
 		options << option
 
-	  option = {}
+		option = {}
 		option['label'] = "#{BOT_CHAR} Get geo, weather themed playlist"
 		option['description'] = 'Carefully curated Spotify playlists...'
 		option['metadata'] = 'snow_music'
+		options << option
+
+		option = {}
+		option['label'] = "#{BOT_CHAR} See (deep) snow Tweet of the day"
+		option['description'] = 'Most engaged Tweet from last 24 hours.'
+		option['metadata'] = 'snow_tweet'
 		options << option
 
 		options
@@ -569,7 +574,7 @@ class GenerateDirectMessageContent
 
 	  option = {}
 	  option['label'] = "#{BOT_CHAR} Another 📷 "
-	  option['description'] = '📷Another snow photo'
+	  option['description'] = 'Another snow photo'
 	  option['metadata'] = "see_photo"
 	  options << option
 
@@ -660,5 +665,31 @@ class GenerateDirectMessageContent
 
 		event.to_json
 	end
+
+end
+
+#Testing
+if __FILE__ == $0 #This script code is executed when running this file.
+
+  generator = GenerateDirectMessageContent.new
+
+  recipient_id = '17200003'
+	@twitter_gem = TwitterAPI.new
+  user_name = @twitter_gem.get_user_handle(recipient_id)
+  print "Hi #{user_name}"
+
+  region = 'top'
+  link_choice = 'Snowmelt Modeling'
+
+	json = generator.generate_link_list(recipient_id)
+  print json
+
+	json = generator.generate_link(recipient_id, link_choice)
+  print json
+
+	json = generator.generate_location_list(recipient_id, region)
+  print json
+
+
 
 end
