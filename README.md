@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/twitterdev/SnowBotDev) 
+
 # @SnowBotDev
 Current home of the [@SnowBotDev](https://twitter.com/SnowBotDev), a demo illustrating the Twitter Account Activity and Direct Message APIs. This SnowBot is written in Ruby, uses the Sinatra web app framework, and is deployed on Heroku. 
 
