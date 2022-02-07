@@ -67,8 +67,12 @@ class GenerateDirectMessageContent
 		event = {}
 		event['event'] = message_create_header(recipient_id)
 
+		#Read database and get list of Tweet IDs
+		top_tweet_ids = @resources.get_top_tweet_ids
+		top_tweet = "https://twitter.com/user/status/#{top_tweet_ids[0]}"
+
 		message_data = {}
-		message_data['text'] = 'Coming soon? Currently teaching the SnowBot to search for "snow" Tweets and display the most favorited one.'
+		message_data['text'] = top_tweet
 
     options = []
     options += build_home_option
