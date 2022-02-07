@@ -18,6 +18,7 @@
 
 class GetResources
 	require 'csv'
+	require 'pg'
 
 	attr_accessor :photos_home,
 	              :photos_list,     #CSV with file name and caption. That's it.
@@ -129,16 +130,43 @@ class GetResources
 		list
 	end
 
+	def get_top_tweet_ids
+		top_tweet_ids = Array.new
+
+		host = ENV['DATABASE_HOST']
+		name = ENV['DATABASE_NAME']
+		user = ENV['DATABASE_USER']
+		password = ENV['DATABASE_PASSWORD']
+
+		sql_query = "SELECT * FROM top_tweets ORDER BY SCORE DESC LIMIT 100;"
+
+		connection = PG::Connection.new(:host => host, :user => user, :dbname => name, :port => '5432', :password => password)
+		results = connection.exec(sql_query)
+
+		connection.close if connection
+
+		results.each do |row|
+			top_tweet_ids << row['tweet_id']
+		end
+
+		top_tweet_ids
+	end
+
   #=======================
 	if __FILE__ == $0 #This script code is executed when running this file.
 		retriever = GetResources.new
-		
-		#Example code for loading location file --------
-		retriever.locations_home = '/Users/jmoffitt/work/snowbotdev/data/locations'
-		locations = retriever.get_locations
-		
-		locations.each do |resorts|  #explore that list
-			puts resorts
+
+		# Example code for loading top tweets from database --------
+		top_tweet_ids = retriever.get_top_tweet_ids
+		top_tweet_ids.each do |id|  #explore that list
+		  puts "https://twitter.com/user/status/#{id}"
 		end
+
+		# Example code for loading location file --------
+		# retriever.locations_home = '/Users/jmoffitt/work/snowbotdev/data/locations'
+		# locations = retriever.get_locations
+		# locations.each do |resorts|  #explore that list
+		# 	puts resorts
+		# end
 	end
 end
