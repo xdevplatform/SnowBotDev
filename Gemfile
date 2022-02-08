@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby "2.6.3"
+ruby "3.0.0"
 
 gem 'oauth'
 gem 'sinatra', require: 'sinatra/base'
