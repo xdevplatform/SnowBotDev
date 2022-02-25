@@ -9,7 +9,7 @@ require_relative 'get_resources'        #Loads local resources used to present D
 
 class GenerateDirectMessageContent
 	
-	VERSION = 2.0088
+	VERSION = 2.88
 	BOT_NAME = '@SnowBotDev'
 	BOT_CHAR = '❄'
   GET_STARTED_MESSAGE = "Send 'main' for main menu and 'help' for a list of supported commands. \n To get straight to the snow reports, send 'reports'"
@@ -19,8 +19,6 @@ class GenerateDirectMessageContent
 		            :thirdparty_api
 
 	def initialize(setup=nil) #'Setup Welcome Message' script using this too, but does not require many helper objects.
-
-
 
 		if setup.nil?
 			@twitter_client = TwitterAPI.new
@@ -40,7 +38,6 @@ class GenerateDirectMessageContent
 
     #+ "Weather data are provided with an API from Weather Underground.\n"
 
-
     #Build DM content.
     event = {}
     event['event'] = message_create_header(recipient_id)
@@ -57,7 +54,6 @@ class GenerateDirectMessageContent
 
     event['event']['message_create']['message_data'] = message_data
     event.to_json
-
 
   end
 
@@ -280,7 +276,6 @@ class GenerateDirectMessageContent
 
   end
 
-
 	#Pass in 'region', and serve up sub menu.
   #Generates Quick Reply for presenting user a Location List via Direct Message.
 	#https://dev.twitter.com/rest/direct-messages/quick-replies/options
@@ -310,7 +305,6 @@ class GenerateDirectMessageContent
 
 		@resources.locations_list.each do |item|
 
-
 			option = {}
 
       if item[0].downcase == region.downcase
@@ -331,7 +325,6 @@ class GenerateDirectMessageContent
         options << option
 			end
 		end
-
 
 		options += build_home_option
 
@@ -393,6 +386,7 @@ class GenerateDirectMessageContent
 		greeting = ''
 		greeting = generate_greeting
 		greeting =+ "#{BOT_CHAR} Thanks for stopping by... #{BOT_CHAR}"
+		greeting
 
 	end
 
@@ -693,7 +687,5 @@ if __FILE__ == $0 #This script code is executed when running this file.
 
 	json = generator.generate_location_list(recipient_id, region)
   print json
-
-
 
 end
